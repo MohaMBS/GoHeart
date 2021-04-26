@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 require __DIR__.'/auth.php';
+
+Route::get('/post',[PostController::class, 'index'])->name('seePost');
+
+Route::post('/save-post',[PostController::class, 'store'])->name('store.post');
+
+Route::get('/post/{id}',[PostController::class, 'showPost'])->name('seeOne');
+?>
