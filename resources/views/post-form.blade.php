@@ -42,7 +42,7 @@
       }
       console.log(cmsURL ,)
       tinyMCE.activeEditor.windowManager.openUrl({
-        url : cmsURL+ "&output=embed",
+        url : cmsURL,
         title : 'Filemanager',
         frameguard: false,
         width : x * 0.8,
