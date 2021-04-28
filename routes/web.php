@@ -26,11 +26,13 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
+Route::group(['middleware' => ['cors']], function () {
+    //Rutas a las que se permitirá acceso
+    Route::get('/post',[PostController::class, 'index'])->name('seePost');
+    Route::post('/save-post',[PostController::class, 'store'])->name('store.post');
+    Route::get('/post/{id}',[PostController::class, 'showPost'])->name('seeOne');
+});
+
 require __DIR__.'/auth.php';
 
-Route::get('/post',[PostController::class, 'index'])->middleware(['auth'])->name('seePost');
-
-Route::post('/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');
-
-Route::get('/post/{id}',[PostController::class, 'show'])->middleware(['auth'])->name('seeOne');
 ?>
