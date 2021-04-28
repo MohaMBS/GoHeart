@@ -39,9 +39,10 @@ class PostController extends Controller
         $article = new Post();     
         $article->title = $input_data['title'];
         $article->body = $input_data['body'];
-        $article->typePostId = $input_data['typePostId'];
+        $article->typePostId = $input_data['Category'];
+        $article->userId = auth()->user()->id;
         $article->save();
-        return redirect()->route('seePost')->withSuccess(['Data saved successfully.']);
+        return redirect('/post/'.$article->id)->withSuccess(['Data saved successfully.']);
     }
 
     /**
@@ -53,6 +54,7 @@ class PostController extends Controller
     public function show(Post $post,$id)
     {
         $article = Post::where('id',$id)->first();
+        dd($article);
         return view('display-article', compact('article'));
     }
 

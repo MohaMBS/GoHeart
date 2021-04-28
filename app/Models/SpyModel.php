@@ -4,16 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-class Post extends Model
+class SpyModel extends Model
 {
     use HasFactory;
+
+    protected $table = 'security_spy';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'title','body', 'typePostId	'
+        'ip',
+        'idUser'
     ];
 
-    protected $table='post';
-
+    
     public function user(){
         return $this->hasOne(User::class);
     }
