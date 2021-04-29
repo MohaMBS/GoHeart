@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +36,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $input_data = $request->all();
-        $article = new Post();     
+          
+        if ($request->has('id')) {
+            if(Post::where('id',$request->id)->where('userId',auth()->user()->id)->exists()){
+                $article =Post::find($request->id);   
+            }
+        }else{
+            $article = new Post();   
+        } 
         $article->title = $input_data['title'];
         $article->body = $input_data['body'];
         $article->typePostId = $input_data['Category'];
@@ -64,9 +71,19 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post, $id)
     {
-        //
+        if(Post::where('id',$id)->exists()){
+            if(Post::where('id',$id)->where('userId',auth()->user()->id)->exists()){
+                $data = Post::where('id',$id)->get();
+                return view('edit-post', compact('data'));
+            }else{
+                return "No eres el dueño del post.";
+            }
+        }else{
+            return "No se encuentra ningun post.";
+        }
+        
     }
 
     /**

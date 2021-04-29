@@ -27,10 +27,16 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Route::group(['middleware' => ['cors']], function () {
-    //Rutas a las que se permitirá acceso
-    Route::get('/post',[PostController::class, 'index'])->name('seePost');
-    Route::post('/save-post',[PostController::class, 'store'])->name('store.post');
-    Route::get('/post/{id}',[PostController::class, 'showPost'])->name('seeOne');
+    
+    //Rutas para poder crear una nueva entrada en el blog.
+    Route::get('/create-post',[PostController::class, 'index'])->middleware(['auth'])->name('seePost');
+    Route::post('/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');
+
+    //Ruta para poder ver un post en concreto.
+    Route::get('/post/{id}',[PostController::class, 'show'])->middleware(['auth'])->name('seeOne');
+
+    //Ruta para poder editar un post.
+    Route::get('/edit-post/{id}',[PostController::class, 'edit']);
 });
 
 require __DIR__.'/auth.php';

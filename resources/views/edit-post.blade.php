@@ -17,18 +17,31 @@
         selector: '#mytextarea'
       });
     </script>
-    
 </head>
 <body>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <form action="{{ route ('store.post') }}" method="POST">
+
+<input type="text" name="id" value="{{$data[0]->id}}" hidden>
 @csrf
-   <label for="title">Titulo:</label> <input type="text" name="title" id="title" maxlength="150" required>
-   <label for="Category">Categoria:</label><select name="Category" id="cat"  required>
-      <option selected disabled>Choose Tagging</option>
-      <option value="0">Ejercico.</option>
-      <option value="1">Dieta.</option>
-      <option value="2">Blog.</option>
+   <label for="title">Titulo:</label> <input type="text" name="title" id="title" maxlength="150" value="{{$data[0]->title}}" required>
+   <label for="Category">Categoria:</label><select name="Category" id="cat" required>
+      <option  disabled>Choose Tagging</option>
+      <option value="0" 
+      @if ($data[0]->typePostId == 0)
+        selected
+      @endif
+      >Ejercico.</option>
+      <option value="1"
+      @if ($data[0]->typePostId == 1)
+        selected
+      @endif
+      >Dieta.</option>
+      <option value="2"
+      @if ($data[0]->typePostId == 2)
+        selected
+      @endif
+      >Blog.</option>
    </select>
   <textarea name="body" class="form-control my-editor" required></textarea>
   <br>
@@ -38,7 +51,7 @@
       selector: 'textarea.my-editor',
       setup: function(editor) {
         editor.on('init', function(e) {
-          tinyMCE.activeEditor.setContent('<span>some</span> html', {format : 'raw'})
+          tinyMCE.activeEditor.setContent('{!! $data[0]->body !!} html', {format : 'html'})
         });
       },
       relative_urls: false,
@@ -78,7 +91,7 @@
     tinymce.init(editor_config);
 
   </script>
-  <input type="submit" class="btn btn-primary"></input>
+    <input type="submit" class="btn btn-primary" value="Submit">
 </form>
 </body>
 </html>
