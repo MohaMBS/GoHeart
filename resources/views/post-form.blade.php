@@ -20,65 +20,75 @@
     
 </head>
 <body>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/d2c5k3zmkiqgn6brkffsa1cysyvuntzc13rcuhggwzofs50u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <form action="{{ route ('store.post') }}" method="POST">
 @csrf
    <label for="title">Titulo:</label> <input type="text" name="title" id="title" maxlength="150" required>
    <label for="Category">Categoria:</label><select name="Category" id="cat"  required>
       <option selected disabled>Choose Tagging</option>
-      <option value="0">Ejercico.</option>
-      <option value="1">Dieta.</option>
-      <option value="2">Blog.</option>
+      <option value="1">Ejercico.</option>
+      <option value="2">Dieta.</option>
+      <option value="3">Blog.</option>
    </select>
   <textarea name="body" class="form-control my-editor" required></textarea>
   <br>
-  <script>
-    var editor_config = {
-      path_absolute : "/",
-      selector: 'textarea.my-editor',
-      setup: function(editor) {
-        editor.on('init', function(e) {
-          tinyMCE.activeEditor.setContent('<span>some</span> html', {format : 'raw'})
-        });
-      },
-      relative_urls: false,
-      plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table directionality",
-        "emoticons template paste textpattern"
-      ],
-      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
-      file_picker_callback : function(callback, value, meta) {
-        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-        var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
-
-        var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
-        if (meta.filetype == 'image') {
-          cmsURL = cmsURL + "&type=Images";
-        } else {
-          cmsURL = cmsURL + "&type=Files";
-        }
-        console.log(cmsURL ,)
-        tinyMCE.activeEditor.windowManager.openUrl({
-          url : cmsURL,
-          title : 'Filemanager',
-          frameguard: false,
-          width : x * 0.8,
-          height : y * 0.8,
-          resizable : "yes",
-          close_previous : "no",
-          onMessage: (api, message) => {
-            callback(message.content);
-          }
-        });
-      }
-    };
-    
-    tinymce.init(editor_config);
-
-  </script>
-  <input type="submit" class="btn btn-primary"></input>
+  <input type="submit" id="send" value="Enviar.">
 </form>
 </body>
+
+<script>
+  var editor_config = {
+    path_absolute : "/",
+    selector: 'textarea.my-editor',
+    setup: function(editor) {
+      editor.on('init', function(e) {
+        tinyMCE.activeEditor.setContent('<span>some</span> html', {format : 'raw'})
+      });
+    },
+    relative_urls: false,
+    plugins: [
+      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+      "searchreplace wordcount visualblocks visualchars code fullscreen",
+      "insertdatetime media nonbreaking save table directionality",
+      "emoticons template paste textpattern"
+    ],
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+    file_picker_callback : function(callback, value, meta) {
+      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+      var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+      var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
+      if (meta.filetype == 'image') {
+        cmsURL = cmsURL + "&type=Images";
+      } else {
+        cmsURL = cmsURL + "&type=Files";
+      }
+      console.log(cmsURL ,)
+      tinyMCE.activeEditor.windowManager.openUrl({
+        url : cmsURL,
+        title : 'Filemanager',
+        frameguard: false,
+        width : x * 0.8,
+        height : y * 0.8,
+        resizable : "yes",
+        close_previous : "no",
+        onMessage: (api, message) => {
+          callback(message.content);
+        }
+      });
+    }
+  };
+  
+  tinymce.init(editor_config);
+
+  </script>
+
+<script>
+  $(document).ready(()=>{
+    $("#send").click(()=>{
+      console.log("click");
+      $("form").submit();
+    })
+  })
+</script>
 </html>

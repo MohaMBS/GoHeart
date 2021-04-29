@@ -38,9 +38,7 @@ class PostController extends Controller
         $input_data = $request->all();
           
         if ($request->has('id')) {
-            if(Post::where('id',$request->id)->where('userId',auth()->user()->id)->exists()){
-                $article =Post::find($request->id);   
-            }
+            $article =Post::find($request->id);  
         }else{
             $article = new Post();   
         } 
@@ -60,9 +58,8 @@ class PostController extends Controller
      */
     public function show(Post $post,$id)
     {
-        $article = Post::where('id',$id)->first();
-        dd($article);
-        return view('display-article', compact('article'));
+        $data["post"] = Post::where('id',$id)->with('comments')->get();
+        return view('display-post', $data);
     }
 
     /**

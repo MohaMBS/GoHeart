@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,14 +29,18 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 Route::group(['middleware' => ['cors']], function () {
     
     //Rutas para poder crear una nueva entrada en el blog.
-    Route::get('/create-post',[PostController::class, 'index'])->middleware(['auth'])->name('seePost');
+    Route::get('/create-post',[PostController::class, 'index'])->middleware(['auth'])->name('create.post');
     Route::post('/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');
 
     //Ruta para poder ver un post en concreto.
-    Route::get('/post/{id}',[PostController::class, 'show'])->middleware(['auth'])->name('seeOne');
+    Route::get('/post/{id}',[PostController::class, 'show'])->name('seeOne');
 
     //Ruta para poder editar un post.
-    Route::get('/edit-post/{id}',[PostController::class, 'edit']);
+    Route::get('/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth'])->middleware(['postowner'])->name('editPost');
+
+    //Ruta para poder comentar.
+    Route::post('/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');
+
 });
 
 require __DIR__.'/auth.php';
