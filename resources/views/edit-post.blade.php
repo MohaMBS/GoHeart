@@ -19,7 +19,7 @@
     </script>
 </head>
 <body>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/d2c5k3zmkiqgn6brkffsa1cysyvuntzc13rcuhggwzofs50u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <div id="loading">
       CARGANDO
 </div>
@@ -46,8 +46,11 @@
       >Blog.</option>
    </select>
   <textarea name="body" class="form-control my-editor" required></textarea>
-  <br>
-  <script>
+  <br>    
+  <input type="submit" id="send" class="btn btn-primary" value="Submit">
+</form>
+
+<script>
     var editor_config = {
       path_absolute : "/",
       selector: 'textarea.my-editor',
@@ -91,9 +94,9 @@
     };
     
     tinymce.init(editor_config);
-
+    $("#send").click(()=>{
+      $("form").submit();
+    })
   </script>
-    <input type="submit" class="btn btn-primary" value="Submit">
-</form>
 </body>
 </html>

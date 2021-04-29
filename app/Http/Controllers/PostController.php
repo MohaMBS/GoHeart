@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post-form');
+        $data["posts"] = Post::withCount("comments")->get();
+        return view("index-posts",$data);
     }
 
     /**
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post-form');
     }
     
     /**
@@ -39,13 +40,15 @@ class PostController extends Controller
           
         if ($request->has('id')) {
             $article =Post::find($request->id);  
+            dd($article);
         }else{
             $article = new Post();   
+            $article->creator_name= auth()->user()->name;
         } 
         $article->title = $input_data['title'];
         $article->body = $input_data['body'];
         $article->typePostId = $input_data['Category'];
-        $article->userId = auth()->user()->id;
+        $article->user_id = auth()->user()->id;
         $article->save();
         return redirect('/post/'.$article->id)->withSuccess(['Data saved successfully.']);
     }
@@ -71,7 +74,7 @@ class PostController extends Controller
     public function edit(Post $post, $id)
     {
         if(Post::where('id',$id)->exists()){
-            if(Post::where('id',$id)->where('userId',auth()->user()->id)->exists()){
+            if(Post::where('id',$id)->where('user_id',auth()->user()->id)->exists()){
                 $data = Post::where('id',$id)->get();
                 return view('edit-post', compact('data'));
             }else{

@@ -17,7 +17,7 @@ class SecurityPost
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Post::where('id',$request->id)->where('userId',auth()->user()->id)->exists()){
+        if(Post::where('id',$request->id)->where('user_id',auth()->user()->id)->exists()){
             return $next($request);
         }else{
             //return redirect('home');

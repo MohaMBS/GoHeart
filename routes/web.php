@@ -29,7 +29,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 Route::group(['middleware' => ['cors']], function () {
     
     //Rutas para poder crear una nueva entrada en el blog.
-    Route::get('/create-post',[PostController::class, 'index'])->middleware(['auth'])->name('create.post');
+    Route::get('/create-post',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');
     Route::post('/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');
 
     //Ruta para poder ver un post en concreto.
@@ -40,6 +40,9 @@ Route::group(['middleware' => ['cors']], function () {
 
     //Ruta para poder comentar.
     Route::post('/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');
+
+    //Para ver todos los posts.
+    Route::get('/posts',[PostController::class, 'index'])->name('posts');
 
 });
 

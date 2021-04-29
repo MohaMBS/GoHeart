@@ -13,7 +13,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title','body', 'typePostId	'
+        'title','body', 'typePostId	','creator_name'
     ];
 
     protected $table='post';
