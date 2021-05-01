@@ -22,10 +22,13 @@
 <script src="https://cdn.tiny.cloud/1/d2c5k3zmkiqgn6brkffsa1cysyvuntzc13rcuhggwzofs50u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <div id="loading">
       CARGANDO
+
+    <a href="{{ url()->previous() }}">Ir atras</a>
 </div>
 <form action="{{ route ('store.post') }}" method="POST">
 <input type="text" name="id" value="{{$data[0]->id}}" hidden>
 @csrf
+    <input type="text" name="token_post" value="{{ $data[0]->security_token }}" hidden>
    <label for="title">Titulo:</label> <input type="text" name="title" id="title" maxlength="150" value="{{$data[0]->title}}" required>
    <label for="Category">Categoria:</label><select name="Category" id="cat" required>
       <option  disabled>Choose Tagging</option>

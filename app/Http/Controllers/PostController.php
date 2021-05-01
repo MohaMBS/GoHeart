@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class PostController extends Controller
 {
@@ -38,11 +40,14 @@ class PostController extends Controller
     {
         $input_data = $request->all();
           
-        if ($request->has('id')) {
-            $article =Post::find($request->id);  
-            dd($article);
+        if ($request->has('id') && $request->has('token_post')) {
+            $article =Post::where('id',$request->id)->where('security_token',$request->token_post)->first();  
         }else{
+            do{
+                $token = Str::random(50);
+            }while(Post::where("security_token",$token)->exists());
             $article = new Post();   
+            $article->security_token =$token;
             $article->creator_name= auth()->user()->name;
         } 
         $article->title = $input_data['title'];
@@ -104,8 +109,16 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, $id)
     {
-        //
+        Post::destroy($id);
+        return redirect()->route('my-posts');
+    }
+
+    public function postsUser(Post $post)
+    {
+        $myPosts["posts"] = Post::where("user_id",auth()->user()->id)->get();
+
+        return view('managment-posts',$myPosts);
     }
 }

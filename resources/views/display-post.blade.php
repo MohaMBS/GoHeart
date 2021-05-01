@@ -22,6 +22,7 @@
     @auth
     <form action="{{ route('makeComment') }}" method="POST">
     <input type="text" name="post" value="{{ $post[0]->id }}" hidden>
+    <input type="text" name="token_post" value="{{ $post[0]->security_token }}" hidden>
     @csrf
     <textarea name="comment" id="" cols="30" rows="10" required></textarea><br>
     <input type="submit" value="Comentar">

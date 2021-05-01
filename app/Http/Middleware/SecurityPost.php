@@ -21,7 +21,7 @@ class SecurityPost
             return $next($request);
         }else{
             //return redirect('home');
-            return abort(403);
+            return redirect()->route('create.post');
         }
     }
 }

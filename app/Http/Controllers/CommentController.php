@@ -26,15 +26,16 @@ class CommentController extends Controller
      */
     public function create(Request $request)
     {
+        $post = Post::where("security_token",$request->token_post)->get();
         $comment = new Comment();
         $comment->name = auth()->user()->name;
         $comment->userId= auth()->user()->id;
-        $comment->post_id= Post::find($request->post)->id;
+        $comment->post_id= $post[0]->id;
         $comment->comment= $request->comment;
         $comment->save();
         
         if(!$comment){
-            return App::abort(500, 'Error');
+            return response('Error.', 500);
         }else{
             return response('Done.', 200);
         }
