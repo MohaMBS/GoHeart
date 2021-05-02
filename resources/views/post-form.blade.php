@@ -1,48 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/d2c5k3zmkiqgn6brkffsa1cysyvuntzc13rcuhggwzofs50u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src='https://cdn.tiny.cloud/1/d2c5k3zmkiqgn6brkffsa1cysyvuntzc13rcuhggwzofs50u/tinymce/5/tinymce.min.js' referrerpolicy="origin">
-    </script>
-    <script>
-      tinymce.init({
+@extends('layouts.master')
+
+@section('content')
+
+<div class="col-12">
+    <form action="{{ route ('store.post') }}" method="POST">
+    <div class="row col-12">
+        @csrf
+        <div class="form-group col-lg-6 col-12">
+            <label for="title"> <h2> Titulo: </h2></label> 
+            <input id="titulo" type="text" class="form-control" name="title" id="title" maxlength="150" placeholder="Escriba un titulo para la entrada maximo 150 caracteres." required>
+        </div>
+
+        <div class="form-group col-lg-6 col-12">
+            <label for="category"> <h2> Categoria: </h2></label>
+            <select class="custom-select" name="Category" required>
+                <option selected disabled>Escoja una categoria...</option>
+                <option value="1">Ejercico.</option>
+                <option value="2">Dieta.</option>
+                <option value="3">Blog.</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <textarea name="body" class="form-control my-editor" required></textarea>
+        </div>
+        <div class="form-group col-12 col-md-10 mt-4 ">
+            <div class="col-12">
+                <h3 class="">Imagen destacada.</h3>
+            </div>
+            <div class="input-group col-12 ">
+                <span class="input-group-btn">
+                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-white">
+                    <i class="fa fa-picture-o"></i> Seleccionar
+                </a>
+                </span>
+                <input id="thumbnail" class="form-control " type="text" name="filepath">
+            </div>
+        </div>
+        <div class="col-12 col-md-2 mt-4 d-flex align-items-start flex-column">
+            <input type="submit" id="send" class="btn btn-primary" value="Publicar">
+            </form>
+        </div>
+    </div>    
+</div>
+
+<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script>
+  $(document).ready(()=>{
+    $('#lfm').filemanager('image');
+    $("#send").click(()=>{
+      console.log("click");
+      $("form").submit();
+    })
+
+    tinymce.init({
         selector: '#mytextarea'
       });
-    </script>
-    
-</head>
-<body>
-<script src="https://cdn.tiny.cloud/1/d2c5k3zmkiqgn6brkffsa1cysyvuntzc13rcuhggwzofs50u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<form action="{{ route ('store.post') }}" method="POST">
-@csrf
-   <label for="title">Titulo:</label> <input type="text" name="title" id="title" maxlength="150" required>
-   <label for="Category">Categoria:</label><select name="Category" id="cat"  required>
-      <option selected disabled>Choose Tagging</option>
-      <option value="1">Ejercico.</option>
-      <option value="2">Dieta.</option>
-      <option value="3">Blog.</option>
-   </select>
-  <textarea name="body" class="form-control my-editor" required></textarea>
-  <br>
-  <input type="submit" id="send" value="Enviar.">
-</form>
-</body>
-
-<script>
-  var editor_config = {
+    var editor_config = {
     path_absolute : "/",
     selector: 'textarea.my-editor',
+    height : "500",
     setup: function(editor) {
       editor.on('init', function(e) {
-        tinyMCE.activeEditor.setContent('<span>some</span> html', {format : 'raw'})
+        tinyMCE.activeEditor.setContent('<p>Escriba aquí su entrada</p>', {format : 'raw'})
       });
     },
     relative_urls: false,
@@ -80,15 +99,7 @@
   };
   
   tinymce.init(editor_config);
-
-  </script>
-
-<script>
-  $(document).ready(()=>{
-    $("#send").click(()=>{
-      console.log("click");
-      $("form").submit();
-    })
   })
 </script>
-</html>
+
+@endsection

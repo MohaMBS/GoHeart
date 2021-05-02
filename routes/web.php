@@ -36,7 +36,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/post/{id}',[PostController::class, 'show'])->name('seeOne');
 
     //Ruta para poder editar un post.
-    Route::get('/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth'])->middleware(['postowner'])->name('edit.post');
+    Route::get('/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth','postowner'])->name('edit.post');
 
     //Ruta para poder comentar.
     Route::post('/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/my-profile/my-posts',[PostController::class, 'postsUser'])->middleware(['auth'])->name('my-posts');
 
     //Route para poder eleminar un post.
-    Route::get('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['postowner'])->middleware(['auth'])->name('delete-post');
+    Route::get('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete-post');
 
 });
 

@@ -1,0 +1,71 @@
+h1{
+    font-size: 48px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h2{
+    font-size: 36px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h3{
+    font-size: 24px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h4{
+    font-size: 22px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h5{
+    font-size: 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h6{
+    font-size: 16px;
+    font-family: Georgia, serif;
+}
+p, body{
+    font-size: 18px;
+    font-family: Georgia, serif;
+    background-color: #95b0b5;
+}
+.special-font{
+    font-family: 'Damion';
+    font-size: 22px;
+}
+small{
+    font-family: Georgia, serif;
+}
+blockquote{
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-style: italic;
+}
+.ta{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.pri{
+    background-color: #1a535c;
+    color:white;
+}
+.sec{
+    background-color: #4ecdc4;
+}
+.res{
+    background-color: #ffe66d;
+}
+.mybgo{
+    background-color: #95b0b5;
+}
+.ex1{
+    background-color: #ff6b6b;
+}
+.ex2{
+    background-color: #dc8eaa;
+}
+.color{
+    display: flex;
+    margin-left: 25%;
+    margin-right: 25%;
+}
