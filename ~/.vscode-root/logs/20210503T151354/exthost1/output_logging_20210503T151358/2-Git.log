@@ -1,0 +1,159 @@
+Looking for git in: git
+Using git 2.25.1 from git
+> git rev-parse --git-dir
+Open repository: /var/www/html/ProyectoM12
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s 84a92dec7274144e595ba6ffb2c02d954ae494f5
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s 84a92dec7274144e595ba6ffb2c02d954ae494f5
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :public/css/mycss.css
+> git ls-files --stage -- /var/www/html/ProyectoM12/public/css/mycss.css
+> git cat-file -s d36de3b92115eeec0e5a88665f3756fecfe0c46f
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s 84a92dec7274144e595ba6ffb2c02d954ae494f5
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :public/css/mycss.css
+> git ls-files --stage -- /var/www/html/ProyectoM12/public/css/mycss.css
+> git cat-file -s d36de3b92115eeec0e5a88665f3756fecfe0c46f
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git check-ignore -v -z --stdin
+> git show --textconv :routes/web.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/routes/web.php
+> git cat-file -s e545c9272156eb17554e12664268e7ea4491e652
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git show --textconv :app/Http/Controllers/Controller.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/Controller.php
+> git cat-file -s a0a2a8a34a6221e4dceb24a759ed14e911f74c57
+> git show --textconv :app/Http/Controllers/CommentController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/CommentController.php
+> git cat-file -s 49090cf0abe8a1b4cec8863c17018f7bf6de605d
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s 84a92dec7274144e595ba6ffb2c02d954ae494f5
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git show --textconv :routes/web.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/routes/web.php
+> git cat-file -s e545c9272156eb17554e12664268e7ea4491e652
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :app/Http/Middleware/SecurityPost.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Middleware/SecurityPost.php
+> git cat-file -s 8912582a12ceaa2679018f167bf23b0ed929219b
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s 84a92dec7274144e595ba6ffb2c02d954ae494f5
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :routes/web.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/routes/web.php
+> git cat-file -s e545c9272156eb17554e12664268e7ea4491e652
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/home.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/home.blade.php
+> git show --textconv :app/Http/Controllers/PostController.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/app/Http/Controllers/PostController.php
+> git cat-file -s b4d16a675beb23c9d1b427b3a93853571f1562c9
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git show --textconv :resources/views/layouts/master.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/layouts/master.blade.php
+> git cat-file -s 74c1ca6e07c24bb849b8b53a4296ed6df8e25dbc
+> git show --textconv :resources/views/home.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/home.blade.php
+> git show --textconv :resources/views/display-post.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4

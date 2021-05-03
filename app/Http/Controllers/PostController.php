@@ -20,6 +20,10 @@ class PostController extends Controller
         return view("index-posts",$data);
     }
 
+    public function home(){
+        return view('home');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +59,7 @@ class PostController extends Controller
         $article->typePostId = $input_data['Category'];
         $article->user_id = auth()->user()->id;
         $article->save();
-        return redirect('/post/'.$article->id)->withSuccess(['Data saved successfully.']);
+        return redirect()->route('seeOne',$article->id)->withSuccess(['Data saved successfully.']);
     }
 
     /**

@@ -27,22 +27,24 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Route::group(['middleware' => ['cors']], function () {
+    //Ruta de home
+    Route::get('/',[PostController::class, 'home'])->name('home');
     
     //Rutas para poder crear una nueva entrada en el blog.
-    Route::get('/create-post',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');
-    Route::post('/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');
+    Route::get('/blog/create-post',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');
+    Route::post('/blog/create-post/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');
 
     //Ruta para poder ver un post en concreto.
-    Route::get('/post/{id}',[PostController::class, 'show'])->name('seeOne');
+    Route::get('/blog/post/{id}',[PostController::class, 'show'])->name('seeOne');
 
     //Ruta para poder editar un post.
-    Route::get('/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth','postowner'])->name('edit.post');
+    Route::get('/my-profile/my-posts/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth','postowner'])->name('edit.post');
 
     //Ruta para poder comentar.
-    Route::post('/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');
+    Route::post('/blog/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');
 
     //Para ver todos los posts.
-    Route::get('/posts',[PostController::class, 'index'])->name('posts');
+    Route::get('/blog/posts',[PostController::class, 'index'])->name('posts');
 
     //Para poder ver y gestionar todos los posts que tiene un usuario.
     Route::get('/my-profile/my-posts',[PostController::class, 'postsUser'])->middleware(['auth'])->name('my-posts');

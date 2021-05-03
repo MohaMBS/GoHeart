@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeHeart | {{$post[0]->title }}</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
-<body>
+@extends('layouts/master')
+@section('title', '- '.$post[0]->title)
+@section('content')
     <div>
         <h1>{!! $post[0]->title !!}</h1>
+        {{ strip_tags($post[0]->body) }}
         {!! $post[0]->body !!}
     </div>
     <div>
@@ -20,26 +14,28 @@
         @endif
     </div>
     @auth
-    <form action="{{ route('makeComment') }}" method="POST">
+    <form  method="POST">
     <input type="text" name="post" value="{{ $post[0]->id }}" hidden>
-    <input type="text" name="token_post" value="{{ $post[0]->security_token }}" hidden>
+    <input type="text" name="token_post" id="token_post" value="{{ $post[0]->security_token }}" hidden>
     @csrf
-    <textarea name="comment" id="" cols="30" rows="10" required></textarea><br>
-    <input type="submit" value="Comentar">
+    <textarea name="comment" id="comment" cols="30" rows="10" required></textarea><br>
+    <input type="submit" id="send" value="Comentar">
     </form>
     @endauth
-</body>
 
+@auth
 <script>
 $(document).ready(function(){
-    console.log($("form").html)
-    $("button").click(function(event){
-        event.preventDefault();
-        $.post("{{ route('makeComment') }}",$("form"),
-        function(data,status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });
-    });
+    $("#send").click((event)=>{
+        event.preventDefault()
+        console.log($("#comment").val())
+        let data = {'_token':"{{ csrf_token() }}","token_post":"{{ $post[0]->security_token }}","comment":$("#comment").val()}
+        $.post("{{ route('makeComment' )}}",data,function(data,status) {
+            console.log("Enviado d:"+data+" s:"+status)
+        })
+    })
 });
 </script>
-</html>
+@endauth
+
+@endsection

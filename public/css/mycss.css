@@ -22,14 +22,31 @@ h6{
     font-size: 16px;
     font-family: Georgia, serif;
 }
-p, body{
+body{
     font-size: 18px;
     font-family: Georgia, serif;
-    background-color: #95b0b5;
+    background-color: #cee0f0;
+    /*93abc0*/
+}
+.menu-font-xl{
+    font-size: 48px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.menu-font-sm{
+    font-size: 22px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .special-font{
     font-family: 'Damion';
     font-size: 22px;
+}
+.special-font-xl{
+    font-family: 'Damion';
+    font-size: 48px;
+}
+.special-font-xxl{
+    font-family: 'Damion';
+    font-size: 58px;
 }
 small{
     font-family: Georgia, serif;
@@ -46,7 +63,7 @@ blockquote{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .pri{
-    background-color: #1a535c;
+    background-color: #35638A;
     color:white;
 }
 .sec{
