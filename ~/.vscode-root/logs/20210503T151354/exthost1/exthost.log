@@ -28,3 +28,5 @@
 [2021-05-03 16:58:29.011] [exthost] [error] {"message":"Git error","stdout":"","stderr":"fatal: el patrón de ruta '/var/www/html/ProyectoM12/public/storage/files' está detrás de un enlace simbólico\n","exitCode":128}
 [2021-05-03 16:58:32.034] [exthost] [info] ExtensionService#_doActivateExtension vscode.css-language-features {"startup":false,"extensionId":{"value":"vscode.css-language-features","_lower":"vscode.css-language-features"},"activationEvent":"onLanguage:css"}
 [2021-05-03 16:58:32.034] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/css-language-features/client/dist/node/cssClientMain
+[2021-05-03 21:12:21.842] [exthost] [info] extension host terminating: received terminate message from renderer
+[2021-05-03 21:12:22.861] [exthost] [info] exiting with code 0

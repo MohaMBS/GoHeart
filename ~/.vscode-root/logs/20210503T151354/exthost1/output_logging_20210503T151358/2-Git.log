@@ -157,3 +157,45 @@ Open repository: /var/www/html/ProyectoM12
 > git show --textconv :resources/views/display-post.blade.php
 > git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
 > git cat-file -s d187c8d638f61c4f41aac86a7556688bfb6d23f4
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s 81e70e478ca2c15be97c8d2777eebd7a8ca67c4e
+> git show --textconv :resources/views/display-post.blade.php
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git cat-file -s 81e70e478ca2c15be97c8d2777eebd7a8ca67c4e
+> git show --textconv :resources/views/display-post.blade.php
+> git status -z -u
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/display-post.blade.php
+> git symbolic-ref --short HEAD
+> git cat-file -s 81e70e478ca2c15be97c8d2777eebd7a8ca67c4e
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git show --textconv :resources/views/display-post.blade.php
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s b628d3894e5cc15e550a0f4ef6de031caced44a7

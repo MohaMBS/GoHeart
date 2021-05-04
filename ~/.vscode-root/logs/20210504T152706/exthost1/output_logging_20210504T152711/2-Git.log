@@ -1,0 +1,14 @@
+Looking for git in: git
+Using git 2.25.1 from git
+> git rev-parse --git-dir
+Open repository: /var/www/html/ProyectoM12
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/main refs/remotes/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git show --textconv :resources/views/index-posts.blade.php
+> git ls-files --stage -- /var/www/html/ProyectoM12/resources/views/index-posts.blade.php
+> git cat-file -s b628d3894e5cc15e550a0f4ef6de031caced44a7
+> git check-ignore -v -z --stdin
