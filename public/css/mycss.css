@@ -96,3 +96,9 @@ blockquote{
 .imga-post-prev{
     background-size: cover;
 }
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        padding-left: 30px ;
+    }
+}

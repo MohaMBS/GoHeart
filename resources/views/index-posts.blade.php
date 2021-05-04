@@ -2,8 +2,8 @@
 
 @section('content')
 @foreach ($posts as $post)
-<div class="card mb-3 offset-2 col-8 offset-2">
-  <img class="rounded pt-2" height="180" src="https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg" alt="Card image cap">
+<div class="card mb-3  ">
+  <img class="rounded " height="180" src="https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{$post->title}}</h5>
     <p class="card-text">{!! strip_tags($post->body) !!}</p>
