@@ -32,8 +32,8 @@ $(document).ready(function(){
         let data = {'_token':"{{ csrf_token() }}","token_post":"{{ $post[0]->security_token }}","comment":$("#comment").val()}
         $.post("{{ route('makeComment' )}}",data,function(data,status) {
             console.log("Enviado d:"+data+" s:"+status)
-        })
-    })
+        });
+    });
 });
 </script>
 @endauth

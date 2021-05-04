@@ -8,7 +8,8 @@
     <!-- Fuente Damion -->
     <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet'> 
     <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
     <!-- Bootstrap 4.6.0 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -22,7 +23,7 @@
 </head>
 <body>
     <!-- Menu fijo en la parte superior -->
-    <nav class="row navbar navbar-expand-lg navbar-dark ftco_navbar pri ftco-navbar-light sticky-top " id="ftco-navbar">
+    <nav class="mx-auto col-12 row navbar navbar-expand-lg navbar-dark ftco_navbar pri ftco-navbar-light sticky-top " id="ftco-navbar">
 	    <div class="container-fluid col-12">
             <a class="navbar-brand " href="{{ route('home')}}"><img src="{{ asset('storage/web/images/logo.png')}}" height="50px" height="50" alt="LogoWeb"> GoHeart</a>
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,8 +86,8 @@
 	        </div>
 	    </div>
     </nav>
-    <div class="position-fixed col-12 shadow-lg border-top border-dark" style="height: 1rem;background-color:#244866; z-index:99;"></div>
-<div class="mt-4 row" style="margin-left:auto;margin-right:auto;">
+    <div class="col-12 position-fixed  shadow-lg border-top border-dark" style="height: 1rem;background-color:#244866; z-index:99;"></div>
+<div class="col-12 mt-4 row" style="margin-left:auto;margin-right:auto;">
     <div class="col-md-2">
         @yield("l-content")
     </div>

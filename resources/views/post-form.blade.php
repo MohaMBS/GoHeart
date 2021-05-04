@@ -43,102 +43,69 @@
     </div>    
 </div>
 
-
 <script>
-  /*
   $(document).ready(()=>{
-    $('#lfm').filemanager('image');
-    $("#send").click(()=>{
-      console.log("click");
-      $("form").submit();
-    })
-
-    tinymce.init({
-        selector: '#mytextarea'
-      });
+    //Script para poder añadir imgaen en el editor de texto.
     var editor_config = {
-    path_absolute : "../",
-    selector: 'textarea.my-editor',
-    height : "500",
-    setup: function(editor) {
-      editor.on('init', function(e) {
-        tinyMCE.activeEditor.setContent('<p>Escriba aquí su entrada</p>', {format : 'raw'})
-      });
-    },
-    relative_urls: false,
-    plugins: [
-      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-      "searchreplace wordcount visualblocks visualchars code fullscreen",
-      "insertdatetime media nonbreaking save table directionality",
-      "emoticons template paste textpattern"
-    ],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
-    file_picker_callback : function(callback, value, meta) {
-      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-      var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+      path_absolute : "../",
+      selector: 'textarea.my-editor',
+      relative_urls: false,
+      plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table directionality",
+        "emoticons template paste textpattern"
+      ],
+      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+      file_picker_callback : function(callback, value, meta) {
+        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+        var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-      var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
-      if (meta.filetype == 'image') {
-        cmsURL = cmsURL + "&type=Images";
-      } else {
-        cmsURL = cmsURL + "&type=Files";
-      }
-      console.log(cmsURL ,)
-      tinyMCE.activeEditor.windowManager.openUrl({
-        url : cmsURL,
-        title : 'Filemanager',
-        frameguard: false,
-        width : x * 0.8,
-        height : y * 0.8,
-        resizable : "yes",
-        close_previous : "no",
-        onMessage: (api, message) => {
-          callback(message.content);
+        var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
+        if (meta.filetype == 'image') {
+          cmsURL = cmsURL + "&type=Images";
+        } else {
+          cmsURL = cmsURL + "&type=Files";
         }
-      });
-    }
-  };
-  
-  tinymce.init(editor_config);
-  })*/
-</script>
-<script>
-  var editor_config = {
-    path_absolute : "../",
-    selector: 'textarea.my-editor',
-    relative_urls: false,
-    plugins: [
-      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-      "searchreplace wordcount visualblocks visualchars code fullscreen",
-      "insertdatetime media nonbreaking save table directionality",
-      "emoticons template paste textpattern"
-    ],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
-    file_picker_callback : function(callback, value, meta) {
-      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-      var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-      var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
-      if (meta.filetype == 'image') {
-        cmsURL = cmsURL + "&type=Images";
-      } else {
-        cmsURL = cmsURL + "&type=Files";
+        tinyMCE.activeEditor.windowManager.openUrl({
+          url : cmsURL,
+          title : 'Filemanager',
+          width : x * 0.8,
+          height : y * 0.8,
+          resizable : "yes",
+          close_previous : "no",
+          onMessage: (api, message) => {
+            callback(message.content);
+          }
+        });
       }
+    };
+    tinymce.init(editor_config);
+    /*===============================================================================*/
+    //Para lara subida de la imagen destacada
+    var lfm = function(id, type, options) {
+      let button = document.getElementById(id);
 
-      tinyMCE.activeEditor.windowManager.openUrl({
-        url : cmsURL,
-        title : 'Filemanager',
-        width : x * 0.8,
-        height : y * 0.8,
-        resizable : "yes",
-        close_previous : "no",
-        onMessage: (api, message) => {
-          callback(message.content);
-        }
+      button.addEventListener('click', function () {
+        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+        var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+        var cmsURL ='../laravel-filemanager?editor=image';
+        tinyMCE.activeEditor.windowManager.openUrl({
+          url : cmsURL,
+          title : 'Filemanager',
+          width : x * 0.8,
+          height : y * 0.8,
+          resizable : "yes",
+          close_previous : "no",
+          onMessage: (api, message) => {
+            $('#thumbnail').val(message.content);
+          }
+        });
       });
-    }
-  };
-
-  tinymce.init(editor_config);
+    };
+    var route_prefix = "../filemanager";
+    lfm('lfm', 'image', {prefix: route_prefix});
+})
 </script>
 @endsection
