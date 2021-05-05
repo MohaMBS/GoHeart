@@ -25,10 +25,10 @@
     </div>
 </div>   
 
-<main role="main" class="offset-sm-1 col-sm-10 offset-sm-1 ">
+<main role="main" class="offset-sm-1 col-sm-10 offset-sm-1">
     <div class="">
-        <div class="col-12 blog-main bg-white">
-            <div class="blog-post col-12">
+        <div class="col-12 blog-main bg-white rounded">
+            <div class="blog-post col-12 p-sm-4">
                 <div class="col-12">
                     <h2 class="blog-post-title">{!! $post[0]->title !!}</h2>
                     <p class="blog-post-meta">Creado por <span class="font-weight-bold">{!! $post[0]->creator_name !!}</span>, {!! explode(' ',$post[0]->created_at)[0] !!} </p>
@@ -38,16 +38,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 bg-white">
+        <div class="col-12 bg-white rounded">
             <div class="mt-5">
-                <h2>Comentarios:</h2>
+                <h2 class="px-3 pt-3">Comentarios:</h2>
+                <hr/>
                 <div class="d-flex justify-content-center row">
                     <div class="col-12">
                         <div class="d-flex flex-column comment-section" >
                             <div id="secciton-comment">
                                 @if( count($post[0]->comments) > 0)
                                     @foreach ( $post[0]->comments as $comment)
-                                        <div class="p-2 bg-commnets">
+                                        <div class="p-2 mb-1 bg-commnets rounded border border-light">
                                             <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
                                                 <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$comment->name}}</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span></div>
                                                 </div>
@@ -56,7 +57,7 @@
                                                 </div>
                                                 <div>
                                                     @if($ownpost)
-                                                        <a href="#" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar comentario.</a><br>
+                                                        <a href="#" class="badge badge-warning" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar comentario.</a><br>
                                                     @endif
                                                 </div>
                                         </div>
@@ -75,7 +76,7 @@
                             @auth    
                             <form  method="POST">
                             <div class="bg-light p-2">
-                                <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea name="comment" id="comment-area" class="form-control ml-1 shadow-none textarea"></textarea></div>
+                                <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea name="comment" id="comment-area" class="form-control ml-1 shadow-none textarea" placeholder="Escribe aquú su mensaje..."></textarea></div>
                                 <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" id="send" type="button">Comentar</button><button id="cancel-send" class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancelar</button></div>
                             </div>
                             @endauth

@@ -32,7 +32,7 @@
 	            <span class="fa fa-bars"></span> Menu
 	        </button>
 	        <div class="collapse navbar-collapse m-auto ml-sm-5" id="ftco-nav">
-                <ul class="navbar-nav mx-auto px-sm-5 pl-5">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ route('home')}}" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ (request()->is('blog/create-post') || request()->is('blog/posts') ) ? 'active' : '' }}" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
