@@ -96,9 +96,21 @@ blockquote{
 .imga-post-prev{
     background-size: cover;
 }
-
+.logo-tamaño{
+    height:50px; 
+    height:50px;
+}
 @media (max-width: 991px) {
     .navbar-nav {
         padding-left: 30px ;
+    }
+    /*
+    .col-12{
+        padding-left: 0.45rem;
+        padding-right:0;
+    }*/
+    .logo-tamaño{
+        height:25px; 
+        height:25px;
     }
 }

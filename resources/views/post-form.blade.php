@@ -1,5 +1,14 @@
 @extends('layouts.master')
-
+@section('css')
+<style>
+  @media (max-width: 991px) {
+  .col-12{
+      padding-left: 0.45rem;
+      padding-right:0;
+  }
+}
+</style>
+@endsection
 @section('content')
 
 <div class="col-12">
@@ -36,7 +45,7 @@
                 <input id="thumbnail" class="form-control " type="text" name="filepath">
             </div>
         </div>
-        <div class="col-12 col-md-2 mt-4 d-flex align-items-start flex-column">
+        <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">
             <input type="submit" id="send" class="btn btn-primary" value="Publicar">
             </form>
         </div>
@@ -50,6 +59,7 @@
       path_absolute : "../",
       selector: 'textarea.my-editor',
       relative_urls: false,
+      height : $( window ).height()*0.5,
       plugins: [
         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
         "searchreplace wordcount visualblocks visualchars code fullscreen",
