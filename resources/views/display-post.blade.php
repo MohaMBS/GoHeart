@@ -2,7 +2,6 @@
 @section('title', '- '.$post[0]->title)
 @section('content')
 
-{{dd(@ownpost)}}
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,8 +12,8 @@
             </div>
         
             <div class="modal-body">
-                <p>You are about to delete one track, this procedure is irreversible.</p>
-                <p>Do you want to proceed?</p>
+                <p>Estas seguro de que quieres borrar este comentio?</p>
+                <p>Esta accion irreversible.</p>
                 <p class="debug-url"></p>
             </div>
             
@@ -54,6 +53,11 @@
                                                 </div>
                                                     <div class="mt-2">
                                                         <p class="comment-text">{{$comment->comment}} </br></p>
+                                                </div>
+                                                <div>
+                                                    @if($ownpost)
+                                                        <a href="#" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar comentario.</a><br>
+                                                    @endif
                                                 </div>
                                         </div>
                                     @endforeach
@@ -113,15 +117,10 @@
 
 <script>
     $('#confirm-delete').on('show.bs.modal', function(e) {
+
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        
-        $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        $('.debug-url').html('Borrar comentario de: <strong>' + $(e.relatedTarget).attr('own-comment') + '</strong>');
     });
 </script>
-<a href="#" data-href="/delete.php?id=23" data-toggle="modal" data-target="#confirm-delete">Delete record #23</a><br>
-    
-    <button class="btn btn-default" data-href="/delete.php?id=54" data-toggle="modal" data-target="#confirm-delete">
-        Delete record #54
-    </button>
 
 @endsection
