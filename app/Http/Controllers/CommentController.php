@@ -35,9 +35,19 @@ class CommentController extends Controller
         $comment->save();
         
         if(!$comment){
-            return response('Error.', 500);
+            return response('Error.', 403);
         }else{
-            return response('Done.', 200);
+            $commentReturn = '
+            <div class="p-2 bg-commnets">
+                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
+                <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">'.$comment->name.'</span><span class="date text-black-50">'.explode(' ',$comment->create_at)[0].'</span></div>
+                </div>
+                    <div class="mt-2">
+                        <p class="comment-text">'.$comment->comment.'</p>
+                </div>
+            </div>';
+            $data= array('comment' => $commentReturn);
+            return json_encode($data);
         }
     }
 

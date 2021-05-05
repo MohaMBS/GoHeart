@@ -25,28 +25,27 @@
 </head>
 <body>
     <!-- Menu fijo en la parte superior -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar pri sticky-top " id="ftco-navbar">
+    <nav class="navbar navbar-expand-xl navbar-dark ftco_navbar pri sticky-top " id="ftco-navbar">
 	    <div class="container-fluid ">
             <a class="navbar-brand " href="{{ route('home')}}"><img class="logo-tamaño" src="{{ asset('storage/web/images/logo.png')}}" alt="LogoWeb"> GoHeart</a>
 	        <button class="navbar-toggler" id="collapse-button" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	            <span class="fa fa-bars"></span> Menu
 	        </button>
 	        <div class="collapse navbar-collapse m-auto ml-sm-5" id="ftco-nav">
-                <ul class="navbar-nav mx-auto px-sm-5">
+                <ul class="navbar-nav mx-auto px-sm-5 pl-5">
                     <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ route('home')}}" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ (request()->is('blog/create-post') || request()->is('blog/posts') ) ? 'active' : '' }}" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Guias</a>
-                            <a class="dropdown-item" href="#">Eentos</a>
+                            <a class="dropdown-item" href="{{route ('posts')}}">Guias</a>
+                            <a class="dropdown-item" href="">Eentos</a>
                         </div>
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link">Ayuda</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">¿Quines somos?</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contacto</a></li>
                 </ul>
-                <!--
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ml-auto">
                     <li>
                         <form class="d-flex input-group w-auto" action="javascript:void(0);">
                         <input
@@ -64,8 +63,8 @@
                         </button>
                       </form>
                     </li>
-                </ul>-->
-                <ul class="navbar-nav d-md-flex align-items-md-center">
+                </ul>
+                <ul class="px-5 navbar-nav d-md-flex align-items-md-center">
                     @auth
                         <li class="nav-item mx-2 d-sm-inline-flex"> 
                             <span style="font-size: 1.8em;">
@@ -89,7 +88,7 @@
 	    </div>
     </nav>
     <div id="barr" class="col-12 position-fixed  shadow-lg border-top border-dark" style="height: 1rem;background-color:#244866; z-index:99;"></div>
-<div class="col-12 mt-4 row" style="margin-left:auto;margin-right:auto;">
+<div class="mt-4 row" style="margin-left:auto;margin-right:auto;">
     <div class="col-12">
         @yield("content")
     </div>

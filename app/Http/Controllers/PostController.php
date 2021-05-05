@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use View;
 
 class PostController extends Controller
 {
@@ -70,6 +70,11 @@ class PostController extends Controller
      */
     public function show(Post $post,$id)
     {
+        if(auth()->user()->id == $id){
+            View::share ( 'ownpost', true );
+        }else{
+            View::share ( 'ownpost', false );
+        }
         $data["post"] = Post::where('id',$id)->with('comments')->get();
         return view('display-post', $data);
     }

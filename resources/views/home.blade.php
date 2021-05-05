@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','- Home')
 @section('content')
-<div class="jumbotron">
+<div class="jumbotron offset-sm-1 col-sm-10 offset-sm-1">
   <h1 class="display-4">Bienvenido, a GoHeart!</h1>
   <p class="lead">El sito web líder, donde nuestros usuarios comparten todos sus conocimientos hacia otros.</p>
   <hr class="my-4">

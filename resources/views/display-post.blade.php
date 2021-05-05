@@ -2,7 +2,29 @@
 @section('title', '- '.$post[0]->title)
 @section('content')
 
-    
+{{dd(@ownpost)}}
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+            </div>
+        
+            <div class="modal-body">
+                <p>You are about to delete one track, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+                <p class="debug-url"></p>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>   
 
 <main role="main" class="offset-sm-1 col-sm-10 offset-sm-1 ">
     <div class="">
@@ -22,19 +44,21 @@
                 <h2>Comentarios:</h2>
                 <div class="d-flex justify-content-center row">
                     <div class="col-12">
-                        <div class="d-flex flex-column comment-section">
-                            @if( count($post[0]->comments) > 0)
-                                @foreach ( $post[0]->comments as $comment)
-                                    <div class="p-2 bg-commnets">
-                                        <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
-                                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$comment->name}}</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span></div>
-                                            </div>
-                                                <div class="mt-2">
-                                                    <p class="comment-text">{{$comment->comment}} </br></p>
-                                            </div>
-                                    </div>
-                                @endforeach
-                            @endif
+                        <div class="d-flex flex-column comment-section" >
+                            <div id="secciton-comment">
+                                @if( count($post[0]->comments) > 0)
+                                    @foreach ( $post[0]->comments as $comment)
+                                        <div class="p-2 bg-commnets">
+                                            <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
+                                                <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$comment->name}}</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span></div>
+                                                </div>
+                                                    <div class="mt-2">
+                                                        <p class="comment-text">{{$comment->comment}} </br></p>
+                                                </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                                 <!--
                                 <div class="bg-white">
                                     <div class="d-flex flex-row fs-12">
@@ -74,7 +98,10 @@
             console.log($("#comment-area").val())
             let data = {'_token':"{{ csrf_token() }}","token_post":"{{ $post[0]->security_token }}","comment":$("#comment-area").val()}
             $.post("{{ route('makeComment' )}}",data,function(data,status) {
-                //console.log("Enviado d:"+data+" s:"+status)
+                let comment = $.parseJSON(data)
+                console.log(comment)
+                $("#secciton-comment").append(comment.comment)
+                $("#comment-area").val("")
             });
         });
         $("#cancel-send").click(()=>{
@@ -83,5 +110,18 @@
     });
     </script>
 @endauth
+
+<script>
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        
+        $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+    });
+</script>
+<a href="#" data-href="/delete.php?id=23" data-toggle="modal" data-target="#confirm-delete">Delete record #23</a><br>
+    
+    <button class="btn btn-default" data-href="/delete.php?id=54" data-toggle="modal" data-target="#confirm-delete">
+        Delete record #54
+    </button>
 
 @endsection
