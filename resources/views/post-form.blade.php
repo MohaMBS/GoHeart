@@ -51,12 +51,11 @@
         </div>
     </div>    
 </div>
-
 <script>
   $(document).ready(()=>{
     //Script para poder añadir imgaen en el editor de texto.
     var editor_config = {
-      path_absolute : "../",
+      path_absolute : "{{URL::to('/')}}/",
       selector: 'textarea.my-editor',
       relative_urls: false,
       height : $( window ).height()*0.5,
@@ -100,7 +99,7 @@
       button.addEventListener('click', function () {
         var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
         var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
-        var cmsURL ='../laravel-filemanager?editor=image';
+        var cmsURL ="{{route ('unisharp.lfm.show')}}?editor=image&type=Images";
         tinyMCE.activeEditor.windowManager.openUrl({
           url : cmsURL,
           title : 'Filemanager',

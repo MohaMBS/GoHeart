@@ -114,3 +114,10 @@ blockquote{
         height:25px;
     }
 }
+
+.bg-commnets:nth-child(even){
+    background-color: white;
+}
+.bg-commnets:nth-child(odd) {
+    background-color: lightgrey;
+}
