@@ -144,3 +144,8 @@ blockquote{
     font-size: 18px;
     text-align: center;
 }
+
+.myhr{
+    margin-top: 0px;
+    margin-bottom: 0.25rem;
+}

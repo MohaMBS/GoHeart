@@ -50,7 +50,9 @@
                                     @foreach ( $post[0]->comments as $comment)
                                         <div class="p-2 mb-1 bg-commnets rounded border border-light">
                                             <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
-                                                <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$comment->name}}</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span></div>
+                                                <div class="d-flex flex-column justify-content-start ml-2">
+                                                    <span class="d-block font-weight-bold name">{{$comment->name}} @auth @if(Auth::user()->id == $comment->user_id)<a href="" id="{{$comment->id}}"><i class="far fa-trash-alt"> Eliminar.</i></a>@endif @endauth</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span>
+                                                </div>
                                                 </div>
                                                     <div class="mt-2">
                                                         <p class="comment-text">{{$comment->comment}} </br></p>

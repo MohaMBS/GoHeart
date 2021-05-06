@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +55,9 @@ Route::group(['middleware' => ['cors']], function () {
 
     //Para eliminar un mensaje de un usuario en tu post.
     Route::post('/blog/post/{id}/delete/comment/{cid}',[CommentController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete.comment');
+
+    //Routa para editar el perfil de usuario
+    Route::get('/my-profile', [UserController::class,'index'])->middleware(['auth'])->name("edit-user");
 
 });
 

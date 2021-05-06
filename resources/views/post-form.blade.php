@@ -79,6 +79,9 @@
 
         tinyMCE.activeEditor.windowManager.openUrl({
           url : cmsURL,
+          image_class_list: [
+    {title: 'Responsive', value: 'img-responsive'}
+],
           title : 'Filemanager',
           width : x * 0.8,
           height : y * 0.8,
