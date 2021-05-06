@@ -50,7 +50,10 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/my-profile/my-posts',[PostController::class, 'postsUser'])->middleware(['auth'])->name('my-posts');
 
     //Route para poder eleminar un post.
-    Route::get('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete-post');
+    Route::post('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete-post');
+
+    //Para eliminar un mensaje de un usuario en tu post.
+    Route::post('/blog/post/{id}/delete/comment/{cid}',[CommentController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete.comment');
 
 });
 

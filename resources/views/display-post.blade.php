@@ -1,7 +1,7 @@
 @extends('layouts/master')
 @section('title', '- '.$post[0]->title)
 @section('content')
-
+@if($ownpost)
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,19 +12,19 @@
             </div>
         
             <div class="modal-body">
-                <p>Estas seguro de que quieres borrar este comentio?</p>
+                <p>Estas seguro de que quieres borrar este mensaje que no te pertenece?</p>
                 <p>Esta accion irreversible.</p>
                 <p class="debug-url"></p>
             </div>
             
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger btn-ok">Delete</a>
+                <a id="deletComment"class="btn btn-danger btn-ok">Delete</a>
             </div>
         </div>
     </div>
 </div>   
-
+@endif
 <main role="main" class="offset-sm-1 col-sm-10 offset-sm-1">
     <div class="">
         <div class="col-12 blog-main bg-white rounded">
@@ -56,8 +56,8 @@
                                                         <p class="comment-text">{{$comment->comment}} </br></p>
                                                 </div>
                                                 <div>
-                                                    @if($ownpost)
-                                                        <a href="#" class="badge badge-warning" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar comentario.</a><br>
+                                                    @if($ownpost && $comment->user_id != Auth::id())
+                                                        <a href="" class="badge badge-warning" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar este comentario.</a><br>
                                                     @endif
                                                 </div>
                                         </div>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     @auth
-                        <input type="text" name="post" value="{{ $post[0]->id }}" hidden>
+                        <input type="text" name="post" id="postKey" value="{{ $post[0]->id }}" hidden>
                         <input type="text" name="token_post" id="token_post" value="{{ $post[0]->security_token }}" hidden>
                         @csrf
                         </form>
@@ -116,12 +116,28 @@
     </script>
 @endauth
 
+@if($ownpost)
 <script>
     $('#confirm-delete').on('show.bs.modal', function(e) {
 
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
         $('.debug-url').html('Borrar comentario de: <strong>' + $(e.relatedTarget).attr('own-comment') + '</strong>');
     });
+    $("#deletComment").click((e)=>{
+        e.preventDefault();
+        console.log($("#deletComment").attr('href'))
+        var url= "{{ route('delete.comment',['id'=>":id",'cid'=>":cid"]) }}"
+        url = url.replace(':id', $("#postKey").val());
+        url = url.replace(':cid', $("#deletComment").attr('href'));
+        console.log(url)
+        let data = {
+            "_token":"{{ csrf_token() }}",
+            "token_post":"{{ $post[0]->security_token }}"
+        }
+        $.post(url,data,function(data,stat){
+            console.log(data);
+        })
+    })
 </script>
-
+@endif
 @endsection

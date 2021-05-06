@@ -20,9 +20,10 @@ class Comment extends Model
      */
     protected $fillable = [
         'name',
-        'userId',
-        'postId',
-        'comment'
+        'user_id',
+        'post_id',
+        'comment',
+        'comment_deleted'
     ];
 
     
@@ -31,6 +32,6 @@ class Comment extends Model
     }
 
     public function post(){
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class);
     }
 }

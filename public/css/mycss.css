@@ -123,11 +123,24 @@ blockquote{
 }
 
 
-.navbar-dark .navbar-nav .nav-link {
-    color: rgb(255 255 255);
-}
 
 .navbar-dark .navbar-toggler {
     color: rgb(255 255 255);
     border-color: rgb(255 255 255);
+}
+
+
+/*Estilos pra bontatne floatant*/
+.cmn-divfloat {
+    position: fixed !important;
+    bottom: 45px;
+    right: 5px;
+}
+.cmn-btncircle {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 6px 0px;
+    border-radius: 15px;
+    font-size: 18px;
+    text-align: center;
 }

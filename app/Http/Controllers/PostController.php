@@ -73,11 +73,15 @@ class PostController extends Controller
         if(auth()->check()){
             if(Post::where("user_id",auth()->user()->id)->exists()){    
                 View::share ( 'ownpost', true );
+            }else{
+                View::share ( 'ownpost', false );
             }
         }else{
             View::share ( 'ownpost', false );
         }
-        $data["post"] = Post::where('id',$id)->with('comments')->get();
+        $data["post"] = Post::where('id',$id)->with(array('comments' => function($query){
+            $query->where("comment_deleted",0);
+        }))->get();
         return view('display-post', $data);
     }
 
