@@ -83,12 +83,13 @@
                         </li>              
                     @endauth
                     @guest
-                        <li class="nav-item "><a class="nav-link" href="{{ route('register') }}">Registro</a></li>
-                        <li class="nav-item "><a class="nav-link" href="{{ route('login') }}">Log in.</a></li>
-                        <li class="nav-item "> 
-                            <span style="font-size: 1.8em;">
-                            <a href="" class="text-white"><i class="fas fa-user-circle"></i></a> 
+                        <li class="ml-lg-2 nav-item d-flex"> 
+                            <span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
+                            <a href="{{ route('login') }}" class="text-white"><i class="fas fa-user-circle"></i></a> 
                             </span>
+                            
+                            <a class="nav-link ml-2 ml-sm-1 " href="{{ route('register') }}">Registro</a>
+                            <a class="nav-link ml-3 ml-sm-1" href="{{ route('login') }}">Log in.</a>
                         </li>
                     @endguest
                 </ul>
