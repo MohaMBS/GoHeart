@@ -34,7 +34,7 @@
         </div>
         <div class="form-group col-12 col-md-10 mt-4 ">
             <div class="col-12">
-                <h3 class="">Imagen destacada.</h3>
+                <h3 class="">Imagen destacada. <small>(Opcional y debe de ser una imagene panorámicas)</small></h3>
             </div>
             <div class="input-group col-12 ">
                 <span class="input-group-btn">
@@ -86,6 +86,7 @@
           resizable : "yes",
           close_previous : "no",
           onMessage: (api, message) => {
+            console.log(message)
             callback(message.content);
           }
         });
@@ -100,21 +101,22 @@
       button.addEventListener('click', function () {
         var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
         var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
-        var cmsURL ="{{route ('unisharp.lfm.show')}}?editor=image&type=Images";
+        var cmsURL =" {{URL::to('/')}}/laravel-filemanager?editor=image&type=Images";
         tinyMCE.activeEditor.windowManager.openUrl({
           url : cmsURL,
+          path_absolute : "{{URL::to('/')}}/",
           title : 'Filemanager',
           width : x * 0.8,
           height : y * 0.8,
           resizable : "yes",
           close_previous : "no",
           onMessage: (api, message) => {
-            $('#front_page').val(message.content);
+            $('#front_page').val(message.content.split("//")[2]);
           }
         });
       });
     };
-    var route_prefix = "../filemanager";
+    var route_prefix = "/";
     lfm('lfm', 'image', {prefix: route_prefix});
 })
 </script>

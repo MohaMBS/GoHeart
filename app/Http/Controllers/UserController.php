@@ -70,6 +70,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return response("test",403);
     }
 
     /**

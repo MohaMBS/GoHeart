@@ -58,6 +58,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     //Routa para editar el perfil de usuario
     Route::get('/my-profile', [UserController::class,'index'])->name("edit-user")->middleware(['auth']);
+    Route::post('/my-profile',[UserController::class, 'update'])->name('update-profile')->middleware(['auth']);
     Route::post('my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
 
 });

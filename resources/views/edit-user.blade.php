@@ -39,11 +39,11 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-2 "> <label for="name">Nombare:</label> </div>
-                    <div class="col-md-10"><input type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
+                    <div class="col-md-10"><input id="name" type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-2 "> <label for="email">Email:</label> </div>
-                    <div class="col-md-10"><input type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}"></div>
+                    <div class="col-md-10"><input id="" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}"></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-4 "> <label for="email">Contraseña actual:</label> </div>
@@ -57,12 +57,33 @@
                     <div class="col-md-4 "> <label for="email">Repita la nueva contraseña: </label> </div>
                     <div class="col-md-8"><input type="text" class="form-control" placeholder="Email" value=""></div>
                 </div>
-                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button">Guardar</button></div>
+                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button" id="update">Guardar</button></div>
             </div>
         </div>
     </div>
 </div>
 <textarea name="" id="profile" cols="30" rows="10" hidden></textarea>
+<script>
+    $(document).ready(()=>{
+        const orginalData = {
+            name:"{{ Auth::user()->name}}",
+            email:"{{ Auth::user()->name}}"
+        }
+
+        let newDataUpdate = {
+            _token: "{{ csrf_token() }}",
+            name:"",
+            email:"",
+            currentPass:"",
+            newPass:""
+        }
+
+        $("#update").click((evet)=>{
+            evet.preventDefault();
+            if(orginalData.name != )
+        })
+    })
+</script>
 <script>
     $(document).ready(()=>{
         var editor_config = {
