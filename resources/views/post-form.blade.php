@@ -38,11 +38,11 @@
             </div>
             <div class="input-group col-12 ">
                 <span class="input-group-btn">
-                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-white">
+                <a id="lfm" data-input="front_page" data-preview="holder" class="btn btn-primary text-white">
                     <i class="fa fa-picture-o"></i> Seleccionar
                 </a>
                 </span>
-                <input id="thumbnail" class="form-control " type="text" name="filepath">
+                <input id="front_page" class="form-control " type="text" name="filepath">
             </div>
         </div>
         <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">
@@ -57,6 +57,7 @@
     var editor_config = {
       path_absolute : "{{URL::to('/')}}/",
       selector: 'textarea.my-editor',
+      plugins: ["tinymce-plugin-responsive-image", /* and other plugins */],
       relative_urls: false,
       height : $( window ).height()*0.5,
       plugins: [
@@ -79,9 +80,6 @@
 
         tinyMCE.activeEditor.windowManager.openUrl({
           url : cmsURL,
-          image_class_list: [
-    {title: 'Responsive', value: 'img-responsive'}
-],
           title : 'Filemanager',
           width : x * 0.8,
           height : y * 0.8,
@@ -111,7 +109,7 @@
           resizable : "yes",
           close_previous : "no",
           onMessage: (api, message) => {
-            $('#thumbnail').val(message.content);
+            $('#front_page').val(message.content);
           }
         });
       });

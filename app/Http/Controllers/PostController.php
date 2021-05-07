@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data["posts"] = Post::withCount("comments")->get();
+        $data["posts"] = Post::withCount("comments")->with('user')->orderBy('id', 'desc')->paginate(10);
         return view("index-posts",$data);
     }
 
@@ -43,16 +43,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $input_data = $request->all();
-          
+        
         if ($request->has('id') && $request->has('token_post')) {
             $article =Post::where('id',$request->id)->where('security_token',$request->token_post)->first();  
         }else{
             do{
                 $token = Str::random(50);
             }while(Post::where("security_token",$token)->exists());
-            $article = new Post();   
+            $article = new Post();  
             $article->security_token =$token;
             $article->creator_name= auth()->user()->name;
+        }
+        if($request->has('filepath')){
+            if($request->filepath  != null){
+                $article->front_page  = $request->filepath;
+            }
         } 
         $article->title = $input_data['title'];
         $article->body = $input_data['body'];

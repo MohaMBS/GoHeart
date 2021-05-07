@@ -10,6 +10,8 @@
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js" defer></script>
+    <!-- JQueryAnimation -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap 4.6.0 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -55,7 +57,7 @@
                           aria-label="Search"
                         />
                         <button
-                          class="btn btn-info d-none d-sm-block "
+                          class="btn btn-info  "
                           type="button"
                           data-mdb-ripple-color="dark"
                         >
@@ -63,15 +65,22 @@
                         </button>
                       </form>
                     </li>
-                </ul>
-                <ul class="px-5 navbar-nav d-md-flex align-items-md-center">
+                </ul>      
+                <ul class=" navbar-nav d-md-flex ">
                     @auth
-                        <li class="nav-item mx-2 d-sm-inline-flex"> 
-                            <span style="font-size: 1.8em;">
-                            <a href="" class="text-white"><i class="fas fa-user-circle"></i></a> 
+                        <li class="ml-lg-2 d-flex nav-item dropdown">
+                            <span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
+                                <a href="{{ route('edit-user') }}" class="text-white"><i class="fas fa-user-circle"></i></a> 
                             </span>
-                        </li>        
-                        <li class="nav-item "><small> {{ Auth::user()->name }} </small></li>                
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><small> 
+                                    {{ Auth::user()->name }} </small></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown02">
+                                <a class="dropdown-item" href="{{route ('edit-user')}}">Editar cuenta</a>
+                                <a class="dropdown-item" href="{{ route('my-posts') }}">Ver mis entradas</a>
+                                <a class="dropdown-item" href="">Ver mis favoritos</a>
+                                <a class="dropdown-item" href="">Ver mis guardados</a>
+                            </div>
+                        </li>              
                     @endauth
                     @guest
                         <li class="nav-item "><a class="nav-link" href="{{ route('register') }}">Registro</a></li>

@@ -57,7 +57,8 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/blog/post/{id}/delete/comment/{cid}',[CommentController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete.comment');
 
     //Routa para editar el perfil de usuario
-    Route::get('/my-profile', [UserController::class,'index'])->middleware(['auth'])->name("edit-user");
+    Route::get('/my-profile', [UserController::class,'index'])->name("edit-user")->middleware(['auth']);
+    Route::post('my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
 
 });
 

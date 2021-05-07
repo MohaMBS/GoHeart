@@ -33,12 +33,12 @@
                     <h2 class="blog-post-title">{!! $post[0]->title !!}</h2>
                     <p class="blog-post-meta">Creado por <span class="font-weight-bold">{!! $post[0]->creator_name !!}</span>, {!! explode(' ',$post[0]->created_at)[0] !!} </p>
                 </div>
-                <div class="col-12">
+                <div class="col-12 body-post-fixed">
                     {!! $post[0]->body !!}
                 </div>
             </div>
         </div>
-        <div class="col-12 bg-white rounded">
+        <div class="col-12 bg-white rounded pb-3">
             <div class="mt-5">
                 <h2 class="px-3 pt-3">Comentarios:</h2>
                 <hr/>

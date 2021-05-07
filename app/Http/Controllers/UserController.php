@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -80,5 +81,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeAvatar(Request $req){
+
+        $user = User::find(auth()->user()->id);
+        $user->url_avatar = $req->url_avatar;
+        if($user->save()){
+            return response("Guardado el cambio.",200 );
+        }else{
+            return response("No se guardo los cambios",500);
+        }
+
     }
 }

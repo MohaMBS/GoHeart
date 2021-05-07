@@ -137,9 +137,9 @@ blockquote{
     right: 5px;
 }
 .cmn-btncircle {
-    width: 40px !important;
-    height: 40px !important;
-    padding: 6px 0px;
+    width: 45px !important;
+    height: 45px !important;
+    padding: 2px 0px;
     border-radius: 15px;
     font-size: 18px;
     text-align: center;
@@ -148,4 +148,8 @@ blockquote{
 .myhr{
     margin-top: 0px;
     margin-bottom: 0.25rem;
+}
+.body-post-fixed  img{
+    max-width: 10rem !important;
+    max-height: 10rem !important;
 }
