@@ -71,33 +71,48 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        $dataUser = User::find(auth()->user()->id);
         if($request->has('email')){
             if(auth()->user()->email != $request->email && $request->email != null){
                 $request->validate([
                     'email' => 'unique:users',
                 ]);
+                $dataUser->email= $request->email;
+                
             }
         }
         if($request->has('name')){
-            if($request->name != null){
+            if($request->name != null && auth()->user()->name != $request->name){
                 $request->validate([
                     'name' => 'required',
                 ]);
+                $dataUser->name =  $request->name;
+                if($dataUser->save()){
+                    return redirect()->route('update-profile')->with('msg',true);
+                }else{
+                    return redirect()->route('update-profile')->with('msg',false);
+                }
             }
         }
         if($request->has('oldPass') | $request->has('newPass')){
             if($request->oldPass != null | $request->newPass != null){
                 $request->validate([
-                    'oldPass' => ['required', function ($attribute, $value, $fail) use ($user) {
-                        if (!\Hash::check($value, $user->password)) {
-                            return $fail(__('No la contraseña es incorrecta.'));
-                        }
-                    }],                
-                    'newPass' => 'required|min:8|confirmed',
-                ]);
+                    'oldPass' => ['required',function ($attribute, $value, $fail) 
+                    {if (!\Hash::check($value , \Auth::user()->password)) {
+                        return $fail(__('La contraseña es incorrecta.'));
+                    }}],                
+                    'newPass1' => ['required','same:newPass2'],
+                ]); 
+                $dataUser->password = Hash::make($request->newPass1);
+                if($dataUser->save()){
+                    return redirect()->route('update-profile')->with('msg',true);
+                }else{
+                    return redirect()->route('update-profile')->with('msg',false);
+                }
+
             }
         }
-        
+        return redirect()->route('update-profile')->with('msg',null);
     }
 
     /**

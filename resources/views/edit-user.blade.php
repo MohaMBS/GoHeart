@@ -41,7 +41,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-2 "> <label for="name">Nombare:</label> </div>
-                        <div class="col-md-10"><input id="name" type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
+                        <div class="col-md-10"><input id="name" name="name" type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-2 "> <label for="email">Email:</label> </div>
@@ -56,7 +56,13 @@
                     <div class="row mt-3">
                         <div class="col-md-4 "> <label for="oldPass">Contraseña actual:</label> </div>
                         <div class="col-md-8"><input id="oldPass" name="oldPass" type="password" class="form-control" placeholder="Contaseña actual" value="">
-                            @error('currentPass')
+                            @error('oldPass')
+                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
+                            @enderror
+                            @error('newPass1')
+                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
+                            @enderror
+                            @error('newPass2')
                                 <div class="col-12 error-user-data rounded">{{ $message }}</div>
                             @enderror
                         </div>
@@ -78,6 +84,12 @@
 <textarea name="" id="profile" cols="30" rows="10" hidden></textarea>
 <script>
     $(document).ready(()=>{
+        @if (Session::get('msg') == true) 
+            $("#msgok").slideToggle(750).delay(1500).slideToggle(1500);
+        @endif
+        @if (Session::get('msg') == false)
+            $("#messagenotok").slideToggle(750).delay(1500).slideToggle(1500);
+        @endif
         const orginalData = {
             name:"{{ Auth::user()->name}}",
             email:"{{ Auth::user()->email}}"
@@ -140,9 +152,9 @@
                     orginalData.newPass= $("#newPass1").val();
                     newDataUpdate.currentPass= $("#oldPass").val()
                     newDataUpdate.newPass=$("#newPass1").val();
+                    $(form)[0].submit()
                 }
             });
-            console.log(newDataUpdate)
         }
 
     })
