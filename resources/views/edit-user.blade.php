@@ -1,12 +1,34 @@
 @extends('layouts/master')
 @section('content')
 
+
+<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de borrado de cuenta.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Quieres eliminar tu cuenta de forma permanente, todos tus datos seran borrados, tanto mensajes como entradas.
+            <p class="text-danger"> Estas esguro de que quieres borrar tu cuenta?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="deletteAcount">Eliminar cuenta</button>
+        </div>
+        </div>
+    </div>
+</div>
+
 <div class="container rounded bg-white mt-5">
     <div class="row">
         <div id="msgok" class="col-12 alert alert-success" role="alert" style="display: none">
             Se han guardado los cambios.
         </div>
-        <div id="messagenotok" class="alert alert-danger" role="alert" hidden>
+        <div id="messagenotok" class="col-12 alert alert-danger" role="alert" style="display: none">
             No ha sido posible guardar los cambios.
         </div>
         <div class="col-md-4 border-right">
@@ -24,8 +46,8 @@
                 <span class="text-black-50">{{ Auth::user()->email }}</span>
                 <span>Un <span class="special-font">heart</span> </span>
                 <span>más en nuestra comunidad.</span>
-                <span class="mt-5"> <a href="#"> <i class="fas fa-edit">Editar mis entradas.</i></a> </span>
-                <span class="mt-5"> <a href=""><i class="fas fa-user-alt-slash text-danger">Eliminar mi cuenta.</i></a></span>
+                <span class="mt-5"> <a href="{{ route('my-posts') }}"> <i class="fas fa-edit">Editar mis entradas.</i></a> </span>
+                <span class="mt-5"> <a id="deletteAcount" href="#"><i data-toggle="modal" data-target="#deleteUser" class="fas fa-user-alt-slash text-danger">Eliminar mi cuenta.</i></a></span>
             </div>
         </div>
         <div class="col-md-8">
@@ -59,21 +81,23 @@
                             @error('oldPass')
                                 <div class="col-12 error-user-data rounded">{{ $message }}</div>
                             @enderror
-                            @error('newPass1')
-                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
-                            @enderror
-                            @error('newPass2')
-                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
-                            @enderror
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-4 "> <label for="email">Nueva contraseña:</label> </div>
-                        <div class="col-md-8"><input id="newPass1" name="newPass1" type="password" class="form-control" placeholder="Nueva contrasñea" value=""></div>
+                        <div class="col-md-8"><input id="newPass1" name="newPass1" type="password" class="form-control" placeholder="Nueva contrasñea" value="">
+                            @error('newPass1')
+                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
+                            @enderror
+                    </div>       
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-4 "> <label for="email">Repita la nueva contraseña: </label> </div>
-                        <div class="col-md-8"><input id="newPass2" name="newPass2" type="password" class="form-control" placeholder="Repita la nueva contraseña" value=""></div>
+                        <div class="col-md-8"><input id="newPass2" name="newPass2" type="password" class="form-control" placeholder="Repita la nueva contraseña" value="">
+                            @error('newPass2')
+                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="mt-5 text-right"><input class="btn btn-primary profile-button" id="update" type="submit" value="Guardar"></div>
                 </div>
@@ -84,10 +108,22 @@
 <textarea name="" id="profile" cols="30" rows="10" hidden></textarea>
 <script>
     $(document).ready(()=>{
-        @if (Session::get('msg') == true) 
+        $('#deletteAcount').click((e)=>{
+            e.preventDefault();
+            $.post("{{ route('delet-user',Auth::user()->id) }}",{"_token":"{{ csrf_token() }}", function (data,status){
+                let url = "{{ route('home')}}"
+                $(location).attr('href',url)
+            }})
+        })
+    })
+</script>
+<script>
+    $(document).ready(()=>{
+        
+        @if (Session::get('msg') == true ) 
             $("#msgok").slideToggle(750).delay(1500).slideToggle(1500);
         @endif
-        @if (Session::get('msg') == false)
+        @if (Session::get('msg') == false && Session::get('msg') != null)
             $("#messagenotok").slideToggle(750).delay(1500).slideToggle(1500);
         @endif
         const orginalData = {

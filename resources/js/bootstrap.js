@@ -1,8 +1,8 @@
 window._ = require('lodash');
-window.tinymce_plugin_responsive_image= require('tinymce-plugin-responsive-image');
+//window.tinymce_plugin_responsive_image= require('tinymce-plugin-responsive-image');
 
-import 'tinymce-plugin-responsive-image'
-require('tinymce-plugin-responsive-image')
+//import 'tinymce-plugin-responsive-image'
+//require('tinymce-plugin-responsive-image')
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

@@ -121,9 +121,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $req, $id)
     {
-        //
+        User::destroy(auth()->user()->id);
+        $req->session()->flush();
+        return redirect()->route('home');
     }
 
     public function changeAvatar(Request $req){
