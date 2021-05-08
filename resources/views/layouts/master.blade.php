@@ -12,6 +12,8 @@
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js" defer></script>
     <!-- JQueryAnimation -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- JQuery validator -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js" defer></script>
     <!-- Bootstrap 4.6.0 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -85,9 +87,8 @@
                     @guest
                         <li class="ml-lg-2 nav-item d-flex"> 
                             <span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
-                            <a href="{{ route('login') }}" class="text-white"><i class="fas fa-user-circle"></i></a> 
+                                <a href="{{ route('login') }}" class="text-white"><i class="fas fa-user-circle"></i></a> 
                             </span>
-                            
                             <a class="nav-link ml-2 ml-sm-1 " href="{{ route('register') }}">Registro</a>
                             <a class="nav-link ml-3 ml-sm-1" href="{{ route('login') }}">Log in.</a>
                         </li>

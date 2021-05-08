@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -67,10 +69,35 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
-        return response("test",403);
+        if($request->has('email')){
+            if(auth()->user()->email != $request->email && $request->email != null){
+                $request->validate([
+                    'email' => 'unique:users',
+                ]);
+            }
+        }
+        if($request->has('name')){
+            if($request->name != null){
+                $request->validate([
+                    'name' => 'required',
+                ]);
+            }
+        }
+        if($request->has('oldPass') | $request->has('newPass')){
+            if($request->oldPass != null | $request->newPass != null){
+                $request->validate([
+                    'oldPass' => ['required', function ($attribute, $value, $fail) use ($user) {
+                        if (!\Hash::check($value, $user->password)) {
+                            return $fail(__('No la contraseña es incorrecta.'));
+                        }
+                    }],                
+                    'newPass' => 'required|min:8|confirmed',
+                ]);
+            }
+        }
+        
     }
 
     /**

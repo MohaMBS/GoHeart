@@ -29,36 +29,49 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="row d-flex flex-row align-items-center back">
-                       <a class="col-12" href="{{ url()->previous() }}"><h6><i class="fa fa-long-arrow-left mr-1 mb-1"></i>Ir atras</h6></a>
-                       <a class="col-12" href="{{route('home')}}"><h6><i class="fa fa-long-arrow-left mr-1 mb-1"></i>Volver al inicio</h6></a>
+            <form id="dataUser" action="{{ route('update-profile') }}" method="POST">
+                @csrf
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="row d-flex flex-row align-items-center back">
+                        <a class="col-12" href="{{ url()->previous() }}"><h6><i class="fa fa-long-arrow-left mr-1 mb-1"></i>Ir atras</h6></a>
+                        <a class="col-12" href="{{route('home')}}"><h6><i class="fa fa-long-arrow-left mr-1 mb-1"></i>Volver al inicio</h6></a>
+                        </div>
+                        <h6 class="text-right">Editor de perfil <span class="special-font"> GoHeart </span></h6>
                     </div>
-                    <h6 class="text-right">Editor de perfil <span class="special-font"> GoHeart </span></h6>
+                    <div class="row mt-2">
+                        <div class="col-md-2 "> <label for="name">Nombare:</label> </div>
+                        <div class="col-md-10"><input id="name" type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-2 "> <label for="email">Email:</label> </div>
+                        <div class="col-md-10">
+                            <input id="email" name="email" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}"> 
+                            @error('email')
+                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 "> <label for="oldPass">Contraseña actual:</label> </div>
+                        <div class="col-md-8"><input id="oldPass" name="oldPass" type="password" class="form-control" placeholder="Contaseña actual" value="">
+                            @error('currentPass')
+                                <div class="col-12 error-user-data rounded">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 "> <label for="email">Nueva contraseña:</label> </div>
+                        <div class="col-md-8"><input id="newPass1" name="newPass1" type="password" class="form-control" placeholder="Nueva contrasñea" value=""></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 "> <label for="email">Repita la nueva contraseña: </label> </div>
+                        <div class="col-md-8"><input id="newPass2" name="newPass2" type="password" class="form-control" placeholder="Repita la nueva contraseña" value=""></div>
+                    </div>
+                    <div class="mt-5 text-right"><input class="btn btn-primary profile-button" id="update" type="submit" value="Guardar"></div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-2 "> <label for="name">Nombare:</label> </div>
-                    <div class="col-md-10"><input id="name" type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-2 "> <label for="email">Email:</label> </div>
-                    <div class="col-md-10"><input id="" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}"></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4 "> <label for="email">Contraseña actual:</label> </div>
-                    <div class="col-md-8"><input type="text" class="form-control" placeholder="Email" value=""></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4 "> <label for="email">Nueva contraseña:</label> </div>
-                    <div class="col-md-8"><input type="text" class="form-control" placeholder="Email" value=""></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4 "> <label for="email">Repita la nueva contraseña: </label> </div>
-                    <div class="col-md-8"><input type="text" class="form-control" placeholder="Email" value=""></div>
-                </div>
-                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button" id="update">Guardar</button></div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -67,7 +80,7 @@
     $(document).ready(()=>{
         const orginalData = {
             name:"{{ Auth::user()->name}}",
-            email:"{{ Auth::user()->name}}"
+            email:"{{ Auth::user()->email}}"
         }
 
         let newDataUpdate = {
@@ -79,9 +92,59 @@
         }
 
         $("#update").click((evet)=>{
-            evet.preventDefault();
-            if(orginalData.name != )
+            if(orginalData.name != $("#name").val()){
+                orginalData.name= $("#name").val()
+                newDataUpdate.name= $("#name").val()
+                
+            }
+            if(orginalData.email != $("#email").val() ){
+                orginalData.email =$("#email").val()
+                newDataUpdate.email =$("#email").val()
+            }
+            if($("#oldPass").val() != "" | $("#newPass1").val() != "" | $("#newPass2").val() != ""){
+                validatePass();
+            }
         })
+        function validatePass(){
+            $("#dataUser").validate({
+                rules: {
+                    oldPass:{
+                        required: true,
+                        minlength: 8
+                    },
+                    newPass1: {
+                        required: true,
+                        equalTo: "#newPass2",
+                        minlength: 8,
+                    },
+                    newPass2: {
+                        required: true,
+                        equalTo: "#newPass1",
+                        minlength: 8,
+                    }
+                },
+                messages: {
+                    oldPass:"Porfavro debe introducir la contrasñea actual.",
+                    newPass1: {
+                        required: "Debe introducir una contraseña.",
+                        equalTo: "La nueva contraseña deben coincidir.",
+                        minlength: "Longitud minima es 8."
+                    },
+                    newPass2: {
+                        required: "Debe introducir una contraseña.",
+                        equalTo: "La nueva contraseña deben coincidir.",
+                        minlength: "Longitud minima es 8."
+                    }
+                },
+                submitHandler: function(form) {
+                    orginalData.newPass= $("#newPass1").val();
+                    newDataUpdate.currentPass= $("#oldPass").val()
+                    newDataUpdate.newPass=$("#newPass1").val();
+                }
+            });
+            console.log(newDataUpdate)
+        }
+
     })
 </script>
 <script>

@@ -153,3 +153,13 @@ blockquote{
     max-width: 10rem !important;
     max-height: 10rem !important;
 }
+
+/* Color de texto para el jquery validator*/
+.error {
+    color: red;
+}
+
+.error-user-data{
+    color: #ff6b6b;
+    background-color: #fffb00;
+}
