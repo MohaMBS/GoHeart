@@ -49,7 +49,14 @@
                                 @if( count($post[0]->comments) > 0)
                                     @foreach ( $post[0]->comments as $comment)
                                         <div id="comment-id-{{$comment->id}}" class="p-2 mb-1 bg-commnets rounded border border-light">
-                                            <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
+                                            <div class="d-flex flex-row user-info">
+                                                @if(auth()->user()->url_avatar)
+                                                    <img class="rounded-circle" src="{{auth()->user()->url_avatar   }}" width="65">
+                                                @else
+                                                    <span style="font-size: 50px">
+                                                        <i class="fas fa-user-circle"></i>
+                                                    </span>
+                                                @endif
                                                 <div class="d-flex flex-column justify-content-start ml-2">
                                                     <span class="d-block font-weight-bold name">{{$comment->name}} @auth @if(Auth::user()->id == $comment->user_id)<a class="comment-button-delete btn btn-danger" href="" id="{{$comment->id}}"><i class="far fa-trash-alt"> Eliminar.</i></a>@endif @endauth</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span>
                                                 </div>
@@ -78,7 +85,16 @@
                             @auth    
                             <form  method="POST">
                             <div class="bg-light p-2">
-                                <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea name="comment" id="comment-area" class="form-control ml-1 shadow-none textarea" placeholder="Escribe aquú su mensaje..."></textarea></div>
+                                <div class="d-flex flex-row align-items-start">
+                                    @if(auth()->user()->url_avatar)
+                                        <img class="rounded-circle" src="{{auth()->user()->url_avatar   }}" width="40">
+                                    @else
+                                        <span style="font-size: 40px">
+                                            <i class="fas fa-user-circle"></i>
+                                        </span>
+                                    @endif
+                                    <textarea name="comment" id="comment-area" class="form-control ml-1 shadow-none textarea" placeholder="Escribe aquú su mensaje..."></textarea>
+                                </div>
                                 <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" id="send" type="button">Comentar</button><button id="cancel-send" class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancelar</button></div>
                             </div>
                             @endauth
