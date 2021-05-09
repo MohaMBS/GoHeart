@@ -18,8 +18,8 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a id="deletComment"class="btn btn-danger btn-ok">Delete</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="notification-delete">Cancelar</button>
+                <a id="deletComment"class="btn btn-danger btn-ok">Borar</a>
             </div>
         </div>
     </div>
@@ -48,20 +48,20 @@
                             <div id="secciton-comment">
                                 @if( count($post[0]->comments) > 0)
                                     @foreach ( $post[0]->comments as $comment)
-                                        <div class="p-2 mb-1 bg-commnets rounded border border-light">
+                                        <div id="comment-id-{{$comment->id}}" class="p-2 mb-1 bg-commnets rounded border border-light">
                                             <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
                                                 <div class="d-flex flex-column justify-content-start ml-2">
-                                                    <span class="d-block font-weight-bold name">{{$comment->name}} @auth @if(Auth::user()->id == $comment->user_id)<a href="" id="{{$comment->id}}"><i class="far fa-trash-alt"> Eliminar.</i></a>@endif @endauth</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span>
+                                                    <span class="d-block font-weight-bold name">{{$comment->name}} @auth @if(Auth::user()->id == $comment->user_id)<a class="comment-button-delete btn btn-danger" href="" id="{{$comment->id}}"><i class="far fa-trash-alt"> Eliminar.</i></a>@endif @endauth</span><span class="date text-black-50">{{explode(' ',$post[0]->created_at)[0]}}</span>
                                                 </div>
                                                 </div>
                                                     <div class="mt-2">
                                                         <p class="comment-text">{{$comment->comment}} </br></p>
                                                 </div>
-                                                <div>
-                                                    @if($ownpost && $comment->user_id != Auth::id())
+                                                @if($ownpost && $comment->user_id != Auth::id())
+                                                    <div>
                                                         <a href="" class="badge badge-warning" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar este comentario.</a><br>
-                                                    @endif
-                                                </div>
+                                                    </div>
+                                                @endif      
                                         </div>
                                     @endforeach
                                 @endif
@@ -98,8 +98,26 @@
 </main>
 
 @auth
-    <script>
+<script>
     $(document).ready(function(){
+
+        function deleteMsg(){
+            console.log("cargado")
+            $(".comment-button-delete").click(function(e){
+                e.preventDefault()
+                let id=$(this).attr("id");
+                $.post('{{ route("delete.my.comment",$post[0]->id) }}',{'_token':'{{ csrf_token() }}','id':id},function(data){
+                    console.log("Vamos bien.")
+                    console.log(data)
+                    if(data == true){
+                        console.log(id)
+                        $("#comment-id-"+id).remove()
+                    }
+                })
+                return false;
+            })
+        }
+
         $("#send").click((event)=>{
             event.preventDefault()
             console.log($("#comment-area").val())
@@ -109,13 +127,17 @@
                 console.log(comment)
                 $("#secciton-comment").append(comment.comment)
                 $("#comment-area").val("")
+                deleteMsg()
             });
         });
         $("#cancel-send").click(()=>{
             $("#comment-area").val("")
         })
-    });
-    </script>
+
+        
+        deleteMsg()
+    })
+</script>
 @endauth
 
 @if($ownpost)
@@ -127,7 +149,7 @@
     });
     $("#deletComment").click((e)=>{
         e.preventDefault();
-        console.log($("#deletComment").attr('href'))
+        let idcomment=$("#deletComment").attr('href')
         var url= "{{ route('delete.comment',['id'=>":id",'cid'=>":cid"]) }}"
         url = url.replace(':id', $("#postKey").val());
         url = url.replace(':cid', $("#deletComment").attr('href'));
@@ -137,7 +159,8 @@
             "token_post":"{{ $post[0]->security_token }}"
         }
         $.post(url,data,function(data,stat){
-            console.log(data);
+            $("#comment-id-"+idcomment).remove();
+            $("#notification-delete").trigger("click")
         })
     })
 </script>

@@ -37,9 +37,9 @@ class CommentController extends Controller
             return response('Error.', 403);
         }else{
             $commentReturn = '
-            <div class="p-2 bg-commnets rounded border border-light">
+            <div id="comment-id-'.$comment->id.'" class="p-2 bg-commnets rounded border border-light">
                 <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
-                <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">'.$comment->name.'</span><span class="date text-black-50">'.explode(' ',$comment->created_at )[0].'</span></div>
+                <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">'.$comment->name.' <a class="comment-button-delete btn btn-danger" href="'.route('delete.my.comment',$comment->id).'" id="'.$comment->id.'"><i class="far fa-trash-alt" aria-hidden="true"> Eliminar.</i></a>'.'</span><span class="date text-black-50">'.explode(' ',$comment->created_at )[0].'</span></div>
                 </div>
                     <div class="mt-2">
                         <p class="comment-text">'.$comment->comment.'</p>
@@ -47,6 +47,16 @@ class CommentController extends Controller
             </div>';
             $data= array('comment' => $commentReturn);
             return json_encode($data);
+        }
+    }
+
+    public function deleteMessage(Request $req, $id){
+
+        $message = Comment::where('id',$req->id)->where('post_id',$id)->where("user_id",auth()->user()->id)->first();
+        if(Comment::where('id',$req->id)->where('post_id',$id)->where("user_id",auth()->user()->id)->delete()){
+            return true;
+        }else{
+            return false;
         }
     }
 

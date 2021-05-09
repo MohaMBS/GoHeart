@@ -40,14 +40,14 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/blog/posts',[PostController::class, 'index'])->name('posts');//Para ver todos los posts.
     Route::post('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete-post'); //Route para poder eleminar un post.
     Route::post('/blog/post/{id}/delete/comment/{cid}',[CommentController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete.comment');//Para eliminar un mensaje de un usuario en tu post.
+    Route::post('/blog/post/{id}/delete/message', [CommentController::class, 'deleteMessage'])->middleware(['auth'])->name('delete.my.comment');//Ruta para eliminar tus propios mensajes.
 
     //Routa para el perfil de usuario
-    Route::post('/my-profile/deleteAcount/{id}',[UserController::class,'destroy'])->name('delet-user')->middleware(['auth']);
+    Route::post('/my-profile/deleteAcount/{id}',[UserController::class,'destroy'])->name('delet-user')->middleware(['auth']);//Ruta para poder eliminar la cuenta del usuario.
     Route::get('/my-profile/my-posts',[PostController::class, 'postsUser'])->middleware(['auth'])->name('my-posts');//Para poder ver y gestionar todos los posts que tiene un usuario.
     Route::get('/my-profile', [UserController::class,'index'])->name("edit-user")->middleware(['auth']);//Ruta para poder llegar a la seccion para editar el perfil del usuairo.
     Route::post('/my-profile',[UserController::class, 'update'])->name('update-profile')->middleware(['auth']);//Ruta para cambiar los datos personales de la perosna.
-    Route::post('my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
-
+    Route::post('/my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
 });
 
 require __DIR__.'/auth.php';
