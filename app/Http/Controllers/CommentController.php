@@ -36,9 +36,17 @@ class CommentController extends Controller
         if(!$comment){
             return response('Error.', 403);
         }else{
+            if(auth()->user()->url_avatar){
+                $avatar = '<img class="rounded-circle" src="'.auth()->user()->url_avatar.'" width="50">';
+            }else{
+                $avatar = '<span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
+                        <i class="fas fa-user-circle"></i> 
+                    </span>';
+            }
+
             $commentReturn = '
             <div id="comment-id-'.$comment->id.'" class="p-2 bg-commnets rounded border border-light">
-                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="50">
+                <div class="d-flex flex-row user-info">'.$avatar.'
                 <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">'.$comment->name.' <a class="comment-button-delete btn btn-danger" href="'.route('delete.my.comment',$comment->id).'" id="'.$comment->id.'"><i class="far fa-trash-alt" aria-hidden="true"> Eliminar.</i></a>'.'</span><span class="date text-black-50">'.explode(' ',$comment->created_at )[0].'</span></div>
                 </div>
                     <div class="mt-2">

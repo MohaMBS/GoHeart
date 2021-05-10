@@ -10,7 +10,7 @@
                     <img class="rounded " height="180" src="../{{$post->front_page}}" alt="Card image cap">
                 @endif
                 <div class="card-body">
-                <h3 class="card-title font-weight-bold">{{$post->title}}</h3>
+                 <a href="{{ route('seeOne',$post->id )}}"><h3 class="card-title font-weight-bold">{{$post->title}}</h3></a>
                 <hr class="myhr">
                 <p class="card-text">{!! strip_tags($post->body) !!}</p>
                 <div class="row">
@@ -25,7 +25,7 @@
                             </small></p>
                         </div>
                     @endif
-                    <div class="col-sm-5 col-6 my-auto mx-auto"> <i class="far fa-thumbs-up"></i> 66  <i class="fas fa-comments"></i> 2 <i class="far fa-heart"> 23</i></div>
+                    <div class="col-sm-5 col-6 my-auto mx-auto"> <i class="fas fa-comments"></i> {{ $post->comments_count }} <a href=""><i class="far fa-heart"> 23</i></a></div>
                     <div class="col-sm-2 col-12 my-auto mx-autod-flex"><a href="{{ route('seeOne',$post->id )}}" class="btn btn-primary">Ver</a></div>
                 </div>
                 </div>

@@ -1,3 +1,5 @@
+/*======================== MIS FUNETE ================================*/
+
 h1{
     font-size: 48px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -100,6 +102,9 @@ blockquote{
     height:50px; 
     height:50px;
 }
+
+/*=================== FIN DE MI ESTILOS ==============================================*/
+/*=================== PEQUEÑAS MODIFICAIONES DE BOOTSTRAP ============================*/
 @media (max-width: 991px) {
     .navbar-nav {
         padding-left: 30px ;
@@ -114,7 +119,8 @@ blockquote{
         height:25px;
     }
 }
-
+/*==================== FIN DE MODIFICAIONES ==============================================*/
+/*==================== COLOR DE FONDO DE LOS COMENTARIOS =================================*/
 .bg-commnets:nth-child(even){
     background-color: white;
 }
@@ -162,4 +168,14 @@ blockquote{
 .error-user-data{
     color: #ff6b6b;
     background-color: #fffb00;
+}
+
+/*================== ESTILOS PARA RACION DE LOS POST ========================*/
+.reaciton-post{
+    display: block;
+    padding-top: 1rem;
+    color: black;
+}
+.reaciton-post:hover{
+    color: #2881cf;
 }

@@ -12,6 +12,7 @@ use App\Models\Comment;
 class Post extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'title','body', 'typePostId	','creator_name','security_token'
     ];
@@ -26,6 +27,7 @@ class Post extends Model
         return $this->hasOne(User::class);
     }
 
+    
     public function comments(){
         return $this->hasMany(Comment::class);
     }

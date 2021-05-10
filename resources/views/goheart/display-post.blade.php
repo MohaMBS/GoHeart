@@ -33,8 +33,15 @@
                     <h2 class="blog-post-title">{!! $post[0]->title !!}</h2>
                     <p class="blog-post-meta">Creado por <span class="font-weight-bold">{!! $post[0]->creator_name !!}</span>, {!! explode(' ',$post[0]->created_at)[0] !!} </p>
                 </div>
-                <div class="col-12 body-post-fixed">
-                    {!! $post[0]->body !!}
+                <div class="row col">
+                    <div class="col-sm-11 col-12 body-post-fixed">
+                        {!! $post[0]->body !!}
+                    </div>
+                    <div class="text-center col-sm-1 col-12 ">
+                        <a id="report" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Reportar este post."> <i  class="fas fa-exclamation col"></i></a>
+                        <a id="faovrite" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Me gusta."> <i class="far fa-heart col"></i> </a> 
+                        <a id="save" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Guardar para más tarde."> <i class="far fa-bookmark col"></i> </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,8 +57,8 @@
                                     @foreach ( $post[0]->comments as $comment)
                                         <div id="comment-id-{{$comment->id}}" class="p-2 mb-1 bg-commnets rounded border border-light">
                                             <div class="d-flex flex-row user-info">
-                                                @if(auth()->user()->url_avatar)
-                                                    <img class="rounded-circle" src="{{auth()->user()->url_avatar   }}" width="65">
+                                                @if( $comment->user->url_avatar )
+                                                    <img class="rounded-circle" src="{{ $comment->user->url_avatar }}" width="65">
                                                 @else
                                                     <span style="font-size: 50px">
                                                         <i class="fas fa-user-circle"></i>
@@ -114,7 +121,7 @@
 </main>
 
 @auth
-<script>
+<script>    
     $(document).ready(function(){
 
         function deleteMsg(){
@@ -150,35 +157,57 @@
             $("#comment-area").val("")
         })
 
-        
         deleteMsg()
+
+        $("#report").click(function(e){
+            console.log("Reportando...")
+            
+            
+            e.preventDefault()
+        })
+        $("#faovrite").click((e)=>{
+            console.log("Favorito")
+            $.post("{{ route('favorite.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
+                console.log(data+" "+status)
+            })
+            e.preventDefault()
+        })
+        $("#save").click((e)=>{
+            console.log("Guardando")
+            $.post("{{ route('save.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
+                console.log(data+" "+status)
+            })
+            e.preventDefault()
+        })
     })
 </script>
 @endauth
 
 @if($ownpost)
 <script>
-    $('#confirm-delete').on('show.bs.modal', function(e) {
-
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        $('.debug-url').html('Borrar comentario de: <strong>' + $(e.relatedTarget).attr('own-comment') + '</strong>');
-    });
-    $("#deletComment").click((e)=>{
-        e.preventDefault();
-        let idcomment=$("#deletComment").attr('href')
-        var url= "{{ route('delete.comment',['id'=>":id",'cid'=>":cid"]) }}"
-        url = url.replace(':id', $("#postKey").val());
-        url = url.replace(':cid', $("#deletComment").attr('href'));
-        console.log(url)
-        let data = {
-            "_token":"{{ csrf_token() }}",
-            "token_post":"{{ $post[0]->security_token }}"
-        }
-        $.post(url,data,function(data,stat){
-            $("#comment-id-"+idcomment).remove();
-            $("#notification-delete").trigger("click")
+    $(document).ready(()=>{
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $('.debug-url').html('Borrar comentario de: <strong>' + $(e.relatedTarget).attr('own-comment') + '</strong>');
+        });
+        $("#deletComment").click((e)=>{
+            e.preventDefault();
+            let idcomment=$("#deletComment").attr('href')
+            var url= "{{ route('delete.comment',['id'=>":id",'cid'=>":cid"]) }}"
+            url = url.replace(':id', $("#postKey").val());
+            url = url.replace(':cid', $("#deletComment").attr('href'));
+            console.log(url)
+            let data = {
+                "_token":"{{ csrf_token() }}",
+                "token_post":"{{ $post[0]->security_token }}"
+            }
+            $.post(url,data,function(data,stat){
+                $("#comment-id-"+idcomment).remove();
+                $("#notification-delete").trigger("click")
+            })
         })
     })
+    
 </script>
 @endif
 @endsection

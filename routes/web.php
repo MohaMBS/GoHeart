@@ -41,6 +41,11 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete-post'); //Route para poder eleminar un post.
     Route::post('/blog/post/{id}/delete/comment/{cid}',[CommentController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete.comment');//Para eliminar un mensaje de un usuario en tu post.
     Route::post('/blog/post/{id}/delete/message', [CommentController::class, 'deleteMessage'])->middleware(['auth'])->name('delete.my.comment');//Ruta para eliminar tus propios mensajes.
+    
+    //Ruta para reacciones a las entradas
+    Route::post('/blog/post/{id}/save', [PostController::class,'savePost'])->middleware(['auth'])->name('save.post');//Rute para guardar un post.
+    Route::post('/blog/post/{id}/fovirte', [PostController::class,'favoritePost'])->middleware(['auth'])->name('favorite.post');//Rute para "favoritar" un post.
+
 
     //Routa para el perfil de usuario
     Route::post('/my-profile/deleteAcount/{id}',[UserController::class,'destroy'])->name('delet-user')->middleware(['auth']);//Ruta para poder eliminar la cuenta del usuario.

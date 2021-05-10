@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\SavePost;
+use App\Models\FavoritePost;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use View;
@@ -85,8 +88,9 @@ class PostController extends Controller
             View::share ( 'ownpost', false );
         }
         $data["post"] = Post::where('id',$id)->with(array('comments' => function($query){
-            $query->where("comment_deleted",0);
+            $query->where("comment_deleted",0)->with('user');
         }))->get();
+        $data["post_id"] = $id;
         return view('goheart.display-post', $data);
     }
 
@@ -140,5 +144,35 @@ class PostController extends Controller
         $myPosts["posts"] = Post::where("user_id",auth()->user()->id)->get();
 
         return view('goheart.managment-posts',$myPosts);
+    }
+
+    public function savePost($id)
+    {
+        $status = new SavePost();
+        $status->user_id = auth()->user()->id;
+        $status->post_id = $id;
+        $status->onSave = true;
+        if($status->save()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function favoritePost($id)
+    {
+        if(FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->exists()){
+            FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->update(['onFavorite'=>false]);
+        }else{
+            $status = new FavoritePost();
+            $status->user_id = auth()->user()->id;
+            $status->post_id = $id;
+            $status->onFavorite = true;
+            if($status->save()){
+                return true;
+            }else{
+                return false;
+            }
+        }   
     }
 }
