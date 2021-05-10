@@ -179,3 +179,8 @@ blockquote{
 .reaciton-post:hover{
     color: #2881cf;
 }
+
+.liked-post{
+    color: red !important;
+}
+

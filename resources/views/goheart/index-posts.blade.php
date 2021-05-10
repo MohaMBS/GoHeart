@@ -25,7 +25,7 @@
                             </small></p>
                         </div>
                     @endif
-                    <div class="col-sm-5 col-6 my-auto mx-auto"> <i class="fas fa-comments"></i> {{ $post->comments_count }} <a href=""><i class="far fa-heart"> {{ $post->favorite_count }}</i></a></div>
+                    <div class="col-sm-5 col-6 my-auto mx-auto"> <i class="fas fa-comments"></i> {{ $post->comments_count }} <i class="fas fa-heart"> {{ $post->favorite_count }}</i></div>
                     <div class="col-sm-2 col-12 my-auto mx-autod-flex"><a href="{{ route('seeOne',$post->id )}}" class="btn btn-primary">Ver</a></div>
                 </div>
                 </div>

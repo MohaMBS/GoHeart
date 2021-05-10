@@ -176,16 +176,32 @@
             e.preventDefault()
         })
         $("#faovrite").click((e)=>{
+            const evento = $("#faovrite")
             console.log("Favorito")
             $.post("{{ route('favorite.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
                 console.log(data+" "+status)
+                if(data){
+                    if($(evento).children().first().attr("style")){
+                        $(evento).children().first().removeAttr("style")
+                    }else{
+                        $(evento).css('color',"red")
+                    }
+                }
             })
             e.preventDefault()
         })
         $("#save").click((e)=>{
+            const evento = $("#save")
             console.log("Guardando")
             $.post("{{ route('save.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
                 console.log(data+" "+status)
+                if(data){
+                    if($(evento).children().first().hasClass("far")){
+                        $(evento).children().first().removeClass("far").addClass("fas")
+                    }else{
+                        $(evento).children().first().removeClass("fas").addClass("far")
+                    }
+                }
             })
             e.preventDefault()
         })
