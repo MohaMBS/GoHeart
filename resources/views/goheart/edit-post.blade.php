@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', '- Editando: '.$data[0]->title)
 @section('content')
 <div class="col-12">
   <form action="{{ route ('store.post') }}" method="POST">

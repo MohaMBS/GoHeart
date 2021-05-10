@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('edit-user');
+        return view('goheart.edit-user');
     }
 
     /**

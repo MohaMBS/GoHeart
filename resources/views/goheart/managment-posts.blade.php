@@ -1,4 +1,6 @@
 @extends('layouts.master')
+
+@section('title', '- Mis entradas.')
 @section('content')
 
 <div class="row col-12">

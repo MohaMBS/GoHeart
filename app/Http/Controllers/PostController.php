@@ -17,11 +17,11 @@ class PostController extends Controller
     public function index()
     {
         $data["posts"] = Post::withCount("comments")->with('user')->orderBy('id', 'desc')->paginate(10);
-        return view("index-posts",$data);
+        return view("goheart.index-posts",$data);
     }
 
     public function home(){
-        return view('home');
+        return view('goheart.home');
     }
 
     /**
@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post-form');
+        return view('goheart.post-form');
     }
     
     /**
@@ -87,7 +87,7 @@ class PostController extends Controller
         $data["post"] = Post::where('id',$id)->with(array('comments' => function($query){
             $query->where("comment_deleted",0);
         }))->get();
-        return view('display-post', $data);
+        return view('goheart.display-post', $data);
     }
 
     /**
@@ -139,6 +139,6 @@ class PostController extends Controller
     {
         $myPosts["posts"] = Post::where("user_id",auth()->user()->id)->get();
 
-        return view('managment-posts',$myPosts);
+        return view('goheart.managment-posts',$myPosts);
     }
 }

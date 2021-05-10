@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', '- Creando entrada.')
 @section('css')
 <style>
   @media (max-width: 991px) {
