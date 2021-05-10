@@ -15,7 +15,7 @@ class CreateSecuritySpyTable extends Migration
     {
         Schema::create('security_spy', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUser');
+            $table->unsignedBigInteger('user_id');
             $table->longText('ip');
             $table->timestamps();
         });

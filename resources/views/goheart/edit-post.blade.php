@@ -16,17 +16,17 @@
         <label for="category"> <h2> Categoria: </h2></label>
           <select class="custom-select" name="Category" required>
             <option value="1" 
-            @if ($data[0]->typePostId == 1)
+            @if ($data[0]->	typepost_id  == 1)
               selected
             @endif
             >Ejercico.</option>
             <option value="2"
-            @if ($data[0]->typePostId == 2)
+            @if ($data[0]->	typepost_id  == 2)
               selected
             @endif
             >Dieta.</option>
             <option value="3"
-            @if ($data[0]->typePostId == 3)
+            @if ($data[0]->	typepost_id  == 3)
               selected
             @endif
             >Blog.</option>

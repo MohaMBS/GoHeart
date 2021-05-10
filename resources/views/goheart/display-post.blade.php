@@ -29,18 +29,28 @@
     <div class="">
         <div class="col-12 blog-main bg-white rounded">
             <div class="blog-post col-12 p-sm-4">
-                <div class="col-12">
+                <div class="">
                     <h2 class="blog-post-title">{!! $post[0]->title !!}</h2>
                     <p class="blog-post-meta">Creado por <span class="font-weight-bold">{!! $post[0]->creator_name !!}</span>, {!! explode(' ',$post[0]->created_at)[0] !!} </p>
                 </div>
-                <div class="row col">
+                <div class="row">
                     <div class="col-sm-11 col-12 body-post-fixed">
                         {!! $post[0]->body !!}
                     </div>
-                    <div class="text-center col-sm-1 col-12 ">
-                        <a id="report" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Reportar este post."> <i  class="fas fa-exclamation col"></i></a>
-                        <a id="faovrite" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Me gusta."> <i class="far fa-heart col"></i> </a> 
-                        <a id="save" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Guardar para más tarde."> <i class="far fa-bookmark col"></i> </a>
+                    <div class="text-center col-lg-1 col-12 ">
+                        <span style="font-size:1.5rem" class="pb-auto d-flex d-lg-inline text-center">
+                            <a id="report" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Reportar este post."> <i  class="fas fa-exclamation col"></i></a>
+                            @if($post[0]->favorite_count)
+                                <a id="faovrite" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Me gusta."> <i style="color: red" class="fas fa-heart col"></i> </a> 
+                            @else
+                                <a id="faovrite" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Me gusta."> <i class="fas fa-heart col"></i> </a> 
+                            @endif
+                            @if($post[0]->save_post_count)
+                                <a id="save" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Guardar para más tarde."> <i class="fas fa-bookmark col"></i> </a>
+                            @else
+                                <a id="save" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Guardar para más tarde."> <i class="far fa-bookmark col"></i> </a>
+                            @endif
+                        </span>
                     </div>
                 </div>
             </div>

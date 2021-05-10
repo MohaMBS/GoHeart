@@ -15,8 +15,8 @@ class CreateFavoritesPostsTable extends Migration
     {
         Schema::create('favorites_posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('postId');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('post_id');
             $table->boolean('onFavorite');
             $table->timestamps();
         });

@@ -54,7 +54,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/my-profile',[UserController::class, 'update'])->name('update-profile')->middleware(['auth']);//Ruta para cambiar los datos personales de la perosna.
     Route::post('/my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
 });
-
+dd("Acaba con la tabla de reports y el sistema de like");
 require __DIR__.'/auth.php';
 
 ?>

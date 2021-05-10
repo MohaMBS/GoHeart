@@ -19,7 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data["posts"] = Post::withCount("comments")->with('user')->orderBy('id', 'desc')->paginate(10);
+        $data["posts"] = Post::withCount("comments")->with('user')->withCount(array('favorite' => function($query){
+            $query->where("onFavorite",1);
+        } ))->orderBy('id', 'desc')->paginate(10);
         return view("goheart.index-posts",$data);
     }
 
@@ -64,7 +66,7 @@ class PostController extends Controller
         } 
         $article->title = $input_data['title'];
         $article->body = $input_data['body'];
-        $article->typePostId = $input_data['Category'];
+        $article->	typepost_id  = $input_data['Category'];
         $article->user_id = auth()->user()->id;
         $article->save();
         return redirect()->route('seeOne',$article->id)->withSuccess(['Data saved successfully.']);
@@ -84,12 +86,20 @@ class PostController extends Controller
             }else{
                 View::share ( 'ownpost', false );
             }
+            $data["post"] = Post::where('id',$id)
+            ->with(array('comments' => function($query){
+                $query->where("comment_deleted",0)->with('user');}))
+            ->withCount(array('favorite' => function ($query) use ($id) { $query->where('post_id',$id)->where("user_id",\Auth::user()->id)->where("onFavorite",1); }))
+            ->withCount(array('savePost'=> function ($query) use ($id) { $query->where('post_id',$id)->where("user_id",\Auth::user()->id)->where("onSave",1); }))
+            ->get();
         }else{
             View::share ( 'ownpost', false );
+            $data["post"] = Post::where('id',$id)
+            ->with(array('comments' => function($query){
+                $query->where("comment_deleted",0)->with('user');}))
+            ->get();
         }
-        $data["post"] = Post::where('id',$id)->with(array('comments' => function($query){
-            $query->where("comment_deleted",0)->with('user');
-        }))->get();
+        
         $data["post_id"] = $id;
         return view('goheart.display-post', $data);
     }
@@ -105,7 +115,7 @@ class PostController extends Controller
         if(Post::where('id',$id)->exists()){
             if(Post::where('id',$id)->where('user_id',auth()->user()->id)->exists()){
                 $data = Post::where('id',$id)->get();
-                return view('edit-post', compact('data'));
+                return view('goheart.edit-post', compact('data'));
             }else{
                 return "No eres el dueño del post.";
             }
@@ -148,31 +158,55 @@ class PostController extends Controller
 
     public function savePost($id)
     {
-        $status = new SavePost();
-        $status->user_id = auth()->user()->id;
-        $status->post_id = $id;
-        $status->onSave = true;
-        if($status->save()){
-            return true;
-        }else{
+        try {
+            if (SavePost::where("post_id",$id)->where("user_id",auth()->user()->id)->exists()) {
+                if(SavePost::where("post_id",$id)->where("user_id",auth()->user()->id)->where("onSave",true)->exists()){
+                    SavePost::where("post_id",$id)->where("user_id",auth()->user()->id)->update(['onSave'=>false]);
+                }else{
+                    SavePost::where("post_id",$id)->where("user_id",auth()->user()->id)->update(['onSave'=>true]);
+                }
+                return true;
+            } else {
+                $status = new SavePost();
+                $status->user_id = auth()->user()->id;
+                $status->post_id = $id;
+                $status->onSave = true;
+                if($status->save()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        } catch (\Throwable $th) {
             return false;
         }
+        
     }
     
     public function favoritePost($id)
     {
-        if(FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->exists()){
-            FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->update(['onFavorite'=>false]);
-        }else{
-            $status = new FavoritePost();
-            $status->user_id = auth()->user()->id;
-            $status->post_id = $id;
-            $status->onFavorite = true;
-            if($status->save()){
+        try {
+            if(FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->exists()){
+                if(FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->where("onFavorite",true)->exists()){
+                    FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->update(['onFavorite'=>false]);
+                }else{
+                    FavoritePost::where("post_id",$id)->where("user_id",auth()->user()->id)->update(['onFavorite'=>true]);
+                }
                 return true;
             }else{
-                return false;
-            }
-        }   
+                $status = new FavoritePost();
+                $status->user_id = auth()->user()->id;
+                $status->post_id = $id;
+                $status->onFavorite = true;
+                if($status->save()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }   
+        } catch (\Throwable $th) {
+            return false;
+        }
+        
     }
 }

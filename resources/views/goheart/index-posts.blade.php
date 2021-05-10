@@ -12,7 +12,7 @@
                 <div class="card-body">
                  <a href="{{ route('seeOne',$post->id )}}"><h3 class="card-title font-weight-bold">{{$post->title}}</h3></a>
                 <hr class="myhr">
-                <p class="card-text">{!! strip_tags($post->body) !!}</p>
+                <p class="card-text">{!!  \Illuminate\Support\Str::limit(strip_tags($post->body), $limit = 400, $end = '...') !!}</p>
                 <div class="row">
                     @if( $post->user->url_avatar !=null)
                         <div class="col-sm-5 col-6 my-auto mx-auto"><p class="card-text"><img src="{{$post->user->url_avatar}}" alt="Profile picture" class="avatar"><small class="text-muted">
@@ -25,7 +25,7 @@
                             </small></p>
                         </div>
                     @endif
-                    <div class="col-sm-5 col-6 my-auto mx-auto"> <i class="fas fa-comments"></i> {{ $post->comments_count }} <a href=""><i class="far fa-heart"> 23</i></a></div>
+                    <div class="col-sm-5 col-6 my-auto mx-auto"> <i class="fas fa-comments"></i> {{ $post->comments_count }} <a href=""><i class="far fa-heart"> {{ $post->favorite_count }}</i></a></div>
                     <div class="col-sm-2 col-12 my-auto mx-autod-flex"><a href="{{ route('seeOne',$post->id )}}" class="btn btn-primary">Ver</a></div>
                 </div>
                 </div>

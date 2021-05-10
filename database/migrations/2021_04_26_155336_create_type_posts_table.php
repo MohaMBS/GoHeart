@@ -15,8 +15,8 @@ class CreateTypePostsTable extends Migration
     {
         Schema::create('type_posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('postId');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('postid');
             $table->timestamps();
         });
     }
