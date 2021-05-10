@@ -29,7 +29,6 @@ class Post extends Model
         return $this->hasOne(User::class);
     }
 
-    
     public function comments(){
         return $this->hasMany(Comment::class);
     }

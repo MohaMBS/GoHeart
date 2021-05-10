@@ -39,7 +39,9 @@
                     </div>
                     <div class="text-center col-lg-1 col-12 ">
                         <span style="font-size:1.5rem" class="pb-auto d-flex d-lg-inline text-center">
+                            @if(!$ownpost)
                             <a id="report" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Reportar este post."> <i  class="fas fa-exclamation col"></i></a>
+                            @endif
                             @if($post[0]->favorite_count)
                                 <a id="faovrite" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Me gusta."> <i style="color: red" class="fas fa-heart col"></i> </a> 
                             @else
@@ -171,8 +173,9 @@
 
         $("#report").click(function(e){
             console.log("Reportando...")
-            
-            
+            $.post("{{ route('report.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
+                console.log(data)
+            })
             e.preventDefault()
         })
         $("#faovrite").click((e)=>{

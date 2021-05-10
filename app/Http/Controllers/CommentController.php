@@ -37,7 +37,7 @@ class CommentController extends Controller
             return response('Error.', 403);
         }else{
             if(auth()->user()->url_avatar){
-                $avatar = '<img class="rounded-circle" src="'.auth()->user()->url_avatar.'" width="50">';
+                $avatar = '<img class="rounded-circle" src="'.auth()->user()->url_avatar.'" width="75">';
             }else{
                 $avatar = '<span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
                         <i class="fas fa-user-circle"></i> 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 /*
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['cors']], function () {
     //Ruta para reacciones a las entradas
     Route::post('/blog/post/{id}/save', [PostController::class,'savePost'])->middleware(['auth'])->name('save.post');//Rute para guardar un post.
     Route::post('/blog/post/{id}/fovirte', [PostController::class,'favoritePost'])->middleware(['auth'])->name('favorite.post');//Rute para "favoritar" un post.
+    Route::post('/blog/post/{id}/report', [ReportController::class,'store'])->middleware(['auth'])->name('report.post');//Rute para hacer un reporte a un post.
 
 
     //Routa para el perfil de usuario
