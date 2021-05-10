@@ -71,9 +71,7 @@
                 <ul class=" navbar-nav d-md-flex ">
                     @auth
                         <li class="ml-lg-2 d-flex nav-item dropdown">
-                            <span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
-                                <a href="{{ route('edit-user') }}" class="text-white"><i class="fas fa-user-circle"></i></a> 
-                            </span>
+                            <a href="{{ route('edit-user') }}" class="text-white"><img class="rounded-circle" src="{{ auth()->user()->url_avatar }}" alt="" width="40"></a>
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><small> 
                                     {{ Auth::user()->name }} </small></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown02">
@@ -82,6 +80,11 @@
                                 <a class="dropdown-item" href="">Ver mis favoritos</a>
                                 <a class="dropdown-item" href="">Ver mis guardados</a>
                             </div>
+                            <a data-toggle="tooltip" data-placement="bottom" title="Cerrar session." class="text-white" href="{{ route('logout-get') }}">
+                                <span style="font-size:1.8rem">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                            </a>
                         </li>              
                     @endauth
                     @guest
