@@ -42,7 +42,7 @@
                         <a class="nav-link dropdown-toggle {{ (request()->is('blog/create-post') || request()->is('blog/posts') ) || request()->is('blog/post/'.request()->id) ? 'active' : '' }}" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="{{route ('posts')}}">GoBlog</a>
-                            <a class="dropdown-item" href="">Eentos</a>
+                            <a class="dropdown-item" href="">Eventos</a>
                         </div>
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link">Ayuda</a></li>
