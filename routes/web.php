@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
@@ -33,8 +34,8 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/',[PostController::class, 'home'])->name('home');
     
     //Ruta del blog
-    Route::get('/blog/create-post',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');//Rutas para poder crear una nueva entrada en el blog.
-    Route::post('/blog/create-post/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');//Rutas para editar una nueva entrada en el blog.
+    Route::get('/blog/post/create-post',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');//Rutas para poder crear una nueva entrada en el blog.
+    Route::post('/blog/post/create-post/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');//Rutas para editar una nueva entrada en el blog.
     Route::get('/blog/post/{id}',[PostController::class, 'show'])->name('seeOne');//Ruta para poder ver un post en concreto.
     Route::get('/my-profile/my-posts/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth','postowner'])->name('edit.post');//Ruta para poder editar un post.
     Route::post('/blog/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');//Ruta para poder comentar.
@@ -57,6 +58,11 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
     Route::get('/my-profile/my-favorites', [UserController::class,'fovritesPost'])->name('my-favorites')->middleware(['auth']); //Ruta para cambiar el avatar
     Route::get('/my-profile/my-saves', [UserController::class,'savedPost'])->name('my-saves')->middleware(['auth']); //Ruta para cambiar el avatar
+
+    //Rutas para eventos
+    Route::get('/blog/events',[EventController::class,'index'])->name('events'); //Ruta para ver los eventos
+    Route::get('/blog/event/create',[EventController::class,'create'])->name('create-event')->middleware(['auth']);
+    dd("creacion de evento");
 });
 require __DIR__.'/auth.php';
 
