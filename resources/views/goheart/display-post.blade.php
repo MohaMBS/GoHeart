@@ -92,15 +92,6 @@
                                     @endforeach
                                 @endif
                             </div>
-                                <!--
-                                <div class="bg-white">
-                                    <div class="d-flex flex-row fs-12">
-                                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
-                                        <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
-                                        <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
-                                    </div>
-                                </div>
-                                -->
                             @auth    
                             <form  method="POST">
                             <div class="bg-light p-2">
@@ -117,6 +108,17 @@
                                 <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" id="send" type="button">Comentar</button><button id="cancel-send" class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancelar</button></div>
                             </div>
                             @endauth
+                            @guest
+                            <div class="bg-light p-2 mt-2">
+                                <div class="d-flex flex-row align-items-start">
+                                        <span style="font-size: 40px">
+                                            <i class="fas fa-user-circle"></i>
+                                        </span>
+                                    <textarea name="comment" id="comment-area" class="form-control ml-1 shadow-none textarea" placeholder="Para poder comentar, proceda a autenticarse..." disabled></textarea>
+                                </div>
+                                <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" id="send" type="button" disabled>Comentar</button><button id="cancel-send" class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" disabled>Cancelar</button></div>
+                            </div>
+                            @endguest
                         </div>
                     </div>
                     @auth
@@ -131,112 +133,150 @@
     </div>
     
 </main>
-
-@auth
-<script>    
-    $(document).ready(function(){
-
-        function deleteMsg(){
-            console.log("cargado")
-            $(".comment-button-delete").click(function(e){
+@guest
+<div id="Modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">OPS!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Para poder reaccionar a esta entrada debe estar autenticado. Por favor proceda a autenticarse o registrarse.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar.</button>
+            <a href="{{ route('register') }}" class="btn btn-primary">Registrarse.</a>
+            <a href="{{ route('login') }}" class="btn btn-primary">Iiniciar session.</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script>
+        $(document).ready(()=>{
+            $("#report").click(function(e){
+                $('#Modal').fadeIn("1500").modal('show');
                 e.preventDefault()
-                let id=$(this).attr("id");
-                $.post('{{ route("delete.my.comment",$post[0]->id) }}',{'_token':'{{ csrf_token() }}','id':id},function(data){
-                    console.log("Vamos bien.")
+            })
+            $("#faovrite").click((e)=>{
+                $('#Modal').fadeIn("1500").modal('show');
+                e.preventDefault()
+            })
+            $("#save").click((e)=>{
+                $('#Modal').fadeIn("1500").modal('show');
+                e.preventDefault()
+            })
+        })
+    </script>
+@endguest
+@auth
+    <script>    
+        $(document).ready(function(){
+
+            function deleteMsg(){
+                console.log("cargado")
+                $(".comment-button-delete").click(function(e){
+                    e.preventDefault()
+                    let id=$(this).attr("id");
+                    $.post('{{ route("delete.my.comment",$post[0]->id) }}',{'_token':'{{ csrf_token() }}','id':id},function(data){
+                        console.log("Vamos bien.")
+                        console.log(data)
+                        if(data == true){
+                            console.log(id)
+                            $("#comment-id-"+id).remove()
+                        }
+                    })
+                    return false;
+                })
+            }
+
+            $("#send").click((event)=>{
+                event.preventDefault()
+                console.log($("#comment-area").val())
+                let data = {'_token':"{{ csrf_token() }}","token_post":"{{ $post[0]->security_token }}","comment":$("#comment-area").val()}
+                $.post("{{ route('makeComment' )}}",data,function(data,status) {
+                    let comment = $.parseJSON(data)
+                    console.log(comment)
+                    $("#secciton-comment").append(comment.comment)
+                    $("#comment-area").val("")
+                    deleteMsg()
+                });
+            });
+            $("#cancel-send").click(()=>{
+                $("#comment-area").val("")
+            })
+
+            deleteMsg()
+
+            $("#report").click(function(e){
+                console.log("Reportando...")
+                $.post("{{ route('report.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
                     console.log(data)
-                    if(data == true){
-                        console.log(id)
-                        $("#comment-id-"+id).remove()
+                })
+                e.preventDefault()
+            })
+            $("#faovrite").click((e)=>{
+                const evento = $("#faovrite")
+                console.log("Favorito")
+                $.post("{{ route('favorite.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
+                    console.log(data+" "+status)
+                    if(data){
+                        if($(evento).children().first().attr("style")){
+                            $(evento).children().first().removeAttr("style")
+                        }else{
+                            $(evento).css('color',"red")
+                        }
                     }
                 })
-                return false;
+                e.preventDefault()
             })
-        }
-
-        $("#send").click((event)=>{
-            event.preventDefault()
-            console.log($("#comment-area").val())
-            let data = {'_token':"{{ csrf_token() }}","token_post":"{{ $post[0]->security_token }}","comment":$("#comment-area").val()}
-            $.post("{{ route('makeComment' )}}",data,function(data,status) {
-                let comment = $.parseJSON(data)
-                console.log(comment)
-                $("#secciton-comment").append(comment.comment)
-                $("#comment-area").val("")
-                deleteMsg()
-            });
-        });
-        $("#cancel-send").click(()=>{
-            $("#comment-area").val("")
-        })
-
-        deleteMsg()
-
-        $("#report").click(function(e){
-            console.log("Reportando...")
-            $.post("{{ route('report.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
-                console.log(data)
-            })
-            e.preventDefault()
-        })
-        $("#faovrite").click((e)=>{
-            const evento = $("#faovrite")
-            console.log("Favorito")
-            $.post("{{ route('favorite.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
-                console.log(data+" "+status)
-                if(data){
-                    if($(evento).children().first().attr("style")){
-                        $(evento).children().first().removeAttr("style")
-                    }else{
-                        $(evento).css('color',"red")
+            $("#save").click((e)=>{
+                const evento = $("#save")
+                console.log("Guardando")
+                $.post("{{ route('save.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
+                    console.log(data+" "+status)
+                    if(data){
+                        if($(evento).children().first().hasClass("far")){
+                            $(evento).children().first().removeClass("far").addClass("fas")
+                        }else{
+                            $(evento).children().first().removeClass("fas").addClass("far")
+                        }
                     }
-                }
+                })
+                e.preventDefault()
             })
-            e.preventDefault()
         })
-        $("#save").click((e)=>{
-            const evento = $("#save")
-            console.log("Guardando")
-            $.post("{{ route('save.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
-                console.log(data+" "+status)
-                if(data){
-                    if($(evento).children().first().hasClass("far")){
-                        $(evento).children().first().removeClass("far").addClass("fas")
-                    }else{
-                        $(evento).children().first().removeClass("fas").addClass("far")
-                    }
-                }
-            })
-            e.preventDefault()
-        })
-    })
-</script>
+    </script>
 @endauth
 
 @if($ownpost)
-<script>
-    $(document).ready(()=>{
-        $('#confirm-delete').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            $('.debug-url').html('Borrar comentario de: <strong>' + $(e.relatedTarget).attr('own-comment') + '</strong>');
-        });
-        $("#deletComment").click((e)=>{
-            e.preventDefault();
-            let idcomment=$("#deletComment").attr('href')
-            var url= "{{ route('delete.comment',['id'=>":id",'cid'=>":cid"]) }}"
-            url = url.replace(':id', $("#postKey").val());
-            url = url.replace(':cid', $("#deletComment").attr('href'));
-            console.log(url)
-            let data = {
-                "_token":"{{ csrf_token() }}",
-                "token_post":"{{ $post[0]->security_token }}"
-            }
-            $.post(url,data,function(data,stat){
-                $("#comment-id-"+idcomment).remove();
-                $("#notification-delete").trigger("click")
+    <script>
+        $(document).ready(()=>{
+            $('#confirm-delete').on('show.bs.modal', function(e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+                $('.debug-url').html('Borrar comentario de: <strong>' + $(e.relatedTarget).attr('own-comment') + '</strong>');
+            });
+            $("#deletComment").click((e)=>{
+                e.preventDefault();
+                let idcomment=$("#deletComment").attr('href')
+                var url= "{{ route('delete.comment',['id'=>":id",'cid'=>":cid"]) }}"
+                url = url.replace(':id', $("#postKey").val());
+                url = url.replace(':cid', $("#deletComment").attr('href'));
+                console.log(url)
+                let data = {
+                    "_token":"{{ csrf_token() }}",
+                    "token_post":"{{ $post[0]->security_token }}"
+                }
+                $.post(url,data,function(data,stat){
+                    $("#comment-id-"+idcomment).remove();
+                    $("#notification-delete").trigger("click")
+                })
             })
         })
-    })
-    
-</script>
+        
+    </script>
 @endif
 @endsection

@@ -146,13 +146,19 @@ class UserController extends Controller
 
     public function fovritesPost()
     {
-
-        return view('goheart.fovrite-post')->with('posts',FavoritePost::where("onFavorite",1)->where("user_id",auth()->user()->id)->with('post')->get());
+        return view('goheart.fovrite-post')
+        ->with('posts',FavoritePost::where("onFavorite",1)
+        ->where("user_id",auth()->user()->id)
+        ->orderBy("updated_at","desc")
+        ->with('post')->get());
     }
 
     public function savedPost()
     {
-
-        return view()->with();
+        return view('goheart.save-post')
+        ->with('posts',SavePost::where("onSave",1)
+        ->where("user_id",auth()->user()->id)
+        ->orderBy("updated_at","desc")
+        ->with('post')->get());
     }
 }

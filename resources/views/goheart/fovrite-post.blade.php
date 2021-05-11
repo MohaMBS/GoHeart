@@ -2,8 +2,11 @@
 
 @section('title', '- Mis favoritos.')
 @section('content')
-<div class="row col-12">
-    <div class="offset-sm-2 col-sm-9 offset-sm-1 col-12">
+<div class="row col-12 ">
+    <div class="col-12 text-center">
+        <h1 class="font-italic"> Mis favoritos: </h1>
+    </div>
+    <div class="offset-sm-2 col-sm-8 offset-sm-2 col-12">
     @if(count($posts) > 0)
         @foreach($posts as $post)
             <div class="col">
@@ -17,7 +20,7 @@
                     <p class="card-text">{!!  \Illuminate\Support\Str::limit(strip_tags($post->post->body), $limit = 400, $end = '...') !!}</p>
                     <div class="row">
                         <div class="col-12 text-center d-flex d-lg-inline "> 
-                            <a href="{{ route('seeOne',$post->id )}}" class="btn btn-primary">Ver</a> 
+                            <a href="{{ route('seeOne',$post->post->id )}}" class="btn btn-primary">Ver</a> 
                         </div>
                     </div>
                     </div>
@@ -25,8 +28,14 @@
             </div>
         @endforeach
     @else
-        <p>No has creado ninguna entrada.</p>
-        <a href="{{ route('create.post')}}">Crear entrada.</a>
+    <div class="col">
+        <div class="card mb-3 text-center">
+            <div class="card-body">
+            <h3 class="card-title font-weight-bold"> Tines 0 entradas en favoritos.</h3>
+            <hr class="myhr">
+            </div>
+        </div>
+    </div>
     @endif
     </div>
 </div>
