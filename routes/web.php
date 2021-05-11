@@ -62,7 +62,7 @@ Route::group(['middleware' => ['cors']], function () {
     //Rutas para eventos
     Route::get('/blog/events',[EventController::class,'index'])->name('events'); //Ruta para ver los eventos
     Route::get('/blog/event/create',[EventController::class,'create'])->name('create-event')->middleware(['auth']);
-    dd("creacion de evento");
+    dd("creacion de evento hacer que al reportar salgo un pop up");
 });
 require __DIR__.'/auth.php';
 
