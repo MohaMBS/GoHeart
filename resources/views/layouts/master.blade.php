@@ -77,7 +77,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdown02">
                                 <a class="dropdown-item" href="{{route ('edit-user')}}">Editar cuenta</a>
                                 <a class="dropdown-item" href="{{ route('my-posts') }}">Ver mis entradas</a>
-                                <a class="dropdown-item" href="">Ver mis favoritos</a>
+                                <a class="dropdown-item" href="{{route ('my-favorites')}}">Ver mis favoritos</a>
                                 <a class="dropdown-item" href="">Ver mis guardados</a>
                             </div>
                             <a data-toggle="tooltip" data-placement="bottom" title="Cerrar session." class="text-white" href="{{ route('logout-get') }}">

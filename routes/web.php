@@ -55,9 +55,8 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/my-profile', [UserController::class,'index'])->name("edit-user")->middleware(['auth']);//Ruta para poder llegar a la seccion para editar el perfil del usuairo.
     Route::post('/my-profile',[UserController::class, 'update'])->name('update-profile')->middleware(['auth']);//Ruta para cambiar los datos personales de la perosna.
     Route::post('/my-profile/avatar', [UserController::class,'changeAvatar'])->name('change-avatar')->middleware(['auth']); //Ruta para cambiar el avatar
-    Route::get('/my-profile/my-favorites', [PostController::class,'changeAvatar'])->name('my-favorites')->middleware(['auth']); //Ruta para cambiar el avatar
-    Route::get('/my-profile/my-saves', [PostController::class,'changeAvatar'])->name('my-saves')->middleware(['auth']); //Ruta para cambiar el avatar
-    dd("Crear las vistas para gestionar mis favoritos y guardados y cambiar los cometnarios en las ruta de los 2 ultimos");
+    Route::get('/my-profile/my-favorites', [UserController::class,'fovritesPost'])->name('my-favorites')->middleware(['auth']); //Ruta para cambiar el avatar
+    Route::get('/my-profile/my-saves', [UserController::class,'savedPost'])->name('my-saves')->middleware(['auth']); //Ruta para cambiar el avatar
 });
 require __DIR__.'/auth.php';
 

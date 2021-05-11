@@ -42,7 +42,7 @@
         <p>No has creado ninguna entrada.</p>
         <a href="{{ route('create.post')}}">Crear entrada.</a>
     @endif
-@endsection
     </div>
 </div>
+@endsection
 

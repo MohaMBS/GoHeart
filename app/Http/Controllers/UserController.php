@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\SavePost;
+use App\Models\FavoritePost;
+
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
@@ -138,5 +142,17 @@ class UserController extends Controller
             return response("No se guardo los cambios",500);
         }
 
+    }
+
+    public function fovritesPost()
+    {
+
+        return view('goheart.fovrite-post')->with('posts',FavoritePost::where("onFavorite",1)->where("user_id",auth()->user()->id)->with('post')->get());
+    }
+
+    public function savedPost()
+    {
+
+        return view()->with();
     }
 }
