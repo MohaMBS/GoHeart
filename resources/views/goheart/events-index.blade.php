@@ -8,7 +8,7 @@
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small> <a class="btn btn-primary" href="{{ route('see-event',1) }}">Ver</a></p>
         </div>
     </div>
     <div class="card p-3">

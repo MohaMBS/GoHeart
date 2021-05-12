@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
 <div class="col-12">
-    <form action="{{ route ('store.post') }}" method="POST">
+    <form action="{{ route ('save-event') }}" method="POST">
     <div class="row col-12">
         @csrf
         <div class="form-group col-lg-6 col-12">
@@ -19,11 +19,11 @@
           <textarea name="body" class="form-control my-editor"></textarea>
         </div>
         <div class="col-lg-4">
-            <div id="mapid" style=" height: 180px;"></div>
+            <div id="mapid" style=" height: 485px;"></div>
         </div>
         <div class="form-group col-12 col-md-10 mt-4 ">
             <div class="col-12">
-                <h3 class="">Imagen destacada. <small>(Opcional y debe de ser una imagene panorámicas)</small></h3>
+                <h3 class="">Imagen destacada. <small>(Opcional)</small></h3>
             </div>
             <div class="input-group col-12 ">
                 <span class="input-group-btn">
@@ -36,6 +36,7 @@
         </div>
         <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">
             <input type="submit" id="send" class="btn btn-primary" value="Publicar">
+            <input type="text" name="cords" id="cords" value="" hidden>
             </form>
         </div>
     </div>    
@@ -96,20 +97,57 @@
 
 </script>
 
+<script>
+    $(document).ready(()=>{
+        var editor_config = {
+        selector: 'textarea.my-editor',
+        height : $( window ).height()*0.5,
+        plugins: [
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media nonbreaking save table directionality",
+            "emoticons template paste textpattern"
+        ],
+        block_unsupported_drop: true,
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ",
+        };
+        tinymce.init(editor_config);
+    })
+</script>
+
 <!-- PARA EL MAPA -->
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
 crossorigin="" ></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="https://labs.easyblog.it/maps/leaflet-search/dist/leaflet-search.src.js"></script>
 <script>
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoibW9oYW1icyIsImEiOiJja29rZXA2b2owNG51MnFxcGY3NXV2YTBxIn0.U22jGvptX9XCUMJ-D3DKFg'
-}).addTo(mymap);
+    $(document).ready(()=>{ 
+        var mmymarker=null;
+        var map = L.map('mapid')
+        var popup = L.popup();
+/*************************************************/
+        navigator.geolocation.getCurrentPosition( success, error );
+        function success(position) {
+            console.log(position.coords)
+            map.setView([position.coords.latitude,position.coords.longitude], 13);
+        };
+        function error(error) {
+            map.setView([41.3775087,2.1703097], 12);
+        };
+/***********************************************/
+        L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        L.Control.geocoder().on('markgeocode', function(e) {
+            console.log(e)
+            console.log($("input#cords").attr('value', e.geocode.center.lat + " " + e.geocode.center.lng))
+            if(mmymarker != null){
+                mmymarker.remove()  
+            }
+        }).addTo(map);
+    })
 </script>
 @endsection

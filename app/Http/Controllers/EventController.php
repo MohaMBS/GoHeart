@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class EventController extends Controller
 {
@@ -34,7 +35,30 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'daterange'=>'required',
+            'cords' => 'required'
+        ]);
+        $event = new Event();
+        $event->user_id = auth()->user()->id;
+        $event->name_user = auth()->user()->name;
+        $event->is_active= true;
+        $event->dates = $request->daterange;
+        $event->title = $request->title;
+        $event->front_page = $request->filepath;
+        $event->cords = $request->cords;
+        $event->body = $request->body;
+
+        if ($event->save()) {
+            dd($event->id);
+        } else {
+            dd("ops");
+        }
+        
+
+        dd($request->daterange);
     }
 
     /**
@@ -45,7 +69,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('goheart.event')
+        ->with("event",Event::find($id)->first());
     }
 
     /**

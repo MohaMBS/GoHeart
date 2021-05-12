@@ -101,7 +101,7 @@
 	        </div>
 	    </div>
     </nav>
-    <div id="barr" class="col-12 position-fixed  shadow-lg border-top border-dark" style="height: 1rem;background-color:#244866; z-index:99;"></div>
+    <div id="barr" class="col-12 position-fixed  shadow-lg border-top border-dark" style="height: 1rem;background-color:#244866; z-index:99999999999999;"></div>
 <div class="mt-4 row" style="margin-left:auto;margin-right:auto;">
     <div class="col-12">
         @yield("content")
