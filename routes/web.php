@@ -63,10 +63,14 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::get('/blog/events',[EventController::class,'index'])->name('events'); //Ruta para ver los eventos
     Route::get('/blog/event/create',[EventController::class,'create'])->name('create-event')->middleware(['auth']); //Ruta para crear un evento.
     Route::post('/blog/event/save',[EventController::class,'store'])->name('save-event')->middleware(['auth']);// Ruta para guardar el evento. 
-    Route::get('/blog/event/{id}',[EventController::class, 'show'])->name('see-event')->middleware(['auth']); // Ruta para ver el evento.
+    Route::get('/blog/event/{id}',[EventController::class, 'show'])->name('see-event'); // Ruta para ver el evento.
     Route::get('/my-profile/my-events',[UserController::class,'myEvents'])->name('my-events')->middleware(['auth']); //Ruta para poder mis eventos.
     Route::get('my-profile/my-posts/edit-event/{id}',[EventController::class,'edit'])->name('edit-evnet')->middleware(['auth','eventowner']); //Ruta para poder editar un evento.
     Route::post('blog/evnet/save/{id}',[EventController::class, 'updateEvent'])->name('update-event')->middleware(['auth','eventowner']); //Ruta para guarar los cambios de un evento.
+    Route::post('blog/event/{id}/comment',[EventController::class, 'comment'])->name('comment-event')->middleware(['auth']);// Ruta para comentar en un evento.
+    Route::post('blog/event/{id}/comment/delete',[EventController::class, 'destroy'])->name('delet-comment-event')->middleware(['auth']);// Ruta para borrar un comentrio de un evento.
+    Route::post('blog/event/delet/comment/{id}',[EventController::class, 'destroy'])->name('delet-not-my-comment-event')->middleware(['auth']);// Ruta para borrar los comentarios de un evento tuyo.)
+    Route::get('blog/delete/event/{id}',[EventController::class, 'deleteEvent'])->name('delete-event')->middleware(['auth','eventowner']);// Para eliminar un evneto.
 
 require __DIR__.'/auth.php';
 

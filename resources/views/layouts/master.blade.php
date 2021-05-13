@@ -108,6 +108,100 @@
         @yield("content")
     </div>
 </div>
-   
+<footer id="footer" style="border-top: 18px solid #244866;" class="pri text-white d-flex-column text-center">
+    <hr class="mt-0">
+    <div class="text-center">
+      <h4>Estamos en</h4>
+      <ul class="list-unstyled list-inline">
+        <li class="list-inline-item">
+          <a href="https://www.facebook.com/MohamedBoughima/" class="link sbtn btn-large mx-1" title="Facebook">
+            <i class="fab fa-facebook-square fa-2x"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://www.linkedin.com/in/mohamed-boughima-7218b1207/" class="link sbtn btn-large mx-1" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://github.com/MohaMBS" class="link sbtn btn-large mx-1" title="Twitter">
+            <i class="fab fa-github fa-2x"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="www.youtube.es" class="link sbtn btn-large mx-1" title="Youtube">
+            <i class="fab fa-youtube-square fa-2x"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <hr class="mb-0">
+    <div class="container text-left text-md-center">
+      <div class="row">
+        <hr class="clearfix w-100 d-md-none mb-0">
+        <div class="col-md-3 mx-auto shfooter">
+          <h5 class="my-2 font-weight-bold d-none d-md-block">GoHeart</h5>
+          <div class="d-md-none title" data-target="#Company" data-toggle="collapse">
+            <div class="mt-3 font-weight-bold">GoHeart
+              <div class="float-right navbar-toggler">
+                <i class="fas fa-angle-down"></i>
+                <i class="fas fa-angle-up"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="list-unstyled collapse" id="Company">
+            <li><a class="link " href="">Sobre nosotros</a></li>
+            <li><a class="link " href="">Cual es nuestro objetivo</a></li>
+            <li><a class="link " href="">FAQ</a></li>
+            <li><a class="link " href="">Tutorial.</a></li>
+          </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none mb-0">
+        <div class="col-md-3 mx-auto shfooter">
+          <h5 class="my-2 font-weight-bold d-none d-md-block">Funcciones</h5>
+          <div class="d-md-none title" data-target="#Resources" data-toggle="collapse">
+            <div class="mt-3 font-weight-bold">Funcciones
+              <div class="float-right navbar-toggler">
+                <i class="fas fa-angle-down"></i>
+                <i class="fas fa-angle-up"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="list-unstyled collapse" id="Resources">
+            <li><a class="link " href="">Blog</a></li>
+            <li><a class="link " href="">Eventos</a></li>
+            <li><a class="link " href="">Crear una entrada.</a></li>
+            <li><a class="link " href="">Crear un evento.</a></li>
+          </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none mb-0">
+        <div class="col-md-3 mx-auto shfooter">
+          <h5 class="my-2 font-weight-bold d-none d-md-block">Obten ayuda</h5>
+          <div class="d-md-none title" data-target="#Get-Help" data-toggle="collapse">
+            <div class="mt-3 font-weight-bold">Obten ayuda
+              <div class="float-right navbar-toggler">
+                <i class="fas fa-angle-down"></i>
+                <i class="fas fa-angle-up"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="list-unstyled collapse" id="Get-Help">
+            <li><a class="link " href="" target="_blank">Centro de ayuda.</a></li>
+            <li><a class="link " href="">Ponte en contacto con nostros.</a></li>
+            <li><a class="link " href="">Privacidad</a></li>
+            <li><a class="link " href="{{ route('login')}}">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="mb-0">
+    <div class="py-3 text-center">
+      Copyright 2020-
+      <script>
+        document.write(new Date().getFullYear())
+      </script> <a href="https://codepen.io/jettaz">GoHeart</a> | Takr care about your life
+    </div>
+    <!--/.Copyright-->
+  </footer>
 </body>
 </html>
