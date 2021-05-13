@@ -65,7 +65,6 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/blog/event/save',[EventController::class,'store'])->name('save-event')->middleware(['auth']);// Ruta para guardar el evento. 
     Route::get('/blog/event/{id}',[EventController::class, 'show'])->name('see-event')->middleware(['auth']); // Ruta para ver el evento.
     Route::get('/my-profile/my-events',[UserController::class,'myEvents'])->name('my-events')->middleware(['auth']); //Ruta para poder mis eventos.
-    dd("acab el tema de los eventos, haz el buscador y hay que hacer el backend de admin");
 });
 require __DIR__.'/auth.php';
 
