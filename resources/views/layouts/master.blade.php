@@ -39,8 +39,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ route('home')}}" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ (request()->is('blog/create-post') || request()->is('blog/events') || request()->is('blog/posts') ) || request()->is('blog/post/'.request()->id) || request()->is('blog/event/'.request()->id) ? 'active' : '' }}" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="nav-link dropdown-toggle {{ (request()->is('blog/create-post') || (request()->is('blog/event/create')) || request()->is('blog/events') || request()->is('blog/posts') ) || request()->is('blog/post/'.request()->id) || request()->is('blog/event/'.request()->id) ? 'active' : '' }}" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04"> 
                             <a class="dropdown-item" href="{{route ('posts')}}">GoBlog</a>
                             <a class="dropdown-item" href="{{ route('events') }}">Eventos</a>
                         </div>

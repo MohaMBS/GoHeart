@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Post;
-class SecurityPost
+use App\Models\Event;
+
+
+class SecurityEvent
 {
     /**
      * Handle an incoming request.
@@ -16,12 +18,11 @@ class SecurityPost
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Post::where('id',$request->id)->where('user_id',auth()->user()->id)->exists()){
+        if(Event::where('id',$request->id)->where('user_id',auth()->user()->id)->exists()){
             return $next($request);
         }else{
             //return redirect('home');
             return redirect()->route('create.post');
         }
     }
-
 }

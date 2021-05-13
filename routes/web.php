@@ -29,7 +29,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
-Route::group(['middleware' => ['cors']], function () {
+
     //Ruta de home
     Route::get('/',[PostController::class, 'home'])->name('home');
     
@@ -65,7 +65,9 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/blog/event/save',[EventController::class,'store'])->name('save-event')->middleware(['auth']);// Ruta para guardar el evento. 
     Route::get('/blog/event/{id}',[EventController::class, 'show'])->name('see-event')->middleware(['auth']); // Ruta para ver el evento.
     Route::get('/my-profile/my-events',[UserController::class,'myEvents'])->name('my-events')->middleware(['auth']); //Ruta para poder mis eventos.
-});
+    Route::get('my-profile/my-posts/edit-event/{id}',[EventController::class,'edit'])->name('edit-evnet')->middleware(['auth','eventowner']); //Ruta para poder editar un evento.
+    Route::post('blog/evnet/save/{id}',[EventController::class, 'updateEvent'])->name('update-event')->middleware(['auth','eventowner']); //Ruta para guarar los cambios de un evento.
+
 require __DIR__.'/auth.php';
 
 ?>

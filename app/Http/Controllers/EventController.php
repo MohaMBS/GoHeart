@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function index()
     {   
-        $events = Event::where('is_active',true)->get();
+        $events = Event::where('is_active',true)->with("user")->withCount('comment')->get();
         return view('goheart.events-index')->with(compact('events'));
     }
 
@@ -68,7 +68,8 @@ class EventController extends Controller
     public function show($id)
     {
         return view('goheart.event')
-        ->with("event",Event::where('id',$id)->first());
+        ->with("event",Event::where('id',$id)->with(array('comment' => function($query){
+            $query->where("comment_deleted",0)->with('user');}))->first());
     }
 
     /**
@@ -79,7 +80,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        return view('goheart.edit-event')
+        ->with('event',Event::where('id',$id)->where('user_id',auth()->user()->id)->first());
     }
 
     /**
@@ -91,7 +94,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -103,5 +106,24 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function updateEvent(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'daterange'=>'required',
+            'cords' => 'required'
+        ]);
+
+        $event = Event::where('user_id',auth()->user()->id)->where('id',$id)->first();
+        $event->dates = $request->daterange;
+        $event->title = $request->title;
+        $event->front_page = $request->filepath;
+        $event->cords = $request->cords;
+        $event->body = $request->body;
+        $event->save();
+        return redirect()->route('see-event',$event->id);
     }
 }

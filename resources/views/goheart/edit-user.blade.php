@@ -63,7 +63,7 @@
                         <h6 class="text-right">Editor de perfil <span class="special-font"> GoHeart </span></h6>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-2 "> <label for="name">Nombare:</label> </div>
+                        <div class="col-md-2 "> <label for="name">Nombre:</label> </div>
                         <div class="col-md-10"><input id="name" name="name" type="text" class="form-control" placeholder="name" value="{{Auth::user()->name}}"></div>
                     </div>
                     <div class="row mt-3">
