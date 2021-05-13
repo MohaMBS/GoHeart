@@ -201,7 +201,6 @@
         document.write(new Date().getFullYear())
       </script> <a href="https://codepen.io/jettaz">GoHeart</a> | Takr care about your life
     </div>
-    <!--/.Copyright-->
   </footer>
 </body>
 </html>
