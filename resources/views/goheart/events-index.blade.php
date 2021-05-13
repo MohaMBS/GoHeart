@@ -3,6 +3,37 @@
 @section('content')
 <main class="offset-sm-1 col-sm-10 offset-sm-1 ">
 <div class="card-columns">
+    @if(count($events)>0)
+        @foreach($events as $event)
+            <div class="card">
+                @if($event->front_page)
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMhLk5Dbdg5O5XX2iHiBofMmCV7p4fFwIiw&usqp=CAU" class="card-img-top" alt="...">
+                @endif
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small> <a class="btn btn-primary" href="{{ route('see-event',$event->id) }}">Ver</a></p>
+                </div>
+            </div> 
+        @endforeach
+        @foreach($events as $event)
+            <div class="card">
+                @if($event->front_page)
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMhLk5Dbdg5O5XX2iHiBofMmCV7p4fFwIiw&usqp=CAU" class="card-img-top" alt="...">
+                @endif
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small> <a class="btn btn-primary" href="{{ route('see-event',$event->id) }}">Ver</a></p>
+                </div>
+            </div> 
+        @endforeach
+    @endif
+
+</div>
+</main>
+@endsection
+<!-- 
     <div class="card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMhLk5Dbdg5O5XX2iHiBofMmCV7p4fFwIiw&usqp=CAU" class="card-img-top" alt="...">
         <div class="card-body">
@@ -11,7 +42,7 @@
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small> <a class="btn btn-primary" href="{{ route('see-event',1) }}">Ver</a></p>
         </div>
     </div>
-    <div class="card p-3">
+    <div class="card">
         <blockquote class="blockquote mb-0 card-body">
             <p>Nam eget purus consectetur in vehicula. Nullamr ultrices nisl risus, viverra libero.</p>
             <footer class="blockquote-footer">
@@ -60,6 +91,4 @@
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
-    </div>
-</main>
-@endsection
+-->

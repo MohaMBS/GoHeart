@@ -1,25 +1,29 @@
 @extends('layouts.master')
-@section('title', '- ')
+@section('title', '- '.$event->title)
 @section('content')
 <div class="col-12 mt-3 ">
     <main class="row offset-sm-1 col-sm-10 offset-sm-1">
-        <div class="col-lg-8 bg-white border rounded">
+        <div class="col-12 col-lg-8 bg-white border rounded p-4">
             <div class="col-12 mt-2">
-                <h2>{!! $event->title !!}</h2>
-                <small> Creada por: <b>{!! $event->name_user !!}</b> </small>
+                <h2 class="col-12">{!! $event->title !!}</h2>
+                <small class="mx-auto"> Creada por: <b>{!! $event->name_user !!}</b> </small>
+                <small class="mx-3">
+                    Fecha de inicio:{{ explode(" - ",$event->dates)[0]}}  Fecha de fin:{{ explode(" - ",$event->dates)[0]}}
+                </small>
                 <hr/>
             </div>
             <div class="col-12">
                 {!! $event->body !!}
             </div>
         </div>
-        <div class="col-12 col-lg-4 mt-3 mt-lg-auto ">
-            <div id="mapid" style="height: 485px;"></div>
+        <div class="col-12 col-lg-4 mt-3 mt-lg-auto">
+            <div id="mapid" style="height: 485px;z-index:1;"></div>
         </div>
         <div class="col-12"></div>
     </main>
-    <main class="p-3 my-5 row offset-sm-2 col-sm-8 offset-sm-2 bg-white border rounded">
-        <h3>Te quiere apuntar al evento?</h3>
+    <main class="p-3 my-5 row offset-sm-2 col-sm-8 offset-sm-2 bg-white border rounded text-center">
+        <h3 class="col-12">¿Te gusta el evento? Pues no dudes en crear un evento tu mismo, se original y atrevete a crear tu propio evento!</h3> </br>
+        <a class="col-12 btn btn-primary" href="{{ route('create-event') }}"> <h3>Haz click aqui!</h3></a>
     </main>
 </div>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -37,17 +41,18 @@ crossorigin="" ></script>
         var map = L.map('mapid')
         var popup = L.popup();
         var direcion
-        map.setView([41.3775087,2.1703097], 12);
+        map.setView([{{ explode(' ',$event->cords)[0]}},{{ explode(' ',$event->cords)[1]}}], 12);
         L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        $.get("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={{ explode(' ',$event->cords)[0]}}&longitude={{ explode(' ',$event->cords)[1]}}&localityLanguage=es",(data)=>{
+        $.get("https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&accept-language=es&zoom=18&lat={{ explode(' ',$event->cords)[0]}}&lon={{ explode(' ',$event->cords)[1]}}",(data)=>{
+            //https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={{ explode(' ',$event->cords)[0]}}&longitude={{ explode(' ',$event->cords)[1]}}&localityLanguage=es
             console.log(data)
             var popup = L.popup()
             .setLatLng([{{ explode(' ',$event->cords)[0]}},{{ explode(' ',$event->cords)[1]}}])
-            .setContent('<p>'+data.locality+" "+data.postcode+" "+data.localityInfo.administrative[2].isoName.split(" ")[0]+'<br />'+data.principalSubdivision+'.</p>')
+            .setContent('<p>'+data.display_name+'.</p>')
             .openOn(map);
+            L.marker([{{ explode(' ',$event->cords)[0]}},{{ explode(' ',$event->cords)[1]}}]).addTo(map)
             
         })
     })

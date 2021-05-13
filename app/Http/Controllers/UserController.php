@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Event;
 use App\Models\SavePost;
 use App\Models\FavoritePost;
 
@@ -160,5 +161,13 @@ class UserController extends Controller
         ->where("user_id",auth()->user()->id)
         ->orderBy("updated_at","desc")
         ->with('post')->get());
+    }
+
+    public function myEvents ()
+    {
+        return view('goheart.my-events')
+        ->with('events',Event::where("user_id",auth()->user()->id)
+        ->orderBy("updated_at","desc")
+        ->get());
     }
 }

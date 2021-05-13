@@ -151,8 +151,8 @@ class PostController extends Controller
 
     public function postsUser(Post $post)
     {
-        $myPosts["posts"] = Post::where("user_id",auth()->user()->id)->get();
-
+        $myPosts["posts"] = Post::where("user_id",auth()->user()->id)->orderBy('updated_at','desc')->get();
+        
         return view('goheart.managment-posts',$myPosts);
     }
 

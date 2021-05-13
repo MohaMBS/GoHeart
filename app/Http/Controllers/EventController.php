@@ -13,8 +13,9 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('goheart.events-index');
+    {   
+        $events = Event::where('is_active',true)->get();
+        return view('goheart.events-index')->with(compact('events'));
     }
 
     /**
@@ -52,13 +53,10 @@ class EventController extends Controller
         $event->body = $request->body;
 
         if ($event->save()) {
-            dd($event->id);
+            return redirect()->route('see-event',$event->id);
         } else {
-            dd("ops");
+           return response("Ops algo fallo a la hora de guardar el evento...");
         }
-        
-
-        dd($request->daterange);
     }
 
     /**
@@ -70,7 +68,7 @@ class EventController extends Controller
     public function show($id)
     {
         return view('goheart.event')
-        ->with("event",Event::find($id)->first());
+        ->with("event",Event::where('id',$id)->first());
     }
 
     /**

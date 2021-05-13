@@ -48,12 +48,17 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
     $(document).ready(()=>{
+        var f = new Date();
+        var d = f.getDate();
+        var m = f.getMonth() + 1;
+        var a = f.getFullYear();
+        const fecha =d+"/"+m+"/"+a;
         $('input[name="daterange"]').daterangepicker({
             "showDropdowns": true,
             "timePicker": true,
             "timePicker24Hour": true,
             "locale": {
-                "format": "MM/DD/YYYY",
+                "format": "DD/MM/YYYY",
                 "separator": " - ",
                 "applyLabel": "Guardar",
                 "cancelLabel": "Cancelar",
@@ -88,10 +93,8 @@
             },
             "linkedCalendars": false,
             "showCustomRangeLabel": false,
-            "startDate": "05/05/2021",
-            "endDate": "05/11/2021"
-        }, function(start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+            "startDate": fecha,
+            "endDate":  fecha
         });
     })
 
@@ -128,7 +131,7 @@ crossorigin="" ></script>
         var mmymarker=null;
         var map = L.map('mapid')
         var popup = L.popup();
-/*************************************************/
+    /*************************************************/
         navigator.geolocation.getCurrentPosition( success, error );
         function success(position) {
             console.log(position.coords)
@@ -137,7 +140,7 @@ crossorigin="" ></script>
         function error(error) {
             map.setView([41.3775087,2.1703097], 12);
         };
-/***********************************************/
+    /***********************************************/
         L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);

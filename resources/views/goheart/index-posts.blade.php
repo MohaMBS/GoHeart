@@ -1,12 +1,16 @@
 @extends('layouts/master')
 @section('title', '- Entradas.')
 @section('content')
-<div class="row">   
+<div class="row">
     <div class="col-12 col-sm-11">
       @foreach ($posts as $post)
         <div class="offset-sm-2 col-sm-9 offset-sm-1 col-12">
             @if($post->front_page != null)
-                <div class="col-12" style="height:180px;background-image: url(../{{$post->front_page}})"></div>
+                <div class="col-12" style="height:180px;background-image: url(../{{$post->front_page}});border: 2px solid black;
+                    padding: 25px;
+                    background: url(mountain.jpg);
+                    background-repeat: no-repeat;
+                    background-size: auto;"></div>
             @endif
             <div class="card mb-3  ">
                 <div class="card-body">
