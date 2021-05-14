@@ -14,6 +14,7 @@ class Contact extends Model
         'email',
         'name',
         'message',
+        'subject',
         'state'
     ];
 

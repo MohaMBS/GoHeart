@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\ContactMail;
 use App\Models\Contact;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -99,11 +100,13 @@ class ContactController extends Controller
             $ref = Str::random(15);
         } while (Contact::where('ref',$ref)->exists());
         $contact->ref = $ref;
-        $contact->name = $req-name;
+        $contact->name = $req->name;
         $contact->email = $req->email;
+        $contact->message = $req->message;
         $contact->subject = $req->subject;
         if ($contact->save()) {
-            Mail::to('mohamoha144@gmail.com')->send(new ContactMail($req,"Gracias por contactar con GoHeart, con ref ".$ref,$ref));
+            Mail::to($req->email)->send(new ContactMail($req,"Gracias por contactar con GoHeart, con ref ".$ref,$ref));
+            Mail::to('mohamoha144@gmail.com')->send(new ContactMail($req,"Nueva consulta con referencia ".$ref,$ref));
             return true;
         } else {
             return false;

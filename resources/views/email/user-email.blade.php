@@ -14,7 +14,7 @@
 <body>
     <div class="p-3 col-12 text-center" style="border-bottom: 18px solid #244866;background-color: #35638A">
         <a class="row text-center" href="{{ route('home') }}">
-            <a class="" href="{{ route('home')}}"><img class="logo-tamaño" style="height:75px; height:75px;" src="./logo.png" alt="LogoWeb"> 
+            <a class="" href="{{ route('home')}}"><img style="height:75px; height:75px;" src="{{ $logo }}" alt="LogoWeb"> 
                 <span style="color:#fff;font-size:40px;">GoHeart</span></a>
             <h4 style="color: #fff;">Tu sito de confianza para compartir tu sabiduria y cuidarte</h4>
         </a>
@@ -45,7 +45,7 @@
           <ul class="list-unstyled list-inline">
             <li class="list-inline-item">
               <a href="https://www.facebook.com/MohamedBoughima/" class="link sbtn btn-large mx-1" title="Facebook">
-                <a class="" href="{{ route('home')}}"><img class="logo-tamaño mb-3" style="height:30px;" src="./logo.png" alt="LogoWeb"></a>
+                <a class="" href="{{ route('home')}}"><img class="logo-tamaño mb-3" style="height:30px;" src="{{ $logo }}" alt="LogoWeb"></a>
               </a>
             </li>
             <li class="list-inline-item">
@@ -75,7 +75,7 @@
           Copyright 2020-
           <script>
             document.write(new Date().getFullYear())
-          </script> <a href="{{ route('home') }}">GoHeart</a> | Takr care about your life
+          </script> <a href="{{ route('home') }}">GoHeart</a> | Take care about your life
         </div>
       </footer>
 </body>

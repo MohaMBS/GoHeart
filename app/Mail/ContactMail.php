@@ -35,6 +35,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.myTestMail');
+        return $this->view('email.user-email')->with('logo',asset('storage/web/images/logo.png'));
     }
 }

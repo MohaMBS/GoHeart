@@ -29,11 +29,12 @@
                         <div class="bg-white col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
                             <div class="contact-wrap w-100 p-md-5 p-4">
                                 <h3 class="mb-4">Danos un toque</h3>
-                                <div class="alert alert-success" style="display: none" id="form-message-warning" class="mb-4">
-                                    <div id="form-message-success">
-                                            Se ha enviado tu mensaje de forma correcta.
-                                    </div>
+                                <div class="alert alert-danger" style="display: none" id="form-message-warning" class="mb-4">
+                                    
                                 </div> 
+                                <div id="form-message-success" class="alert alert-success" style="display: none">
+                                    Se ha enviado tu mensaje de forma correcta.
+                                </div>
                                 <form method="POST" id="contactForm" name="contactForm" class="contactForm">
                                     @csrf
                                     <div class="row">
@@ -153,6 +154,7 @@
                                 $submit.css('display', 'block').text(waitText);
                             },
                             success: function(msg) {
+                            console.log(msg)
                             if (msg == true) {
                                 $('#form-message-warning').hide();
                                     setTimeout(function(){
@@ -175,17 +177,13 @@
                                                         this.reset();
                                                     });
                                 }, 1400);
-                                
+
                                 } else {
-                                $('#form-message-warning').html(msg);
-                                    $('#form-message-warning').fadeIn();
-                                    $submit.css('display', 'none');
+                                $('#form-message-warning').fadeOut().fadeIn(3500)
                                 }
                             },
                             error: function() {
                                 $('#form-message-warning').html("Algo fallo.");
-                                $('#form-message-warning').removeClass("alert alert-success")
-                                $('#form-message-warning').addClass("alert alert-danger")
                                 $('#form-message-warning').fadeIn();
                                 $submit.css('display', 'none');
                             }
