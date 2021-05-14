@@ -29,9 +29,9 @@
             </div> 
         </div>
         @endforeach
+    </div>  
     @else
-    </div>
-    <div class="col-12">
+    <div class="col-12" style="margin-top:5rem;margin-bottom:10rem;">
         <div class="col-12 text-center bg-white border rounded p-3 ">
             <h1> No tienes ningun evento creado, si quieres puedes crear tus propios eventos haciendo click al siguiente boton <br> 
             <a class="btn btn-primary" href="{{ route('create-event') }}">Crear evento.</a></h1>

@@ -39,8 +39,12 @@
         </div>
     @endforeach
     @else
-        <p>No has creado ninguna entrada.</p>
-        <a href="{{ route('create.post')}}">Crear entrada.</a>
+    <div class="col-12" style="margin-top:5rem;margin-bottom:10rem;">
+        <div class="col-12 text-center bg-white border rounded p-3 ">
+            <h1> No tienes ninguna entrada creada, si quieres puedes crear tus propias entradas haciendo click al siguiente boton <br> 
+            <a class="btn btn-primary" href="{{ route('create-event') }}">Crear evento.</a></h1>
+        </div>
+    </div>
     @endif
     </div>
 </div>

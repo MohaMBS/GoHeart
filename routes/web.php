@@ -6,6 +6,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,6 +73,10 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::post('blog/event/{id}/comment/delete',[EventController::class, 'destroy'])->name('delet-comment-event')->middleware(['auth']);// Ruta para borrar un comentrio de un evento.
     Route::post('blog/event/delet/comment/{id}',[EventController::class, 'destroy'])->name('delet-not-my-comment-event')->middleware(['auth']);// Ruta para borrar los comentarios de un evento tuyo.)
     Route::get('blog/delete/event/{id}',[EventController::class, 'deleteEvent'])->name('delete-event')->middleware(['auth','eventowner']);// Para eliminar un evneto.
+
+    //Rusta para las funciones basicas de la web
+    Route::get('contact-us',[ContactController::class,'index'])->name('form-contact'); // Ruta que lleva a la vista para el formulario de contacto 
+    Route::post('contact-us',[ContactController::class,'send'])->name('send-contact'); // Ruta para enviar la consulta 
 
 require __DIR__.'/auth.php';
 

@@ -47,7 +47,7 @@
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link">Ayuda</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">¿Quines somos?</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contacto</a></li>
+                    <li class="nav-item"><a href="{{ route('form-contact') }}" class="nav-link">Contacto</a></li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li>
@@ -108,7 +108,7 @@
         @yield("content")
     </div>
 </div>
-<footer id="footer" style="border-top: 18px solid #244866;" class="pri text-white d-flex-column text-center">
+<footer id="footer" style="border-top: 18px solid #244866;margin-top:5rem" class="pri text-white d-flex-column text-center">
     <hr class="mt-0">
     <div class="text-center">
       <h4>Estamos en</h4>
@@ -199,7 +199,7 @@
       Copyright 2020-
       <script>
         document.write(new Date().getFullYear())
-      </script> <a href="https://codepen.io/jettaz">GoHeart</a> | Takr care about your life
+      </script> <a href="{{ route('home') }}">GoHeart</a> | Takr care about your life
     </div>
   </footer>
 </body>
