@@ -13,7 +13,7 @@ class Commetsevents extends Migration
      */
     public function up()
     {
-        Schema::create('CommentsEvents', function (Blueprint $table) {
+        Schema::create(' EventComment s', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
@@ -30,6 +30,6 @@ class Commetsevents extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CommentsEvents');
+        Schema::dropIfExists(' EventComment s');
     }
 }
