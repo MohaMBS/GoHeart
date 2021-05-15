@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Commentsevent extends Model
+class CommentsEvent extends Model
 {
     use HasFactory;
+
+    protected $table ='commentsevents';
     
     protected $fillable=[
         'user_id',
