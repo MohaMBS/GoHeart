@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-use App\Models\ EventComment ;
+use App\Models\  MyEventComment  ;
 use View;
 
 class EventController extends Controller
@@ -117,13 +117,13 @@ class EventController extends Controller
     public function destroy(Request $req,$id)
     {
         if($req->has("id_comment_to_delete")){
-            if( EventComment ::where('id',$req->id_comment_to_delete)->where('event_id',$id)->delete()){
+            if(  MyEventComment  ::where('id',$req->id_comment_to_delete)->where('event_id',$id)->delete()){
                 return true;
             }else{
                 return false;
             }
         }else{
-            if( EventComment ::where('id',$req->id)->where('event_id',$id)->where("user_id",auth()->user()->id)->delete()){
+            if(  MyEventComment  ::where('id',$req->id)->where('event_id',$id)->where("user_id",auth()->user()->id)->delete()){
                 return true;
             }else{
                 return false;
@@ -157,7 +157,7 @@ class EventController extends Controller
 
     public function comment(Request $request, $id)
     {
-        $comment = new  EventComment ();
+        $comment = new   MyEventComment  ();
         $comment->user_name = auth()->user()->name;
         $comment->user_id= auth()->user()->id;
         $comment->event_id= $id;

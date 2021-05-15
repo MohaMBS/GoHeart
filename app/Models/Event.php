@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\ EventComment ;
+use App\Models\  MyEventComment  ;
 
 class Event extends Model
 {
@@ -27,6 +27,6 @@ class Event extends Model
     }
 
     public function comment(){
-        return $this->hasMany( EventComment ::class);
+        return $this->hasMany(  MyEventComment  ::class);
     }
 }
