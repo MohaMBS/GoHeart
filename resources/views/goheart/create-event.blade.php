@@ -1,6 +1,33 @@
 @extends('layouts.master')
 @section('title', '- Creacion de evento.')
 @section('content')
+<button id="showmodal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" hidden></button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content alert alert-danger">
+        @error('title')
+            <div class="alert alert-danger">Es necesario un titulo para el vento.</div>
+        @enderror
+        @error('body')
+            <div class="alert alert-danger">Debe de explicar de que se trate del evento.</div>
+        @enderror
+        @error('daterange')
+            <div class="alert alert-danger">Es necesario introducir las fechas del evento.</div>
+        @enderror
+        @error('cords')
+            <div class="alert alert-danger">Es necesario introducir la ubicacion del evento.</div>
+        @enderror
+    </div>
+  </div>
+</div>
+@if (count($errors) > 0)
+<script type="text/javascript">
+    $(document).ready(()=>{
+        $('#showmodal').trigger('click');
+    })
+</script>
+@endif
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
 <div class="col-12">
     <form action="{{ route ('save-event') }}" method="POST">
@@ -13,7 +40,7 @@
 
         <div class="form-group col-lg-6 col-12">
             <label class="col-12" for="category"> <h2> Fechas: </h2></label>
-            <input class="col-12" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+            <input class="col-12" type="text" name="daterange" value="" />
         </div>
         <div class="col-lg-8">
           <textarea name="body" class="form-control my-editor"></textarea>
@@ -35,6 +62,7 @@
             </div>
         </div>
         <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">
+            <a href="{{ route('events') }}" type="submit" id="send" class="btn btn-danger">Cancelar</a>
             <input type="submit" id="send" class="btn btn-primary" value="Publicar">
             <input type="text" name="cords" id="cords" value="" hidden>
             </form>

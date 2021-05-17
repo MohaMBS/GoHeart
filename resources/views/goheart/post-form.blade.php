@@ -47,6 +47,7 @@
             </div>
         </div>
         <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">
+            <a  href="{{ route('posts') }}" type="button" class="btn btn-danger">Cancelar</a>
             <input type="submit" id="send" class="btn btn-primary" value="Publicar">
             </form>
         </div>
