@@ -26,4 +26,9 @@ class Report extends Model
     public function post(){
         return $this->belongsTo(Post::class);
     }
+
+    public function getApproveButtonHtml()
+    {
+        return '<a target="_blank-" style="color:#ff8c00;" href="'.route('seeOne',$this->post_id).'" class="btn btn-sm btn-link"><i class="la la-external-link"></i> Ver entrada</a>';
+    }
 }

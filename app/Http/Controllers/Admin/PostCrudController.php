@@ -39,11 +39,13 @@ class PostCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('id');
         CRUD::column('title');
-        CRUD::column('body');
+        //CRUD::column('body');
         CRUD::column('typepost_id');
-        CRUD::column('creator_name');
-        CRUD::column('security_token');
+        //CRUD::column('creator_name');
+        CRUD::column('user_id');
+        //CRUD::column('security_token');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -66,7 +68,8 @@ class PostCrudController extends CrudController
         CRUD::field('body')->type('ckeditor');
         CRUD::field('typepost_id');
         CRUD::field('creator_name');
-        CRUD::field('security_token');
+        CRUD::field('user_id');
+        //CRUD::field('security_token');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

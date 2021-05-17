@@ -16,7 +16,7 @@ class ReportCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -39,6 +39,7 @@ class ReportCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('id');
         CRUD::column('user_id');
         CRUD::column('post_id');
         CRUD::column('user_reported_id');
@@ -46,6 +47,7 @@ class ReportCrudController extends CrudController
         CRUD::column('email_user');
         CRUD::column('name_user_reported');
         CRUD::column('email_user_reported');
+        CRUD::addButtonFromModelFunction('line','review_document', 'getApproveButtonHtml', 'end');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

@@ -81,7 +81,7 @@ class PostController extends Controller
     public function show(Post $post,$id)
     {
         if(auth()->check()){
-            if(Post::where("user_id",auth()->user()->id)->exists()){    
+            if(Post::where("user_id",auth()->user()->id)->where('id',$id)->exists()){    
                 View::share ( 'ownpost', true );
             }else{
                 View::share ( 'ownpost', false );
