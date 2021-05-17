@@ -2,6 +2,7 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
 <li class="nav-item my-3" style="border-bottom: 1px solid #9c9c9c"></li>
 <li class='nav-item pl-2'>Gestion de usuarios</li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-users'></i> Usuarios</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('contact') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-question'></i> Contacts 
     @if(count(DB::table('contacts')->where('state',false)->get()) > 0)
         <span class="badge badge-danger">{{ count(DB::table('contacts')->where('state',false)->get())}} activo/s</span>
@@ -9,7 +10,6 @@
         <span class="badge badge-success">{{ count(DB::table('contacts')->where('state',false)->get())}} activos</span>
     @endif
 </a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-users'></i> Usuarios</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('report') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-exclamation-triangle'></i> Reportes
     @if(count(DB::table('reports')->whereDate('created_at', Carbon\Carbon::today())->get()) > 0)
         <span class="badge badge-danger">{{ count(DB::table('reports')->whereDate('created_at', Carbon\Carbon::today())->get()) }} hoy </span>

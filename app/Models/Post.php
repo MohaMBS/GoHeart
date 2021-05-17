@@ -42,4 +42,9 @@ class Post extends Model
     {
         return $this->hasMany(SavePost::class);
     }
+/*
+    public function type(){
+        return $this->hasOne();
+    }
+*/
 }
