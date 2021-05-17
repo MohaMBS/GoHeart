@@ -163,7 +163,7 @@ return [
     | By default the registration is open only on localhost.
     */
 
-    'registration_open' => env('BACKPACK_REGISTRATION_OPEN', env('APP_ENV') === 'local'),
+    'registration_open' => false,//env('BACKPACK_REGISTRATION_OPEN', env('APP_ENV') === 'local')
 
     /*
     |--------------------------------------------------------------------------

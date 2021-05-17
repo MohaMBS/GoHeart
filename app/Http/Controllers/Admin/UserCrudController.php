@@ -68,7 +68,7 @@ class UserCrudController extends CrudController
         CRUD::field('password');
         CRUD::field('url_avatar');
         CRUD::field('baned');
-        CRUD::field('is_admin');
+        //CRUD::field('is_admin');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
