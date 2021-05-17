@@ -26,7 +26,11 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'title' => 'required|min:5|max:255',
+            'body' => 'required|min:5|max:255',
+            'typepost_id' => 'required',
+            'creator_name' => 'required|min:5|max:255',
+            'user_id' => 'required',
         ];
     }
 

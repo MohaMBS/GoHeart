@@ -40,13 +40,13 @@ class EventCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('user_id');
-        CRUD::column('name_user');
+        //CRUD::column('name_user');
         CRUD::column('is_active');
-        CRUD::column('dates');
+        //CRUD::column('dates');
         CRUD::column('title');
-        CRUD::column('front_page');
-        CRUD::column('cords');
-        CRUD::column('body');
+        //CRUD::column('front_page');
+        //CRUD::column('cords');
+        //CRUD::column('body');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -67,11 +67,11 @@ class EventCrudController extends CrudController
 
         CRUD::field('user_id');
         CRUD::field('name_user');
-        CRUD::field('is_active');
-        CRUD::field('dates');
+        CRUD::field('is_active')->hint('Si quiere que este evento aparezca debe estar marcada esta opcion.');
+        CRUD::field('dates')->type('date_range')->date_range_options(['locale' => ['format' => 'DD/MM/YYYY']]);
         CRUD::field('title');
-        CRUD::field('front_page');
-        CRUD::field('cords');
+        CRUD::field('front_page')->type('url')->hint('Escriba la url para el avatar.')->attributes(['placeholder'=>'www.goheart.es/storage/5/avtar.png']);
+        CRUD::field('cords')->hint('Escriba las cordenadas por altitut y longitud')->attributes(['placeholder'=>'Ejemplo de cordenada: 40.4582 -52.001']);
         CRUD::field('body')->type('ckeditor');
 
         /**

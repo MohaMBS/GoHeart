@@ -23,8 +23,8 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('post') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-pencil-square-o'></i> Entradas</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('comment') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-comments'></i> Comentarios</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('savepost') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-save'></i> Entradas guardadas</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('favoritepost') }}'><i style="font-size: 1.5rem;" class='la la-heart-o'></i> EntradasFav</a></li>
 <li class="nav-item my-3" style="border-bottom: 1px solid #9c9c9c"></li>
 <li class='nav-item pl-2'>Gestion de Eventos</li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('event') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-lightbulb-o'></i> Eventos</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('myeventcomment') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-commenting-o'></i> Comentarios</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('favoritepost') }}'><i style="font-size: 1.5rem;" class='la la-heart-o'></i> EntradasFav</a></li>

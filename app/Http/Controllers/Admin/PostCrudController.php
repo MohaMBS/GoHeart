@@ -65,6 +65,7 @@ class PostCrudController extends CrudController
         CRUD::setValidation(PostRequest::class);
 
         CRUD::field('title');
+        CRUD::field('front_page')->type('url')->hint('Escriba la url para la imagen destacada.')->attributes(['placeholder'=>'www.goheart.es/storage/5/avtar.png']);
         CRUD::field('body')->type('ckeditor');
         CRUD::field('typepost_id');
         CRUD::field('creator_name');

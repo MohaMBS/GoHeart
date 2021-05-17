@@ -26,7 +26,10 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|min:5|max:255',
+            'user_id' => 'required',
+            'post_id' => 'required',
+            'comment' => 'required|min:5',
         ];
     }
 

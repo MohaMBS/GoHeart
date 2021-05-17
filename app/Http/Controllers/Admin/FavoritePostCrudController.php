@@ -62,7 +62,7 @@ class FavoritePostCrudController extends CrudController
 
         CRUD::field('user_id');
         CRUD::field('post_id');
-        CRUD::field('onFavorite');
+        CRUD::field('onFavorite')->hint('Si quiere que esta esta entrada aprezaca en favoritos debes marcar esta opcion');;
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

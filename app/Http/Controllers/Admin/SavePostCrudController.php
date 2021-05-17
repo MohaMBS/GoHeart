@@ -62,7 +62,7 @@ class SavePostCrudController extends CrudController
 
         CRUD::field('user_id');
         CRUD::field('post_id');
-        CRUD::field('onSave');
+        CRUD::field('onSave')->hint('Si quiere que esta esta entrada aprezaca en guardados debes marcar esta opcion');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

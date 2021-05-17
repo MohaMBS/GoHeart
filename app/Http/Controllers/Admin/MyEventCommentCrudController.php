@@ -63,10 +63,10 @@ class MyEventCommentCrudController extends CrudController
         CRUD::setValidation(MyEventCommentRequest::class);
 
         CRUD::field('user_id');
-        CRUD::field('event_id ');
+        CRUD::field('event_id')->type('select');
         CRUD::field('user_name');
         CRUD::field('comment');
-        CRUD::field('comment_deleted');
+        CRUD::field('comment_deleted')->hint('Si quiere que el comentario no aparezaca marque esta opcion, por defecto ser vera.');;
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
