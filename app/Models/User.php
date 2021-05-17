@@ -9,7 +9,10 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    
+    use \Backpack\CRUD\app\Models\Traits\HasIdentifiableAttribute;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use HasFactory, Notifiable; 
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'url_avatar',
+        'baned',
+        'is_admin'
     ];
 
     /**
@@ -41,4 +46,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function comments(){
+        return $this->hasMany(App\Models\Comment::class);
+    }
+
 }

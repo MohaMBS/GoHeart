@@ -9,6 +9,7 @@ use App\Models\  MyEventComment  ;
 
 class Event extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     protected $fillable=[

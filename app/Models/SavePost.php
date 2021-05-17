@@ -10,6 +10,7 @@ use App\Models\Post;
 
 class SavePost extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     protected $fillable = [
@@ -19,7 +20,7 @@ class SavePost extends Model
     protected $table='saves_posts';
     
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function post(){

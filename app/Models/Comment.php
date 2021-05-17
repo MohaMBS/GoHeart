@@ -9,6 +9,7 @@ use App\Models\Post;
 
 class Comment extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     protected $table = 'comments';

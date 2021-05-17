@@ -8,6 +8,7 @@ use App\Models\User;
 
 class  MyEventComment  extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     protected $table ='commentsevents';

@@ -10,6 +10,7 @@ use App\Models\Post;
 
 class Report extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     protected $fillable = [
