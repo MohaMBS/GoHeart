@@ -20,11 +20,11 @@ class SpyModel extends Model
      */
     protected $fillable = [
         'ip',
-        'idUser'
+        'user_id'
     ];
 
     
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

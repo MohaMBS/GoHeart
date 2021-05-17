@@ -41,7 +41,7 @@ class PostCrudController extends CrudController
     {
         CRUD::column('title');
         CRUD::column('body');
-        CRUD::column('	typepost_id 	');
+        CRUD::column('typepost_id');
         CRUD::column('creator_name');
         CRUD::column('security_token');
 
@@ -63,8 +63,8 @@ class PostCrudController extends CrudController
         CRUD::setValidation(PostRequest::class);
 
         CRUD::field('title');
-        CRUD::field('body');
-        CRUD::field('	typepost_id 	');
+        CRUD::field('body')->type('ckeditor');
+        CRUD::field('typepost_id');
         CRUD::field('creator_name');
         CRUD::field('security_token');
 

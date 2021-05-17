@@ -14,9 +14,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class SpyModelCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -40,7 +40,7 @@ class SpyModelCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('ip');
-        CRUD::column('idUser');
+        CRUD::column('user_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -60,7 +60,7 @@ class SpyModelCrudController extends CrudController
         CRUD::setValidation(SpyModelRequest::class);
 
         CRUD::field('ip');
-        CRUD::field('idUser');
+        CRUD::field('user_id');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

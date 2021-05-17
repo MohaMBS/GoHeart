@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "laraveles/spanish": "^1.5",
         "unisharp/laravel-filemanager": "^2.2"
     },
     "require-dev": {

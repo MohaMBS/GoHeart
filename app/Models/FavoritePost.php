@@ -17,7 +17,7 @@ class FavoritePost extends Model
     protected $table='favorites_posts';
     
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function post(){

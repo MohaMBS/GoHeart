@@ -72,7 +72,7 @@ class EventCrudController extends CrudController
         CRUD::field('title');
         CRUD::field('front_page');
         CRUD::field('cords');
-        CRUD::field('body');
+        CRUD::field('body')->type('ckeditor');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         $spy = new SpyModel;
-        $spy->idUser = auth()->user()->id;
+        $spy->user_id = auth()->user()->id;
         $spy->ip = \Request::getClientIp(true);
         $spy->save();
         

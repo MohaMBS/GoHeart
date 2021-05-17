@@ -63,11 +63,11 @@ class ContactCrudController extends CrudController
     {
         CRUD::setValidation(ContactRequest::class);
 
-        CRUD::field('ref');
-        CRUD::field('email');
-        CRUD::field('name');
-        CRUD::field('message');
-        CRUD::field('subject');
+        //CRUD::field('ref');
+        //CRUD::field('email');
+        //CRUD::field('name');
+        //CRUD::field('message');
+        //CRUD::field('subject');
         CRUD::field('state');
 
         /**
