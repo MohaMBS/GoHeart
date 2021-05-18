@@ -103,9 +103,14 @@ class PostController extends Controller
                 $query->where("comment_deleted",0)->with('user');}))
             ->get();
         }
-        
         $data["post_id"] = $id;
-        return view('goheart.display-post', $data);
+        
+        if(count($data["post"])){
+            return view('goheart.display-post', $data);
+        }else{
+            return abort(404);
+        }
+        
     }
 
     /**

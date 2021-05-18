@@ -41,7 +41,9 @@
         </div>
         @endforeach
     @endif
-
+    <div class="col-12 text-center">
+        <a href="{{ route('create-event') }}" data-toggle="tooltip" data-placement="top" title="Crear un nuevo evento." class="btn btn-primary rounded-circle"><i class="fas fa-plus-circle"></i></a>
+    </div>
 </div>
 </main>
 @endsection

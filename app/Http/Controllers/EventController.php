@@ -78,9 +78,16 @@ class EventController extends Controller
         }else{
             View::share ( 'ownevent', false );
         }
-        return view('goheart.event')
-        ->with("event",Event::where('id',$id)->with(array('comment' => function($query){
-            $query->where("comment_deleted",0)->with('user');}))->first());
+        $event =Event::where('id',$id)->with(array('comment' => function($query){
+            $query->where("comment_deleted",0)->with('user');}))->first();
+        
+        if($event){
+            return view('goheart.event')
+            ->with("event", $event);
+        }else{
+            return abort(404);
+        }
+        
     }
 
     /**
