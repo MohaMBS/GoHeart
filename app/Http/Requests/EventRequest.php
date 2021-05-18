@@ -28,7 +28,7 @@ class EventRequest extends FormRequest
         return [
             'user_id' => 'required',
             'name_user' => 'required|min:5|max:255',
-            'dates' => 'required|min:5|max:255',
+            //'dates' => 'required|min:5|max:255',
             'title' => 'required|min:5|max:255',
             'cords' => 'required|min:2',
             'body' => 'required|min:5',

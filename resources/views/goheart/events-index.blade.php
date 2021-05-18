@@ -2,6 +2,23 @@
 @section('title', '- Eventos.')
 @section('content')
 <main class="offset-sm-1 col-sm-10 offset-sm-1 ">
+    <div class="col-12">
+        @auth
+            @if(Auth::user()->is_admin)
+                @if(session()->has('operation'))
+                    @if(session()->get('operation') )
+                        <div class="alert alert-success">
+                            Se han guardado los cambios.
+                        </div>
+                    @else
+                        <div class="alert alert-danger">
+                            Se han guardado los cambios.
+                        </div>
+                    @endif
+                @endif
+            @endif
+        @endauth
+    </div>
 <div class="row">
     @if(count($events)>0)
         @foreach($events as $event)

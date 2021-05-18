@@ -82,8 +82,10 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     //Rutas para la gestion de admin
     Route::get('admin/delete/post/{id}',[AdminController::class,'deletePost'])->name('admin.delete-post')->middleware(['auth','myadmin']); //Ruta para solo aquellos admin para poder borrar una entrada
     Route::get('admin/disable/post/{id}',[AdminController::class,'disablePost'])->name('admin.disable-post')->middleware(['auth','myadmin']); //Ruta de admin para desabilitar una entrada
-    Route::post('admin/post/delete/comment/{id}',[AdminController::class,'deleteCommentPost'])->name('admin.delete-comment-post')->middleware(['auth','myadmin']);
-    Route::get('admin/delete/event/{id}',[AdminController::class,'deleteEvent'])->name('admin.delete-event')->middleware(['auth','myadmin']); //Ruta de admin para borrar entradas
+    Route::get('admin/disable/event/{id}',[AdminController::class,'disableEvent'])->name('admin.disable-event')->middleware(['auth','myadmin']); //Ruta de admin para desabilitar un evento
+    Route::post('admin/post/delete/comment/{id}',[AdminController::class,'deleteCommentPost'])->name('admin.delete-comment-post')->middleware(['auth','myadmin']);//Ruta para poder eliminar los comentarios de las entradas
+    Route::post('admin/event/delete/comment/{id}',[AdminController::class,'deleteCommentEvent'])->name('admin.delete-comment-event')->middleware(['auth','myadmin']); //Rura para poder eliminar los comentarios de los eventos
+    Route::get('admin/delete/event/{id}',[AdminController::class,'deleteEvent'])->name('admin.delete-event')->middleware(['auth','myadmin']); //Ruta de admin para borrar entradasd
 require __DIR__.'/auth.php';
 
 ?>

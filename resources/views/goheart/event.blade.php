@@ -27,6 +27,14 @@
 @endif
 <div class="col-12 offset-sm-1 my-1 col-sm-10 offset-sm-1 mt-3 ">
     <div class="row ">
+        @auth
+            @if(Auth::user()->is_admin)
+                <div class="col-12 bg-dark rounded text-center">
+                    <a id="admin-delete" class="btn border-bottom" style="color: rgb(255, 255, 0)" href="{{ route('admin.delete-event',$event->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-trash-alt"> Borrar esta entrada como admin.</i></a>
+                    <a id="admin-disable" class="btn" style="color: rgb(255, 255, 0)" href="{{ route('admin.disable-event',$event->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-power-off"> Dehabilitar entrada.</i></a>
+                </div>
+            @endif
+        @endauth
         <div class="col-12 col-lg-8 bg-white border rounded p-4">
             <div class="col-12 mt-2">
                 <h2 class="col-12">{!! $event->title !!}</h2>
@@ -79,7 +87,12 @@
                                                 <div>
                                                     <a href="" class="badge badge-warning" own-comment="{{$comment->user_name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar este comentario.</a><br>
                                                 </div>
-                                            @endif      
+                                            @endif
+                                            @auth
+                                                @if(Auth::user()->is_admin)
+                                                    <a id="{{$comment->id}}" spy="admin-delete-comment" class="btn btn-danger" href=""><i class="fas fa-comment-slash">Borrar este mensaje como admin.</i></a>
+                                                @endif
+                                            @endauth       
                                     </div>
                                 @endforeach
                             @endif
@@ -153,6 +166,42 @@ crossorigin="" ></script>
         })
     })
 </script>
+@auth
+    @if(Auth::user()->is_admin)
+        <script>
+            $(document).ready(()=>{
+                $('[spy="admin-delete-comment"]').click(function(e){
+                    e.preventDefault();
+                    if(confirm("Estas seguro de que quieres porar el mensaje?")){
+                        $route="{{ route('admin.delete-comment-event',':id')}}"
+                        $id=$(this).attr('id')
+                        $parent=$(this).parent()
+                        $url=$route.replace(":id", $id);
+                        $.post($url,{'_token':"{{ csrf_token() }}"},(data,status)=>{
+                            if(data){
+                                $($parent).remove()
+                            }
+                        })
+                    }
+                })
+
+                $("#admin-delete").click(function(e){
+                    e.preventDefault();
+                    if (confirm("Estas seguro de quieres borrar esta entrada?")) {
+                        window.location= $("#admin-delete").attr('href')
+                    }
+                })
+                $("#admin-disable").click(function(e){
+                    e.preventDefault();
+                    if (confirm("Estas seguro de quieres desahbilitar esta entrada?")) {
+                        window.location= $("#admin-disable").attr('href')
+                    }
+                })
+            })
+            
+        </script>
+    @endif
+@endauth 
 
 @auth
     <script>

@@ -51,14 +51,20 @@ class AdminController extends Controller
         $event = Event::find($id);
         $event->is_active= false;
         if($event->save()){
-            return redirect()->route('posts')->with('operation', true);
+            return redirect()->route('events')->with('operation', true);
         }else{
-            return redirect()->route('posts')->with('operation', false);
+            return redirect()->route('events')->with('operation', false);
         }
     }
 
     public function deleteCommentEvent($id){
-        
+        $comment = MyEventComment::find($id);
+        $comment->comment_deleted = true;
+        if($comment->save()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

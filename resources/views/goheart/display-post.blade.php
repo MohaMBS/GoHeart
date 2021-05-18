@@ -30,8 +30,8 @@
         @auth
             @if(Auth::user()->is_admin)
                 <div class="col-12 bg-dark rounded text-center">
-                    <a class="btn border-bottom" style="color: rgb(255, 255, 0)" href="{{ route('admin.delete-post',$post[0]->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-trash-alt"> Borrar esta entrada como admin.</i></a>
-                    <a class="btn" style="color: rgb(255, 255, 0)" href="{{ route('admin.disable-post',$post[0]->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-power-off"> Dehabilitar entrada.</i></a>
+                    <a id="admin-delete" class="btn border-bottom" style="color: rgb(255, 255, 0)" href="{{ route('admin.delete-post',$post[0]->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-trash-alt"> Borrar esta entrada como admin.</i></a>
+                    <a id="admin-disable" class="btn" style="color: rgb(255, 255, 0)" href="{{ route('admin.disable-post',$post[0]->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-power-off"> Dehabilitar entrada.</i></a>
                 </div>
             @endif
         @endauth
@@ -153,15 +153,30 @@
             $(document).ready(()=>{
                 $('[spy="admin-delete-comment"]').click(function(e){
                     e.preventDefault();
-                    $route="{{ route('admin.delete-comment-post',':id')}}"
-                    $id=$(this).attr('id')
-                    $parent=$(this).parent()
-                    $url=$route.replace(":id", $id);
-                    $.post($url,{'_token':"{{ csrf_token() }}"},(data,status)=>{
-                        if(data){
-                            $($parent).remove()
-                        }
-                    })
+                    if(confirm("Estas seguro de que quieres porar el mensaje?")){
+                        $route="{{ route('admin.delete-comment-post',':id')}}"
+                        $id=$(this).attr('id')
+                        $parent=$(this).parent()
+                        $url=$route.replace(":id", $id);
+                        $.post($url,{'_token':"{{ csrf_token() }}"},(data,status)=>{
+                            if(data){
+                                $($parent).remove()
+                            }
+                        })
+                    }
+                })
+
+                $("#admin-delete").click(function(e){
+                    e.preventDefault();
+                    if (confirm("Estas seguro de quieres borrar esta entrada?")) {
+                        window.location= $("#admin-delete").attr('href')
+                    }
+                })
+                $("#admin-disable").click(function(e){
+                    e.preventDefault();
+                    if (confirm("Estas seguro de quieres desahbilitar esta entrada?")) {
+                        window.location= $("#admin-disable").attr('href')
+                    }
                 })
             })
             
