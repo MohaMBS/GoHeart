@@ -29,6 +29,13 @@
 </head>
 <body>
     <!-- Menu fijo en la parte superior -->
+    @auth
+        @if(Auth::user()->is_admin)
+            <div class="col-12 text-center bg-warning">
+              Eres admin, y puede gestionar todo aquello que sea necesario.
+            </div>
+        @endif
+    @endauth
     <nav style="border-bottom: 22px solid #244866;" class="navbar navbar-expand-xl navbar-dark ftco_navbar pri sticky-top " id="ftco-navbar">
 	    <div class="container-fluid ">
             <a class="navbar-brand " href="{{ route('home')}}"><img class="logo-tamaño" src="{{ asset('storage/web/images/logo.png')}}" alt="LogoWeb"> GoHeart</a>

@@ -27,6 +27,14 @@
 @endif
 <main role="main" class="offset-sm-1 col-sm-10 offset-sm-1">
     <div class="">
+        @auth
+            @if(Auth::user()->is_admin)
+                <div class="col-12 bg-dark rounded text-center">
+                    <a class="btn border-bottom" style="color: rgb(255, 255, 0)" href="{{ route('admin.delete-post',$post[0]->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-trash-alt"> Borrar esta entrada como admin.</i></a>
+                    <a class="btn" style="color: rgb(255, 255, 0)" href="{{ route('admin.disable-post',$post[0]->id) }}" data-toggle="tooltip" data-placement="right" title="Como admin puedes borrar esta entrada"><i class="fas fa-power-off"> Dehabilitar entrada.</i></a>
+                </div>
+            @endif
+        @endauth
         <div class="col-12 blog-main bg-white rounded">
             <div class="blog-post col-12 p-sm-4">
                 <div class="">
@@ -52,6 +60,7 @@
                             @else
                                 <a id="save" href="#" class="reaciton-post" data-toggle="tooltip" data-placement="right" title="Guardar para más tarde."> <i class="far fa-bookmark col"></i> </a>
                             @endif
+                            
                         </span>
                     </div>
                 </div>
@@ -87,7 +96,12 @@
                                                     <div>
                                                         <a href="" class="badge badge-warning" own-comment="{{$comment->name}}" data-href="{{$comment->id}}" data-toggle="modal" data-target="#confirm-delete">Borrar este comentario.</a><br>
                                                     </div>
-                                                @endif      
+                                                @endif 
+                                                @auth
+                                                    @if(Auth::user()->is_admin)
+                                                        <a id="{{$comment->id}}" spy="admin-delete-comment" class="btn btn-danger" href=""><i class="fas fa-comment-slash">Borrar este mensaje como admin.</i></a>
+                                                    @endif
+                                                @endauth     
                                         </div>
                                     @endforeach
                                 @endif
@@ -133,6 +147,28 @@
     </div>
     
 </main>
+@auth
+    @if(Auth::user()->is_admin)
+        <script>
+            $(document).ready(()=>{
+                $('[spy="admin-delete-comment"]').click(function(e){
+                    e.preventDefault();
+                    $route="{{ route('admin.delete-comment-post',':id')}}"
+                    $id=$(this).attr('id')
+                    $parent=$(this).parent()
+                    $url=$route.replace(":id", $id);
+                    $.post($url,{'_token':"{{ csrf_token() }}"},(data,status)=>{
+                        if(data){
+                            $($parent).remove()
+                        }
+                    })
+                })
+            })
+            
+        </script>
+    @endif
+@endauth 
+
 @guest
 <div id="Modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'cors' => \App\Http\Middleware\Cors::class,
         'postowner' => \App\Http\Middleware\SecurityPost::class,
         'eventowner' => \App\Http\Middleware\SecurityEvent::class,
+        'myadmin' => \App\Http\Middleware\MyAdminMiddleware::class,
     ];
 }

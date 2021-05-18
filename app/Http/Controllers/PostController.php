@@ -19,7 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data["posts"] = Post::withCount("comments")->with('user')->withCount(array('favorite' => function($query){
+        $data["posts"] = Post::where('active',true)
+        ->withCount("comments")
+        ->with('user')
+        ->withCount(array('favorite' => function($query){
             $query->where("onFavorite",1);
         } ))->orderBy('id', 'desc')->paginate(10);
         return view("goheart.index-posts",$data);
@@ -87,6 +90,7 @@ class PostController extends Controller
                 View::share ( 'ownpost', false );
             }
             $data["post"] = Post::where('id',$id)
+            ->where('active', true)
             ->with(array('comments' => function($query){
                 $query->where("comment_deleted",0)->with('user');}))
             ->withCount(array('favorite' => function ($query) use ($id) { $query->where('post_id',$id)->where("user_id",\Auth::user()->id)->where("onFavorite",1); }))

@@ -40,6 +40,7 @@ class PostCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('id');
+        CRUD::column('active');
         CRUD::column('title');
         //CRUD::column('body');
         CRUD::column('typepost_id');
@@ -65,6 +66,7 @@ class PostCrudController extends CrudController
         CRUD::setValidation(PostRequest::class);
 
         CRUD::field('title');
+        CRUD::field('active');
         CRUD::field('front_page')->type('url')->hint('Escriba la url para la imagen destacada.')->attributes(['placeholder'=>'www.goheart.es/storage/5/avtar.png']);
         CRUD::field('body')->type('ckeditor');
         CRUD::field('typepost_id');

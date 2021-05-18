@@ -2,9 +2,26 @@
 @section('title', '- Entradas.')
 @section('content')
 <div class="row">
-    <div class="col-12 col-sm-11">
+    <div class="col-12 offset-sm-1 col-sm-10  offset-sm-1">
+        <div class="col-12">
+            @auth
+                @if(Auth::user()->is_admin)
+                    @if(session()->has('operation'))
+                        @if(session()->get('operation') )
+                            <div class="alert alert-success">
+                                Se han guardado los cambios.
+                            </div>
+                        @else
+                            <div class="alert alert-danger">
+                                Se han guardado los cambios.
+                            </div>
+                        @endif
+                    @endif
+                @endif
+            @endauth
+        </div>
       @foreach ($posts as $post)
-        <div class="offset-sm-2 col-sm-9 offset-sm-1 col-12">
+        <div class="offset-sm-1 col-sm-10 offset-sm-1 col-12">
             @if($post->front_page != null)
                 <div class="col-12" style="height:180px;background-image: url(../{{$post->front_page}});border: 2px solid black;
                     padding: 25px;

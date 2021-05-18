@@ -7,6 +7,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,11 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::get('contact-us',[ContactController::class,'index'])->name('form-contact'); // Ruta que lleva a la vista para el formulario de contacto 
     Route::post('contact-us',[ContactController::class,'send'])->name('send-contact'); // Ruta para enviar la consulta 
 
+    //Rutas para la gestion de admin
+    Route::get('admin/delete/post/{id}',[AdminController::class,'deletePost'])->name('admin.delete-post')->middleware(['auth','myadmin']); //Ruta para solo aquellos admin para poder borrar una entrada
+    Route::get('admin/disable/post/{id}',[AdminController::class,'disablePost'])->name('admin.disable-post')->middleware(['auth','myadmin']); //Ruta de admin para desabilitar una entrada
+    Route::post('admin/post/delete/comment/{id}',[AdminController::class,'deleteCommentPost'])->name('admin.delete-comment-post')->middleware(['auth','myadmin']);
+    Route::get('admin/delete/event/{id}',[AdminController::class,'deleteEvent'])->name('admin.delete-event')->middleware(['auth','myadmin']); //Ruta de admin para borrar entradas
 require __DIR__.'/auth.php';
 
 ?>
