@@ -70,7 +70,7 @@ class EventCrudController extends CrudController
         CRUD::field('is_active')->hint('Si quiere que este evento aparezca debe estar marcada esta opcion.');
         CRUD::field('dates')->type('date_range')->date_range_options(['locale' => ['format' => 'DD/MM/YYYY']]);
         CRUD::field('title');
-        CRUD::field('front_page')->type('url')->hint('Escriba la url para el avatar.')->attributes(['placeholder'=>'www.goheart.es/storage/5/avtar.png']);
+        CRUD::field('front_page')->hint('Escriba la url para el avatar.')->attributes(['placeholder'=>'www.goheart.es/storage/5/avtar.png']);
         CRUD::field('cords')->hint('Escriba las cordenadas por altitut y longitud')->attributes(['placeholder'=>'Ejemplo de cordenada: 40.4582 -52.001']);
         CRUD::field('body')->type('ckeditor');
 

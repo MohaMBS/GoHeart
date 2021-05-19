@@ -218,4 +218,16 @@ class PostController extends Controller
         }
         
     }
+
+    public function search($vale){
+
+        $data['posts'] = $posts = Post::query()
+        ->where('title', 'LIKE', "%{$vale}%")
+        ->orWhere('body', 'LIKE', "%{$vale}%")
+        ->paginate(10);
+        if(!count($posts)){
+            return 'OPS';
+        }
+        return view('goheart.index-posts',$data);
+    }
 }

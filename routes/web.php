@@ -37,8 +37,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::get('/',[PostController::class, 'home'])->name('home');
     
     //Ruta del blog
-    Route::get('/blog/post/create-post',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');//Rutas para poder crear una nueva entrada en el blog.
-    Route::post('/blog/post/create-post/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');//Rutas para editar una nueva entrada en el blog.
+    Route::get('/blog/post/create',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');//Rutas para poder crear una nueva entrada en el blog.
+    Route::post('/blog/post/create/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');//Rutas para editar una nueva entrada en el blog.
     Route::get('/blog/post/{id}',[PostController::class, 'show'])->name('seeOne');//Ruta para poder ver un post en concreto.
     Route::get('/my-profile/my-posts/edit-post/{id}',[PostController::class, 'edit'])->middleware(['auth','postowner'])->name('edit.post');//Ruta para poder editar un post.
     Route::post('/blog/post/comment',[CommentController::class, 'create'])->middleware(['auth'])->name('makeComment');//Ruta para poder comentar.
@@ -74,10 +74,11 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::post('blog/event/{id}/comment/delete',[EventController::class, 'destroy'])->name('delet-comment-event')->middleware(['auth']);// Ruta para borrar un comentrio de un evento.
     Route::post('blog/event/delet/comment/{id}',[EventController::class, 'destroy'])->name('delet-not-my-comment-event')->middleware(['auth']);// Ruta para borrar los comentarios de un evento tuyo.)
     Route::get('blog/delete/event/{id}',[EventController::class, 'deleteEvent'])->name('delete-event')->middleware(['auth','eventowner']);// Para eliminar un evneto.
-
+    
     //Rusta para las funciones basicas de la web
     Route::get('contact-us',[ContactController::class,'index'])->name('form-contact'); // Ruta que lleva a la vista para el formulario de contacto 
     Route::post('contact-us',[ContactController::class,'send'])->name('send-contact'); // Ruta para enviar la consulta 
+    Route::get('blog/search={value}',[PostController::class,'search'])->name('blog-search');
 
     //Rutas para la gestion de admin
     Route::get('admin/delete/post/{id}',[AdminController::class,'deletePost'])->name('admin.delete-post')->middleware(['auth','myadmin']); //Ruta para solo aquellos admin para poder borrar una entrada

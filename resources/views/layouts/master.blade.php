@@ -58,23 +58,20 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <form class="d-flex input-group w-auto" action="javascript:void(0);">
-                        <input
-                          type="search"
-                          class="form-control"
-                          placeholder="Busca aquí..."
-                          aria-label="Search"
-                        />
-                        <button
-                          class="btn btn-info  "
-                          type="button"
-                          data-mdb-ripple-color="dark"
-                        >
-                          Buscar
-                        </button>
-                      </form>
+                        <form id="form-seacrh" class="d-flex input-group w-auto">
+                          <input type="search" id="dataToSearch"class="form-control" placeholder="Busca aquí..." aria-label="Search"/>
+                          <button class="btn btn-info" id="buttonSeacr" type="submit" data-mdb-ripple-color="dark"> Buscar </button>
+                        </form>
                     </li>
                 </ul>      
+                <script>
+                  $(document).ready(()=>{
+                      $('#buttonSeacr').click((e)=>{
+                        e.preventDefault();
+                        window.location = "{{route('blog-search',':value')}}".replace(':value',$('#dataToSearch').val())
+                      })
+                  })
+                </script>
                 <ul class=" navbar-nav d-md-flex ">
                     @auth
                         <li class="ml-lg-2 d-flex nav-item dropdown">
@@ -206,7 +203,7 @@
       Copyright 2020-
       <script>
         document.write(new Date().getFullYear())
-      </script> <a href="{{ route('home') }}">GoHeart</a> | Takr care about your life
+      </script> <a href="{{ route('home') }}">GoHeart</a> | Take care about your life
     </div>
   </footer>
 </body>

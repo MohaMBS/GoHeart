@@ -23,10 +23,11 @@
       @foreach ($posts as $post)
         <div class="offset-sm-1 col-sm-10 offset-sm-1 col-12">
             @if($post->front_page != null)
-                <div class="col-12" style="height:180px;background-image: url(../{{$post->front_page}});border: 2px solid black;
+                <div class="col-12" style="height:180px;
+                    margin-left: auto;
+                    margin-right: auto;
                     padding: 25px;
-                    background: url(mountain.jpg);
-                    background-repeat: no-repeat;
+                    background: url(../{{$post->front_page}}) no-repeat center;;
                     background-size: auto;"></div>
             @endif
             <div class="card mb-3  ">
