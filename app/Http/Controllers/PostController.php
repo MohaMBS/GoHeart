@@ -22,7 +22,6 @@ class PostController extends Controller
         $data["posts"] = Post::where('active',true)
         ->withCount("comments")
         ->with('user')
-        ->with('typepost')
         ->withCount(array('favorite' => function($query){
             $query->where("onFavorite",1);
         } ))->orderBy('id', 'desc')->paginate(10);
