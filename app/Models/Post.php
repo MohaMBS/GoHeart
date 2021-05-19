@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\FavoritePost;
 use App\Models\SavePost;
+use App\Models\Typepost;
 
 class Post extends Model
 {
@@ -25,11 +26,11 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-
+/*
     public function category(){
         return $this->hasOne(User::class);
     }
-
+*/
     public function comments(){
         return $this->hasMany(Comment::class);
     }
@@ -42,9 +43,8 @@ class Post extends Model
     {
         return $this->hasMany(SavePost::class);
     }
-/*
-    public function type(){
-        return $this->hasOne();
+
+    public function typepost(){
+        return $this->belongsTo(Typepost::class,'typepost_id','id');
     }
-*/
 }

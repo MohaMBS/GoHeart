@@ -22,6 +22,7 @@ class PostController extends Controller
         $data["posts"] = Post::where('active',true)
         ->withCount("comments")
         ->with('user')
+        ->with('typepost')
         ->withCount(array('favorite' => function($query){
             $query->where("onFavorite",1);
         } ))->orderBy('id', 'desc')->paginate(10);
@@ -224,6 +225,13 @@ class PostController extends Controller
         $data['posts'] = $posts = Post::query()
         ->where('title', 'LIKE', "%{$vale}%")
         ->orWhere('body', 'LIKE', "%{$vale}%")
+        ->withCount("comments")
+        ->where('active',true)
+        ->with('user')
+        ->withCount(array('favorite' => function($query){
+            $query->where("onFavorite",1);
+        } ))
+        ->orderBy('created_at','desc')
         ->paginate(10);
         if(!count($posts)){
             return 'OPS';

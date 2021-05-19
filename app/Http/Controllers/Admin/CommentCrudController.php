@@ -39,7 +39,7 @@ class CommentCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('name');
+        //CRUD::column('name');
         CRUD::column('user_id');
         CRUD::column('post_id');
         CRUD::column('comment');

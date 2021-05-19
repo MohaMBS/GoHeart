@@ -40,7 +40,7 @@ class MyEventCommentCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('user_id');
-        CRUD::column('event_id ');
+        CRUD::column('event_id')->type('relationship');
         CRUD::column('user_name');
         CRUD::column('comment');
         CRUD::column('comment_deleted');

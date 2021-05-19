@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\TypepostRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class PostCrudController
+ * Class TypepostCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class PostCrudController extends CrudController
+class TypepostCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class PostCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Post::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/post');
-        CRUD::setEntityNameStrings('post', 'posts');
+        CRUD::setModel(\App\Models\Typepost::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/typepost');
+        CRUD::setEntityNameStrings('typepost', 'typeposts');
     }
 
     /**
@@ -39,15 +39,7 @@ class PostCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        CRUD::column('active');
-        CRUD::column('title');
-        //CRUD::column('body');
-        CRUD::column('typepost_id')->type('relationship');
-        //['type'=>'relationship','name'=>'type']
-        //CRUD::column('creator_name');
-        CRUD::column('user_id');
-        //CRUD::column('security_token');
+        CRUD::column('nameType');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -64,16 +56,9 @@ class PostCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(PostRequest::class);
+        CRUD::setValidation(TypepostRequest::class);
 
-        CRUD::field('title');
-        CRUD::field('active');
-        CRUD::field('front_page')->hint('Escriba la url para la imagen destacada.')->attributes(['placeholder'=>'www.goheart.es/storage/5/avtar.png']);
-        CRUD::field('body')->type('ckeditor');
-        CRUD::field('typepost_id');
-        CRUD::field('creator_name');
-        CRUD::field('user_id');
-        //CRUD::field('security_token');
+        CRUD::field('nameType');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

@@ -24,4 +24,5 @@ Route::group([
     Route::crud('savepost', 'SavePostCrudController');
     Route::crud('spymodel', 'SpyModelCrudController');
     Route::crud('user', 'UserCrudController');
+    Route::crud('typepost', 'TypepostCrudController');
 }); // this should be the absolute last line of this file

@@ -28,3 +28,4 @@
 <li class='nav-item pl-2'>Gestion de Eventos</li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('event') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-lightbulb-o'></i> Eventos</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('myeventcomment') }}'><i style="font-size: 1.5rem;" class='nav-icon la la-commenting-o'></i> Comentarios</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('typepost') }}'><i class='nav-icon la la-question'></i> Typeposts</a></li>
