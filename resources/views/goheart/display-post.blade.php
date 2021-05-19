@@ -264,10 +264,9 @@
 
             $("#report").click(function(e){
                 console.log("Reportando...")
-                $.post("{{ route('report.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{
-                    console.log(data)
+                $.post("{{ route('report.post',$post_id) }}",{"_token":"{{ csrf_token()}}"},(data,status)=>{ 
+                    alert("Se ha reportado de forma correcta.");
                 })
-                alert("Se ha reportado de forma correcta.");
                 e.preventDefault()
             })
             $("#faovrite").click((e)=>{
