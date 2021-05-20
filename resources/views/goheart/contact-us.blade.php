@@ -13,6 +13,21 @@
         font-size: 20px;
         color: #fff;
     }
+    #consent-error{
+        position: absolute;
+        top: 1.5rem;
+    }
+
+    @media (max-width: 400px) {
+        #consent-error{
+            position: absolute;
+            top: 3rem;
+            margin-bottom: 2rem; 
+        }
+        #submit-btn-res{
+            margin-top: 35px;
+        }
+    }
 </style>
 @endsection
 <section class="ftco-section">
@@ -64,7 +79,12 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="submit" value="Enviar mensaje" class="btn btn-primary">
+                                                <label for="consent"><input name="consent" id="consent" type="checkbox" aria-label="Checkbox for following text input"> Accpeto la <a href="">politica de privacidad</a>.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input id="submit-btn-res"type="submit" value="Enviar mensaje" class="btn btn-primary">
                                                 <div class="submitting"></div>
                                             </div>
                                         </div>
@@ -131,13 +151,15 @@
                             message: {
                                 required: true,
                                 minlength: 5
-                            }
+                            },
+                            consent:"required"
                         },
                         messages: {
                             name: "Debe de introducior un nombre.",
                             subject: "Es necesario que escriba el sujeto del mensaje.",
                             email: "Debes de introducir un email valido.",
-                            message: "Debes de escribir el mensaje."
+                            message: "Debes de escribir el mensaje.",
+                            consent:'<p>Debe marcar conforme que esta deacuerdo.</p>'
                         },
                         /* submit via ajax */
                         

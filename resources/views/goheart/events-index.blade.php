@@ -40,6 +40,11 @@
             </div> 
         </div>
         @endforeach
+    @else
+        <div class="col-12 text-center p-5 bg-white my-5">
+            <h1 class="my-5 p-2">No hay ningun evento activo en estos momentos </h1>
+            <p>Puedes crear un evento tu mismo haciendo click <a href="{{ route('create-event') }}">aquí</a>.</p>
+        </div>
     @endif
     <div class="col-12 text-center">
         <a href="{{ route('create-event') }}" data-toggle="tooltip" data-placement="top" title="Crear un nuevo evento." class="btn btn-primary rounded-circle"><i class="fas fa-plus-circle"></i></a>
