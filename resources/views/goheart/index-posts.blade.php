@@ -52,6 +52,7 @@
                 @endif
             @endauth
         </div>
+    @if(count($posts)>0)
       @foreach ($posts as $post)
         <div class="offset-sm-1 col-sm-10 offset-sm-1 col-12">
             @if($post->front_page != null)
@@ -86,6 +87,12 @@
             </div>
         </div>
         @endforeach  
+    @else
+        <div class="col-12 text-center p-5 bg-white my-5">
+            <h1 class="my-5 p-2">No hay ninguna entrada creada en estos momentos </h1>
+            <p>Puedes crear una entrada tu mismo haciendo click <a href="{{ route('create.post') }}">aquí</a>.</p>
+        </div>
+    @endif
     </div>
     <div class="col-sm-1 d-none d-sm-inline-flex" >
         <div id="div-totop" class="cmn-divfloat">

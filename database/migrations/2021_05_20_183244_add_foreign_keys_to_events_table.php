@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesTable extends Migration
+class AddForeignKeysToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
-            $table->id();
-            $table->string("nameType",150);
-            $table->timestamps();
+        Schema::table('events', function (Blueprint $table) {
+            $table->foreign('user_id', 'events_ibfk_1')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropForeign('events_ibfk_1');
+        });
     }
 }

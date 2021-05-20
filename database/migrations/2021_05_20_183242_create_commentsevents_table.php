@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMycommentseTable extends Migration
+class CreateCommentseventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class CreateMycommentseTable extends Migration
     public function up()
     {
         Schema::create('commentsevents', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('event_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->index('user_id');
+            $table->unsignedBigInteger('event_id')->index('event_id');
             $table->string('user_name');
             $table->text('comment');
-            $table->boolean('comment_deleted');
+            $table->tinyInteger('comment_deleted')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +33,4 @@ class CreateMycommentseTable extends Migration
     {
         Schema::dropIfExists('commentsevents');
     }
-
-    
 }
