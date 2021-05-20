@@ -30,7 +30,7 @@
         </em>
         <hr>
         <p>Si quiere recuperar mandenos un email a <a href="mailto:info@goheart.es">info@goheart.es</a></span><em> con el sigiente condigo 
-          @if($data->has(cords))
+          @if(isset($data->cords))
             <b>event-{{ $post_id }}</b>
           @else
             <b>entrada-{{ $post_id }}</b>
