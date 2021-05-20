@@ -46,6 +46,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::get('/my-profile/my-posts/{id}/delete',[PostController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete-post'); //Route para poder eleminar un post.
     Route::post('/blog/post/{id}/delete/comment/{cid}',[CommentController::class, 'destroy'])->middleware(['auth','postowner'])->name('delete.comment');//Para eliminar un mensaje de un usuario en tu post.
     Route::post('/blog/post/{id}/delete/message', [CommentController::class, 'deleteMessage'])->middleware(['auth'])->name('delete.my.comment');//Ruta para eliminar tus propios mensajes.
+    Route::get('/blog/posts/{type}',[PostController::class, 'filterPosts'])->name('posts-filter');//Para ver todos los posts filtrados.
     
     //Ruta para reacciones a las entradas
     Route::post('/blog/post/{id}/save', [PostController::class,'savePost'])->middleware(['auth'])->name('save.post');//Rute para guardar un post.

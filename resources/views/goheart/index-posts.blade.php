@@ -1,6 +1,38 @@
 @extends('layouts/master')
 @section('title', '- Entradas.')
 @section('content')
+<div class="col-12 offset-sm-1 col-sm-10 offset-sm-1">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Filtrar entradas por tipo</label>
+        </div>
+        <select id="filter-posts" class="custom-select" id="inputGroupSelect01">
+            @if(Request::is('blog/posts/type-*'))
+                <option value="0">Todos</option>
+                <option 
+                @if(explode('-',Request::segment(3))[1] == 1)
+                    selected
+                @endif 
+                value="1">Tipo de ejercicos</option>
+                <option 
+                @if(explode('-',Request::segment(3))[1] == 2)
+                    selected
+                @endif
+                value="2">Tipo de dieta</option>
+                <option
+                @if(explode('-',Request::segment(3))[1] == 3)
+                    selected
+                @endif
+                value="3">Tipo de blog</option> 
+            @else
+                <option value="0" selected>Todos</option>
+                <option value="1">Tipo de ejercicos</option>
+                <option value="2">Tipo de dieta</option>
+                <option value="3">Tipo de blog</option>
+            @endif
+        </select>
+    </div>
+</div>
 <div class="row">
     <div class="col-12 offset-sm-1 col-sm-10  offset-sm-1">
         <div class="col-12">
@@ -27,7 +59,7 @@
                     margin-left: auto;
                     margin-right: auto;
                     padding: 25px;
-                    background: url(../{{$post->front_page}}) no-repeat center;;
+                    background: url(/{{$post->front_page}}) no-repeat center;;
                     background-size: auto;"></div>
             @endif
             <div class="card mb-3  ">
@@ -73,6 +105,16 @@
     </div>
     <div class="col-12 ">{{$posts->links() }}</div>
 </div>
-
+<script>
+    $(document).ready(()=>{
+        $('#filter-posts').change(function(){
+            if($(this).val() == "0"){
+                window.location = "{{ route('posts') }}"
+            }else{
+                window.location = "{{ route('posts-filter',':type') }}".replace(':type','type-'+$(this).val()) 
+            }
+        })
+    })
+</script>
 @endsection
     

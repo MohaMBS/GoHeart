@@ -237,4 +237,15 @@ class PostController extends Controller
         }
         return view('goheart.index-posts',$data);
     }
+
+    public function filterPosts($type){
+        $data["posts"] = Post::where('active',true)
+        ->where('typepost_id',explode('-',$type)[1])
+        ->withCount("comments")
+        ->with('user')
+        ->withCount(array('favorite' => function($query){
+            $query->where("onFavorite",1);
+        } ))->orderBy('id', 'desc')->paginate(10);
+        return view("goheart.index-posts",$data);
+    }
 }
