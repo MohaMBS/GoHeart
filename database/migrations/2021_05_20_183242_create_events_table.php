@@ -14,13 +14,13 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->index('user_id');
             $table->string('name_user');
-            $table->boolean("is_active");
-            $table->text('dates');
+            $table->tinyInteger('is_active');
+            $table->text('dates')->nullable();
             $table->string('title');
-            $table->text('front_page');
+            $table->text('front_page')->nullable();
             $table->text('cords');
             $table->text('body');
             $table->timestamps();
