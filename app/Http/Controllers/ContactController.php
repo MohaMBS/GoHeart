@@ -113,4 +113,17 @@ class ContactController extends Controller
         }
         
     }
+
+    public function privacy(){
+        return view('goheart.privacy');
+    }
+
+    public function legal(){
+        return view('goheart.legal');
+    }
+
+    public function cookie(){
+        return view('goheart.cookie');
+    }
+    
 }

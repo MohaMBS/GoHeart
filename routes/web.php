@@ -36,6 +36,11 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     //Ruta de home
     Route::get('/',[PostController::class, 'home'])->name('home');
     
+    //Ruta por el tema de leyes
+    Route::get('/help/privacy',[ContactController::class,'privacy'])->name('privacy');
+    Route::get('/help/legal-warning',[ContactController::class,'legal'])->name('legal-warning');
+    Route::get('/help/cookie',[ContactController::class,'cookie'])->name('cookie');
+
     //Ruta del blog
     Route::get('/blog/post/create',[PostController::class, 'create'])->middleware(['auth'])->name('create.post');//Rutas para poder crear una nueva entrada en el blog.
     Route::post('/blog/post/create/save-post',[PostController::class, 'store'])->middleware(['auth'])->name('store.post');//Rutas para editar una nueva entrada en el blog.
