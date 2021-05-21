@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Rules\isValidPassword;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -35,7 +36,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => 'required|unique:users|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|string|confirmed||min:8',
+            'password' => ['required','confirmed','string',new isValidPassword()],
         ]);
 
         $user = User::create([
