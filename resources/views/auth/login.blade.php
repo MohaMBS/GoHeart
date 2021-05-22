@@ -9,6 +9,11 @@
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
+        @if (session('error'))
+            <div class="text-red-500">
+                {!! session('error') !!}
+            </div>
+        @endif
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />

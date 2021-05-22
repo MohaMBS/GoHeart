@@ -21,7 +21,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Spatie\CookieConsent\CookieConsentMiddleware::class,
+        \Spatie\CookieConsent\CookieConsentMiddleware::class, //Para el tema de las cookies
+        \App\Http\Middleware\CheckBanned::class, //Para vigilar que el usuario no sea baneado
     ];
 
     /**
@@ -34,7 +35,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \App\Http\Middleware\CheckBanned::class,//Añadimos nuetro middle para poder llegar a consultar el estado de usuario
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -64,8 +66,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cors' => \App\Http\Middleware\Cors::class,
-        'postowner' => \App\Http\Middleware\SecurityPost::class,
-        'eventowner' => \App\Http\Middleware\SecurityEvent::class,
-        'myadmin' => \App\Http\Middleware\MyAdminMiddleware::class,
+        'postowner' => \App\Http\Middleware\SecurityPost::class, //Para controlar que el ususario sea el propitario de la entrada y poder gestionarla.
+        'eventowner' => \App\Http\Middleware\SecurityEvent::class, //Para controlar que el ususario sea el propitario del evento y poder gestionarlo.
+        'myadmin' => \App\Http\Middleware\MyAdminMiddleware::class, //Para controlar que el usuario sea admin
     ];
 }
