@@ -13,7 +13,7 @@ use App\Mail\NotificationDD;
 
 class AdminController extends Controller
 {
-
+    //Funcion para poder borrar una entrada sabiendo su id 
     public function deletePost($id){
         if(Post::destroy($id)){
             $data = Post::find($id);
@@ -25,6 +25,7 @@ class AdminController extends Controller
         }
     }
 
+    //Funcion para poder deshabilitar una entrada sabiendo su id
     public function disablePost($id){
         $post = Post::find($id);
         $post->active= false;
@@ -38,6 +39,7 @@ class AdminController extends Controller
         }
     }
 
+    //Funcion para poder comentarios de una entrada sabiendo su id
     public function deleteCommentPost($id){
         $comment = Comment::find($id);
         $comment->comment_deleted = true;
@@ -48,6 +50,7 @@ class AdminController extends Controller
         }
     }
 
+    //Funcion para poder borrar un evento sabiendo su id
     public function deleteEvent($id){
         if(Event::destroy($id)){
             $data = Event::find($id);
@@ -59,6 +62,7 @@ class AdminController extends Controller
         }
     }
 
+    //Funcion para poder deshabilitar un evento sabiendo su id
     public function disableEvent($id){
         $event = Event::find($id);
         $event->is_active= false;
@@ -72,6 +76,7 @@ class AdminController extends Controller
         }
     }
 
+    //Funcion para poder borrar comentarios de un evento sabiendo su id
     public function deleteCommentEvent($id){
         $comment = MyEventComment::find($id);
         $comment->comment_deleted = true;

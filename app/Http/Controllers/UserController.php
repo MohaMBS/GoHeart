@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Devuele una vista donde el usuario para editar la cuenta
      *
      * @return \Illuminate\Http\Response
      */
@@ -68,7 +68,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Funcion para actualizar la informacion de la cuenta del usuario
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -121,7 +121,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Funcion para poder un ususario 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -133,6 +133,11 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Funcion para poder cambiar el avatar
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     */
     public function changeAvatar(Request $req){
 
         $user = User::find(auth()->user()->id);
@@ -145,6 +150,9 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Funcin para para ver las entradas que le hayas dado "like"
+     */
     public function fovritesPost()
     {
         return view('goheart.fovrite-post')
@@ -154,6 +162,9 @@ class UserController extends Controller
         ->with('post')->get());
     }
 
+    /**
+     * Funcin para para ver las entradas que le hayas guardado
+     */
     public function savedPost()
     {
         return view('goheart.save-post')
@@ -163,6 +174,9 @@ class UserController extends Controller
         ->with('post')->get());
     }
 
+    /**
+     * Funcin para para ver tus eventos
+     */
     public function myEvents ()
     {
         return view('goheart.my-events')

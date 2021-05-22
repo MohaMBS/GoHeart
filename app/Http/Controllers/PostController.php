@@ -13,7 +13,7 @@ use View;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Funcion para devolver una vista para poder ver las entradas
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,14 +28,19 @@ class PostController extends Controller
         return view("goheart.index-posts",$data);
     }
 
+    /**
+     * Funcion para devolver una vista de home
+     * 
+     * @return View
+     */
     public function home(){
         return view('goheart.home');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Esta funcion te manda a la vista para crear una entrada
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -43,7 +48,7 @@ class PostController extends Controller
     }
     
     /**
-     * Store a newly created resource in storage.
+     * Funcion tanto para editar y crear una entrada.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -76,7 +81,7 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Funcion para devolver una vista para poder editar una entrada y ademas para tener control de los comenatios
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
@@ -114,7 +119,7 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Esta funcion devuelve una vista para editar
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
@@ -147,7 +152,7 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Funcion para eliminar una entrada
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
@@ -158,6 +163,11 @@ class PostController extends Controller
         return redirect()->route('my-posts');
     }
 
+    /**
+     * Funcion para poder todas tus entradas creadas por un usuarios
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
     public function postsUser(Post $post)
     {
         $myPosts["posts"] = Post::where("user_id",auth()->user()->id)->orderBy('updated_at','desc')->get();
@@ -165,6 +175,11 @@ class PostController extends Controller
         return view('goheart.managment-posts',$myPosts);
     }
 
+    /**
+     * Funcion para poder guardar en "mas tarde" en tu cuenta
+     * @param $id
+     * @return boolean 
+     */
     public function savePost($id)
     {
         try {
@@ -192,6 +207,11 @@ class PostController extends Controller
         
     }
     
+    /**
+     * Funcion para guardar en favoritos en la cuenta del usuario 
+     * 
+     * @param $id
+     */
     public function favoritePost($id)
     {
         try {
@@ -219,6 +239,12 @@ class PostController extends Controller
         
     }
 
+    /**
+     * Funcion para buscar en la web
+     * 
+     * @param $vale
+     * @return View
+     */
     public function search($vale){
 
         $data['posts'] = $posts = Post::query()
@@ -238,6 +264,12 @@ class PostController extends Controller
         return view('goheart.index-posts',$data);
     }
 
+    /**
+     * Funcion para poder filtrar entrdas
+     * 
+     * @param $type
+     * @return View
+     */
     public function filterPosts($type){
         $data["posts"] = Post::where('active',true)
         ->where('typepost_id',explode('-',$type)[1])

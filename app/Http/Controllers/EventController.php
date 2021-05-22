@@ -10,9 +10,8 @@ use View;
 class EventController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Devuelve una vista para poder ver los eventos
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {   
@@ -21,7 +20,7 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Devuelve una vista deonde se puede crear un evento.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,7 +30,7 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Ruta para guardar o editar un evento
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -62,7 +61,7 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Fincion para ver un evento con el id de evento 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -91,7 +90,7 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Funcion que sirve para crear un evento
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -116,7 +115,7 @@ class EventController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Funcion para eliminar un comentario de un evento
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -138,6 +137,9 @@ class EventController extends Controller
         }
     }
 
+    /**
+     * Funcion para actualizar un evento
+     */
     public function updateEvent(Request $request, $id)
     {
         $validated = $request->validate([
@@ -157,11 +159,23 @@ class EventController extends Controller
         return redirect()->route('see-event',$event->id);
     }
 
+    /**
+     * Funcion para eliminar un evento
+     * 
+     * @param $id
+     * @return view
+     */
     public function deleteEvent($id){
         Event::destroy($id);
         return redirect()->route('my-events');
     }
 
+    /**
+     * Funcion para comentar en evento
+     * 
+     * @param Request $request, $id
+     * @return Objeti json
+     */
     public function comment(Request $request, $id)
     {
         $comment = new   MyEventComment  ();

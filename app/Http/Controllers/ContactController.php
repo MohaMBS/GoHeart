@@ -86,6 +86,11 @@ class ContactController extends Controller
         //
     }
 
+    /**
+     * Funcion para poder enviar un formulario de contacto
+     * 
+     * @return boolean
+     */
     public function send(Request $req)
     {
         $validated = $req->validate([
@@ -114,14 +119,23 @@ class ContactController extends Controller
         
     }
 
+    /**
+     * Funcion de devuelve una vista de privacidad
+     */
     public function privacy(){
         return view('goheart.privacy');
     }
 
+    /**
+     * Funcion de devuelve una vista de legalidad
+     */
     public function legal(){
         return view('goheart.legal');
     }
 
+    /**
+     * Funcion de devuelve una vista de cookie
+     */
     public function cookie(){
         return view('goheart.cookie');
     }

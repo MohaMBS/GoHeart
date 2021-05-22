@@ -30,9 +30,9 @@ class ReportController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion para poder crear reportes de usuarios hacia entrads
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request, $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)

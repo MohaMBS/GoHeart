@@ -24,6 +24,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Este metodo lo que hace es crear un comentario en una entrada
+     * Retorna un objeto json para poder insertar el comentario en la vista
+     * 
+     * @return Object comment
+     */
     public function create(Request $request)
     {
         $post = Post::where("security_token",$request->token_post)->get();
@@ -58,6 +64,12 @@ class CommentController extends Controller
         }
     }
 
+    /**
+     * Funcion para borrar un comentario, solo el propietario de la entrada o el usuario que hata creado este comentario 
+     * puede borrar el comentario
+     * 
+     * @return boolean
+     */
     public function deleteMessage(Request $req, $id){
 
         $message = Comment::where('id',$req->id)->where('post_id',$id)->where("user_id",auth()->user()->id)->first();
@@ -114,9 +126,9 @@ class CommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elemina un commentario.
      *
-     * @param  int  $id
+     * @param  int  $id,$cid, Rquest $req
      * @return \Illuminate\Http\Response
      */
     public function destroy($id,$cid, Request $req)
