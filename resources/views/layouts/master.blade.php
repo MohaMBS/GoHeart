@@ -52,7 +52,7 @@
                             <a class="dropdown-item" href="{{ route('events') }}">Eventos</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Ayuda</a></li>
+                    <li class="nav-item"><a href="{{route('help')}}" class="nav-link">Ayuda</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">¿Quines somos?</a></li>
                     <li class="nav-item"><a href="{{ route('form-contact') }}" class="nav-link">Contacto</a></li>
                 </ul>
