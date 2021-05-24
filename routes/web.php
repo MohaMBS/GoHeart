@@ -35,6 +35,11 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 
     //Ruta de home
     Route::get('/',[PostController::class, 'home'])->name('home');
+
+    //Ruta para la seccion de ayuda
+    Route::get('/help',function(){
+        return view('goheart.help');
+    })->name('help');
     
     //Ruta por el tema de leyes
     Route::get('/help/privacy',[ContactController::class,'privacy'])->name('privacy');

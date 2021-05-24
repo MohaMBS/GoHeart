@@ -75,7 +75,13 @@
                 <ul class=" navbar-nav d-md-flex ">
                     @auth
                         <li class="ml-lg-2 d-flex nav-item dropdown">
-                            <a href="{{ route('edit-user') }}" class="text-white"><img class="rounded-circle" src="{{ auth()->user()->url_avatar }}" alt="" width="40"></a>
+                          @if(auth()->user()->url_avatar)
+                          <a href="{{ route('edit-user') }}" class="text-white"><img class="rounded-circle" src="{{ auth()->user()->url_avatar }}" alt="" width="40"></a>
+                          @else
+                            <span class="mr-2 mr-sm-1" style="font-size: 1.8em;">
+                              <a href="{{ route('edit-user') }}" class="text-white"><i class="fas fa-user-circle"></i></a> 
+                            </span>
+                          @endif
                             <a class="nav-link dropdown-toggle {{ (request()->is('my-profile')) || (request()->is('my-profile/my-posts')) || (request()->is('my-profile/my-events')) 
                             || (request()->is('my-profile/my-favorites')) || (request()->is('my-profile/my-saves')) ? 'active' : '' }}" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><small> 
                                     {{ Auth::user()->name }} </small></a>
@@ -172,10 +178,10 @@
             </div>
           </div>
           <ul class="list-unstyled collapse" id="Resources">
-            <li><a class="link " href="">Blog</a></li>
-            <li><a class="link " href="">Eventos</a></li>
-            <li><a class="link " href="">Crear una entrada.</a></li>
-            <li><a class="link " href="">Crear un evento.</a></li>
+            <li><a class="link " href="{{ route('posts') }}">Blog</a></li>
+            <li><a class="link " href="{{ route('events')}}">Eventos</a></li>
+            <li><a class="link " href="{{ route('create.post')}}">Crear una entrada.</a></li>
+            <li><a class="link " href="{{ route('create-event')}}">Crear un evento.</a></li>
           </ul>
         </div>
         <hr class="clearfix w-100 d-md-none mb-0">
@@ -190,9 +196,9 @@
             </div>
           </div>
           <ul class="list-unstyled collapse" id="Get-Help">
-            <li><a class="link " href="" target="_blank">Centro de ayuda.</a></li>
-            <li><a class="link " href="">Ponte en contacto con nostros.</a></li>
-            <li><a class="link " href="">Privacidad</a></li>
+            <li><a class="link " href="{{ route('help')}}">Centro de ayuda.</a></li>
+            <li><a class="link " href="{{ route('form-contact')}}">Ponte en contacto con nostros.</a></li>
+            <li><a class="link " href="{{ route('privacy')}}">Privacidad</a></li>
             <li><a class="link " href="{{ route('login')}}">Login</a></li>
           </ul>
         </div>
