@@ -113,6 +113,9 @@
 	        </div>
 	    </div>
     </nav>
+<div class="h-100">
+  @yield('header')
+</div>
 <div class="mt-4 row" style="margin-left:auto;margin-right:auto;">
     <div class="col-12">
         @yield("content")
