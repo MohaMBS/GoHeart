@@ -12,7 +12,7 @@
         <div class=" col-12 col-sm-6 col-lg-4 mb-3">
             <div class="card h-100">
                 @if($event->front_page)
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMhLk5Dbdg5O5XX2iHiBofMmCV7p4fFwIiw&usqp=CAU" class="card-img-top" alt="...">
+                <img src="{{URL::to('/')}}/{{$event->front_page}}" class="card-img-top" alt="...">
                 @else
                 <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5df04f25-7dfe-4a9b-8ffa-61d0894e9070/d9gpfys-41381adf-0a3a-429c-9d59-c996f8a9f5ab.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVkZjA0ZjI1LTdkZmUtNGE5Yi04ZmZhLTYxZDA4OTRlOTA3MFwvZDlncGZ5cy00MTM4MWFkZi0wYTNhLTQyOWMtOWQ1OS1jOTk2ZjhhOWY1YWIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.CjV-Pwf2Eztd4JxAD27ErOmx-fss1XxagI9Ylf_sEuE" class="card-img-top" alt="...">
                 @endif
