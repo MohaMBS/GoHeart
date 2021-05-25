@@ -63,17 +63,17 @@ header.masthead {
   <div class="col-12 mb-3 bg-light p-4">
       <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
           <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-          <h2>Nutrir tus conocimientos</h2>
+          <h2><a href="{{route('posts')}}">Nutrir tus conocimientos</a></h2>
           <i style="font-size: 10rem" class="fas fa-book-reader"></i>
           <hr>
           <p class="lead mb-0">En la web podrás encontrar decenas de entradas creadas por otros usuarios con la finalidad de poder compartir</p>
-          <p>sus experiencias, únete y ayuda que esta comunidad sea más grande.</p>
+          <p>sus experiencias, únete y ayuda que esta comunidad sea más grande.Recuerda que tambiene tenemos un apartado de <a href="{{route('events')}}">eventos.</a></p>
       </div>
   </div>
   <div class="col-12 mb-3 bg-light p-4">
       <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
           <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-          <h2>¿Como puedo empezar?</h2>
+          <h2><a href="{{route('login')}}">¿Como puedo empezar?</a></h2>
           <i style="font-size: 12rem" class="fas fa-users"></i>
           <hr>
           <p class="lead mb-0">Puede empezar por unirte a esta gran comunidad de <span class="special-font-xl">hearts</span> y mejorar tu dia a</p>
@@ -84,7 +84,7 @@ header.masthead {
   <div class="col-12 mb-3 bg-light p-4">
       <div class="features-icons-item mx-auto mb-0 mb-lg-3">
           <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-          <h2>Simple de usar</h2>
+          <h2><a href="{{ route('posts') }}">Simple de usar</a></h2>
           <i style="font-size: 12rem" class="fas fa-shapes"></i>
           <hr>
           <p>Nuestra web, está pensada para que sea las más simple posible y fácil para al usuario final, y así hacerte llevar</p>
