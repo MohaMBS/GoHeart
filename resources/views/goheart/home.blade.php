@@ -57,7 +57,7 @@ header.masthead {
     <a class="btn btn-primary btn-lg" href="{{ route('register') }}" role="button">Registro</a>
   </div>
 </div>
-
+@endguest
 <section class="offset-sm-1 col-sm-10 offset-sm-1 features-icons  text-center rounded ">
   <h1 class='rounded bg-white p-2'>¿Que puedes hacer?</h1>
   <div class="col-12 mb-3 bg-light p-4">
@@ -157,5 +157,5 @@ header.masthead {
 </div>
 </section>
 </div>
-@endguest
+
 @endsection
