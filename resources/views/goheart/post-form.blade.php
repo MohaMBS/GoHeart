@@ -18,7 +18,7 @@
         @csrf
         <div class="form-group col-lg-6 col-12">
             <label for="title"> <h2> Titulo: </h2></label> 
-            <input id="titulo" type="text" class="form-control" name="title" id="title" maxlength="150" placeholder="Escriba un titulo para la entrada maximo 150 caracteres." required>
+            <input id="titulo" type="text" class="form-control" name="title" id="title" maxlength="150" value="{{ old('title') }}" placeholder="Escriba un titulo para la entrada maximo 150 caracteres." required>
         </div>
 
         <div class="form-group col-lg-6 col-12">
@@ -31,7 +31,7 @@
             </select>
         </div>
         <div class="col-12">
-          <textarea name="body" class="form-control my-editor"></textarea>
+          <textarea name="body" class="form-control my-editor">{{old('body')}}</textarea>
         </div>
         <div class="form-group col-12 col-md-10 mt-4 ">
             <div class="col-12">
@@ -43,7 +43,7 @@
                     <i class="fa fa-picture-o"></i> Seleccionar
                 </a>
                 </span>
-                <input id="front_page" class="form-control " type="text" name="filepath">
+                <input id="front_page" class="form-control " type="text" name="filepath" value="{{ old('filepath')}}">
             </div>
         </div>
         <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">

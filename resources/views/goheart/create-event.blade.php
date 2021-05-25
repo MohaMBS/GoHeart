@@ -35,15 +35,15 @@
         @csrf
         <div class="form-group col-lg-6 col-12">
             <label for="title"> <h2> Nombre del evento: </h2></label> 
-            <input id="titulo" type="text" class="form-control" name="title" id="title" maxlength="150" placeholder="Escriba un nombre para el evento maximo 150 caracteres." required>
+            <input id="titulo" type="text" class="form-control" value="{{ old('title') }}" name="title" id="title" maxlength="150" placeholder="Escriba un nombre para el evento maximo 150 caracteres." required>
         </div>
 
         <div class="form-group col-lg-6 col-12">
             <label class="col-12" for="category"> <h2> Fechas: </h2></label>
-            <input class="col-12" type="text" name="daterange" value="" />
+            <input class="col-12" type="text" value="{{ old('daterange') }}" name="daterange" value="" />
         </div>
         <div class="col-lg-8">
-          <textarea name="body" class="form-control my-editor"></textarea>
+          <textarea name="body" class="form-control my-editor"> {{ old('body') }} </textarea>
         </div>
         <div class="col-lg-4">
             <div id="mapid" style=" height: 485px;"></div>
@@ -58,7 +58,7 @@
                     <i class="fa fa-picture-o"></i> Seleccionar
                 </a>
                 </span>
-                <input id="front_page" class="form-control " type="text" name="filepath">
+                <input id="front_page" class="form-control " type="text" name="filepath" value="{{ old('front_page') }}">
             </div>
         </div>
         <div class="col-12 col-md-2 mt-sm-5 mt-2 text-center align-middle">
@@ -143,6 +143,30 @@
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ",
         };
         tinymce.init(editor_config);
+
+        var lfm = function(id, type, options) {
+        let button = document.getElementById(id);
+
+        button.addEventListener('click', function () {
+            var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+            var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+            var cmsURL =" {{URL::to('/')}}/laravel-filemanager?editor=image&type=Images";
+            tinyMCE.activeEditor.windowManager.openUrl({
+            url : cmsURL,
+            path_absolute : "{{URL::to('/')}}/",
+            title : 'Filemanager',
+            width : x * 0.8,
+            height : y * 0.8,
+            resizable : "yes",
+            close_previous : "no",
+            onMessage: (api, message) => {
+                $('#front_page').val(message.content.split("//")[2]);
+            }
+            });
+        });
+        };
+        var route_prefix = "/";
+        lfm('lfm', 'image', {prefix: route_prefix});
     })
 </script>
 
