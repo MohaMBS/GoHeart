@@ -16,5 +16,8 @@ return [
     'failed' => 'Estas credenciales no coinciden con nuestros registros.',
     'password' => 'La contraseña que has introducido no es correcta.',
     'throttle' => 'Demasiados intentos de acceso. Por favor inténtelo de nuevo en :seconds segundos.',
-
+    'forgotPassword' => '¿Has olvidado tu contraseña?',
+    'login' => 'Iniciar session',
+    'remember' => 'Recordar session',
+    'consent' => 'Estoy deacuerdo con la <a style="color:blue;" href="'.route('privacy').'" target="_blank"> politica de privacidad</a>.'
 ];

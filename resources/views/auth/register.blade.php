@@ -15,9 +15,9 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="nombre" :value="__('Nombre')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus />
             </div>
 
             <!-- Email Address -->
@@ -29,31 +29,43 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="contraseña" :value="__('Contraseña')" />
 
-                <x-input id="password" class="block mt-1 w-full"
+                <x-input id="contraseña" class="block mt-1 w-full"
                                 type="password"
-                                name="password"
+                                name="contraseña"
                                 required autocomplete="new-password" />
             </div>
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-label for="contraseña_confirmation" :value="__('Contraseña Password')" />
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
+                <x-input id="contraseña_confirmation" class="block mt-1 w-full"
                                 type="password"
-                                name="password_confirmation" required />
+                                name="contraseña_confirmation" required />
             </div>
 
+            <div class="flex items-center justify-start mt-4">
+                
+                <label for="privacidad" class="inline-flex items-center">
+                    <input id="privacidad" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="privacidad" required>
+                    <span class="ml-2 text-sm text-gray-600">{!! trans('auth.consent') !!} *</span>
+                </label>
+            </div>
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    Estas registrado? 
                 </a>
 
                 <x-button class="ml-4">
                     {{ __('Register') }}
                 </x-button>
+            </div>
+            <div class="flex items-center justify-center mt-4">
+                <a class="underline text-sm text-white hover:text-gray-800 bg-blue-500 m-auto p-3 rounded" href="{{ route('home') }}">
+                    Ir a la pagina inicial
+                </a>
             </div>
         </form>
     </x-auth-card>

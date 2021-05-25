@@ -16,5 +16,9 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'forgotPassword' => 'Forgot your password?',
+    'login' => 'Log in',
+    'remember' => 'Remember me',
+    'consent' => 'Estoy deacuerdo con la <a style="color:blue;" href="'.route('privacy').'" target="_blank"> politica de privacidad</a>.'
 
 ];

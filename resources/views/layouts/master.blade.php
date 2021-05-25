@@ -53,7 +53,7 @@
                         </div>
                     </li>
                     <li class="nav-item"><a href="{{route('help')}}" class="nav-link">Ayuda</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">¿Quines somos?</a></li>
+                    <li class="nav-item"><a href="{{route('about-us')}}" class="nav-link">¿Quines somos?</a></li>
                     <li class="nav-item"><a href="{{ route('form-contact') }}" class="nav-link">Contacto</a></li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -160,9 +160,9 @@
             </div>
           </div>
           <ul class="list-unstyled collapse" id="Company">
-            <li><a class="link " href="">Sobre nosotros</a></li>
-            <li><a class="link " href="">Cual es nuestro objetivo</a></li>
-            <li><a class="link " href="">FAQ</a></li>
+            <li><a class="link " href="{{route('about-us')}}">Sobre nosotros</a></li>
+            <li><a class="link " href="{{route('about-us')}}">Cual es nuestro objetivo</a></li>
+            <li><a class="link " href="{{route('about-us')}}">FAQ</a></li>
             <li><a class="link " href="">Tutorial.</a></li>
           </ul>
         </div>

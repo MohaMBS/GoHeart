@@ -40,6 +40,10 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::get('/help',function(){
         return view('goheart.help');
     })->name('help');
+    //Ruta para la seccion de quienes somos
+    Route::get('/about-us',function(){
+        return view('goheart.about-us');
+    })->name('about-us');
     
     //Ruta por el tema de leyes
     Route::get('/help/privacy',[ContactController::class,'privacy'])->name('privacy');
