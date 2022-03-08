@@ -17,3 +17,6 @@ Pasos a seguir:
 2. Instalar Laravel 8 con todas las dependecias del proyecto.
 3. Hacer la migracion de la DDBB.
 4. Iniciar el proyecto.
+
+
+<p align="center" ><a href="https://www.linkedin.com/in/mohamed-boughima-7218b1207/" target="_blank"><img style="height:75px; width:75px;" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="400"></a> <br> Mi Linkedin</p>
